@@ -29,7 +29,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/menu', [App\Http\Controllers\modules\MenuController::class, 'index'])->name('menu');
+Route::get('/orderPOS', [App\Http\Controllers\modules\OrderPOSController::class, 'index'])->name('orderPOS');
+Route::get('/sales', [App\Http\Controllers\modules\SalesController::class, 'index'])->name('sales');
+Route::get('/marketing', [App\Http\Controllers\modules\MarketingController::class, 'index'])->name('marketing');
+Route::get('/inventory', [App\Http\Controllers\modules\InventoryController::class, 'index'])->name('inventory');
+Route::get('/users', [App\Http\Controllers\modules\UsersController::class, 'index'])->name('users');
