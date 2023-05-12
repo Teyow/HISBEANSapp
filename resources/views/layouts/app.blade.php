@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>HISBEANS</title>
+    <title>HIS</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,71 +19,149 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.17/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.17/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.17/dist/js/uikit-icons.min.js"></script>
+
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'HISBEANS') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        @auth
+            <nav class="uk-navbar-container" style="background-color:  rgb(9, 9, 83)" uk-navbar>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                <div class="uk-navbar-left ">
+                    <a class="w-24 hidden lg:inline ">
+                        <img src="{{ asset('image/logo.png') }}" alt="">
+                    </a>
 
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                    {{-- BURGER MENU --}}
+                    <div class="lg:hidden block  text-white">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle></a>
+                    </div>
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                </div>
+
+
+                <div class="uk-navbar-center ">
+                    <img src="{{ asset('image/logo.png') }} " alt="" class="w-24 h-24 block lg:hidden ">
+                </div>
+
+                <div class="uk-navbar-right">
+
+                    <div class="uk-inline mr-10">
+
+                        <span class="uk-margin-small-right flex justify-center items-center text-white">
+                            <div class="mr-4 text-white"></div>
+                            <span uk-icon="chevron-down" class=""></span>
+                        </span>
+                        <div uk-drop="mode: click">
+                            <div class="uk-card uk-card-body uk-card-default w-64 h-1">
+                                <form action="/logout" method="POST">
+                                    @csrf
+
+                                    <button type="submit">logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </nav>
+
+
+            <div id="offcanvas-slide" uk-offcanvas>
+                <div class="uk-offcanvas-bar h-screen  " style="background: rgb(9, 9, 83)">
+                    <legend class="text-center pb-20 pt-5 font-bold text-lg text-white">San Juan Portal</legend>
+                    @if (Auth::user()->user_role == 2)
+                        <ul class="uk-nav uk-nav-default">
+
+                            <li class="uk-active pb-6">
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="{{ route('home') }}">
+                                    <span class="text-black px-5">Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="uk-active pb-6">
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Profile</span>
+                                </a>
+                            </li>
+
+                            <li class="uk-active pb-6">
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Attendance</span>
+                                </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="uk-nav uk-nav-default">
+
+                            <li class="uk-active pb-6">
+                                <legend class="text-left  pt-5 font-bold  text-white">Home</legend>
+
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Dashboard</span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
-                        @endguest
-                    </ul>
+                            <li class="uk-active pb-6">
+                                <legend class="text-left  pt-5 font-bold  text-white">Time In/Time Out</legend>
+                                <a class="uk-button mx-4 text-md   bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5 ">Attendance</span>
+                                </a>
+
+                            </li>
+
+                            <li class="uk-active pb-6">
+                                <legend class="text-left  pt-5 font-bold  text-white">User Mamangement</legend>
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Manage Employee</span>
+                                </a>
+                            </li>
+
+                            <li class="uk-active pb-6">
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Manage Attendance</span>
+                                </a>
+
+                            </li>
+                            <li class="uk-active pb-6">
+                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
+                                    href="">
+                                    <span class="text-black px-5">Manage Schedule</span>
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
+
+
                 </div>
             </div>
-        </nav>
+        @endauth
 
-        <main class="py-4">
+
+        <main>
             @yield('content')
         </main>
+
+
+
     </div>
+
 </body>
 
 </html>
