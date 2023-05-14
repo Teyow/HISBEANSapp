@@ -11,4 +11,19 @@ class MarketingController extends Controller
     {
         return view('modules/marketing');
     }
+
+    public function vouchers()
+    {
+        return view('modules/vouchers');
+    }
+
+    public function promotions()
+    {
+        return view('modules/promotions');
+    }
+
+    public function addVoucher()
+    {
+        return view('modules/addVoucher');
+    }
 }

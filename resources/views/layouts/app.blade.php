@@ -27,12 +27,25 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.17/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.17/dist/js/uikit-icons.min.js"></script>
 
+    {{-- Data Tables --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.uikit.min.js"></script>
+
+    {{-- Chart JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
+    <script src="data_chart.js"></script>
+
+    {{-- Data Tables CSS --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.uikit.min.css">
+
+
 </head>
 
 <body>
     <div id="app">
         @auth
-            <nav class="uk-navbar-container h-16" style="background-color:  #d2c1b0" uk-navbar>
+            <nav class="uk-navbar-container h-16" style="background-color:  #ffecd3" uk-navbar>
 
                 <div class="uk-navbar-left ">
                     <a class="w-24 hidden lg:inline ml-36">
@@ -62,7 +75,7 @@
                         </span>
                         <div uk-drop="mode: click">
                             <div class="uk-card uk-card-body uk-card-default w-64 h-1">
-                                <form action="/logout" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
 
                                     <button type="submit">logout</button>
