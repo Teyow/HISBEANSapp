@@ -40,6 +40,7 @@ Route::get('/marketing', [App\Http\Controllers\modules\MarketingController::clas
 Route::get('/vouchers', [App\Http\Controllers\modules\MarketingController::class, 'vouchers'])->name('vouchers');
 Route::get('/addVoucher', [App\Http\Controllers\modules\MarketingController::class, 'addVoucher'])->name('addVoucher');
 Route::get('/promotions', [App\Http\Controllers\modules\MarketingController::class, 'promotions'])->name('promotions');
+Route::get('/AddPromotions', [App\Http\Controllers\modules\MarketingController::class, 'AddPromotions'])->name('AddPromotions');
 
 Route::get('/inventory', [App\Http\Controllers\modules\InventoryController::class, 'index'])->name('inventory');
 Route::get('/users', [App\Http\Controllers\modules\UsersController::class, 'index'])->name('users');

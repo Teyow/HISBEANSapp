@@ -17,13 +17,17 @@ class MarketingController extends Controller
         return view('modules/vouchers');
     }
 
+    public function addVoucher()
+    {
+        return view('modules/addVoucher');
+    }
+
     public function promotions()
     {
         return view('modules/promotions');
     }
-
-    public function addVoucher()
+    public function Addpromotions()
     {
-        return view('modules/addVoucher');
+        return view('modules/AddPromotions');
     }
 }
