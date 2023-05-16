@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 // Route::get('/login', function () {
 //     return view('auth/login');
@@ -28,8 +28,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+//Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::get('/menu', [App\Http\Controllers\modules\MenuController::class, 'index'])->name('menu');
 Route::get('/category', [App\Http\Controllers\modules\CategoryController::class, 'index'])->name('category');
@@ -44,4 +45,6 @@ Route::get('/AddPromotions', [App\Http\Controllers\modules\MarketingController::
 
 Route::get('/inventory', [App\Http\Controllers\modules\InventoryController::class, 'index'])->name('inventory');
 Route::get('/users', [App\Http\Controllers\modules\UsersController::class, 'index'])->name('users');
-Route::get('/addusers', [App\Http\Controllers\modules\UsersController::class, 'addUser'])->name('addusers');
+Route::get('/addusers', [App\Http\Controllers\modules\UsersController::class, 'addusers'])->name('addusers');
+Route::post('/createUser', [App\Http\Controllers\modules\UsersController::class, 'create'])->name('createuser');
+Route::post('/deleteUser', [App\Http\Controllers\modules\UsersController::class, 'deleteEmployee'])->name('deleteUser');

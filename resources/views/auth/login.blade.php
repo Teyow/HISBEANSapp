@@ -17,7 +17,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input w-10" type="text" aria-label="Not clickable icon" name="email">
+                            <input class="uk-input w-10" type="text" aria-label="Not clickable icon" name="username">
                         </div>
                     </div>
                     <div class="uk-margin">

@@ -3,94 +3,65 @@
 @section('pagecontent')
     <div class="container">
         <div class="row justify-content-center">
-            <legend class="text-4xl text-black text-center">User</legend>
+            <legend class="text-4xl text-black text-center">User Management</legend>
         </div>
-        <div class="flex justify-center items-center text-center">
-            <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl w-3/5 ">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">{{ __('Register') }}</div>
+        <div class="flex justify-center">
+            <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
+                <legend class="text-center text-black text-2xl pb-10">Register a User</legend>
+                <form method="POST" action="{{ route('createuser') }}">
+                    @csrf
+                    <div class="grid grid-cols-2">
+                        <div class="col-span-1">
+                            <div class="uk-margin pr-5">
+                                <input class="uk-input" type="text" placeholder="First Name" aria-label="Input"
+                                    name="fname" required>
 
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('register') }}">
-                                        @csrf
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="uk-margin">
+                                <input class="uk-input" type="text" placeholder="Last Name" aria-label="Input"
+                                    name="lname" required>
 
-                                        <div class="row mb-3">
-                                            <label for="name"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="name" type="text"
-                                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                                    value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                                @error('name')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="email"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="email" type="email"
-                                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                                    value="{{ old('email') }}" required autocomplete="email">
-
-                                                @error('email')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="password"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="password" type="password"
-                                                    class="form-control @error('password') is-invalid @enderror"
-                                                    name="password" required autocomplete="new-password">
-
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="password-confirm"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="password-confirm" type="password" class="form-control"
-                                                    name="password_confirmation" required autocomplete="new-password">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-0">
-                                            <div class="col-md-6 offset-md-4">
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Register') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="Username" aria-label="Input" name="username"
+                            required>
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="email" placeholder="Email" aria-label="Input" name="email"
+                            required>
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="password" placeholder="Password" aria-label="Input" name="password"
+                            required>
+                    </div>
+                    <div class="uk-margin">
+
+                        <select class="uk-select" aria-label="Select" name="role" required>
+                            <option>Admin</option>
+                            <option>Staff</option>
+                        </select>
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="number" placeholder="Contact Number" aria-label="Input"
+                            name="cnumber" required>
+                    </div>
+                    <div class="uk-margin">
+                        <select class="uk-select" aria-label="Select" name="status" required>
+                            <option>Enable</option>
+                            <option>Disable</option>
+                        </select>
+                    </div>
+                    <div class="pt-5  flex justify-center text-center pb-5">
+                        <button
+                            class="  bg-blue-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
+                            type="submit" href="">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

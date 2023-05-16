@@ -20,66 +20,29 @@
                         <th>Contact No.</th>
                         <th>PIN Code</th>
                         <th>Status</th>
+                        <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>tiger@gmail.com</td>
-                        <td>Manager</td>
-                        <td>0926545484</td>
-                        <td>*******</td>
-                        <td>Enable</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>g.winter@gmail.com</td>
-                        <td>Staff</td>
-                        <td>0926545484</td>
-                        <td>*******</td>
-                        <td>Enable</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009-01-12</td>
-                        <td>$86,000</td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012-03-29</td>
-                        <td>$433,060</td>
-                    </tr>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008-11-28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012-12-02</td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012-08-06</td>
-                        <td>$137,500</td>
-                    </tr>
+                    @foreach ($employees as $employee)
+                        <tr>
+                            <td>{{ $employee->fname }} {{ $employee->lname }}</td>
+                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->role }}</td>
+                            <td>{{ $employee->cnumber }}</td>
+                            <td></td>
+                            <td>Enable</td>
+                            <td> <span class="text-blue-500">
+                                    <a href="" uk-icon="search"></a>
+                                </span>
+
+                                <span class="text-red-500 p-5">
+                                    <button id="delete{{ $employee->id }}" uk-icon="trash"></button>
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
 
