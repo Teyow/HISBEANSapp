@@ -6,6 +6,11 @@
             <legend class="text-4xl text-black text-center">INVENTORY</legend>
         </div>
         <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl">
+            <div class="pt-5  flex justify-end text-center pb-5">
+                <a class="  bg-blue-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
+                    href="{{ route('addItems') }}">+ Add
+                    Item</a>
+            </div>
             <table id="inventory_table" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -20,70 +25,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Coffee Beans</td>
-                        <td>500</td>
-                        <td>700</td>
-                        <td>5</td>
-                        <td>115</td>
-                        <td>Coffee Beans Inc.</td>
-                        <td>NA</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Coffee Beans</td>
-                        <td>500</td>
-                        <td>700</td>
-                        <td>5</td>
-                        <td>115</td>
-                        <td>Coffee Beans Inc.</td>
-                        <td>NA</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Coffee Beans</td>
-                        <td>500</td>
-                        <td>700</td>
-                        <td>5</td>
-                        <td>115</td>
-                        <td>Coffee Beans Inc.</td>
-                        <td>NA</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Coffee Beans</td>
-                        <td>500</td>
-                        <td>700</td>
-                        <td>5</td>
-                        <td>115</td>
-                        <td>Coffee Beans Inc.</td>
-                        <td>NA</td>
-                    </tr>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008-11-28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012-12-02</td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012-08-06</td>
-                        <td>$137,500</td>
-                    </tr>
+                    @forelse ($items as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->cost_price }}</td>
+                            <td>{{ $item->selling_price }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>{{ $item->product_id }}</td>
+                            <td>{{ $item->supplier }}</td>
+                            <td><span class="text-blue-500">
+                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
+                                </span>
+
+                                <span class="text-red-500 p-5">
+                                    <button id="delete{{ $item->id }}" uk-icon="trash"></button>
+                                </span>
+                            </td>
+                        </tr>
+                        <script>
+                            $("#delete{{ $item->id }}").click(function() {
+                                const formdata = new FormData()
+                                formdata.append("id", "{{ $item->id }}")
+                                axios.post("/d", formdata)
+                                    .then(() => {
+                                        swal({
+                                            icon: "success",
+                                            title: "Item Deleted!",
+                                            text: "Item has been deleted successfully!",
+                                            buttons: false
+                                        }).then(() => {
+                                            location.reload()
+                                        })
+                                    })
+                            })
+
+                            $(document).ready(function() {
+                                $('#users_table').DataTable();
+                            });
+                        </script>
+                    @empty
+                    @endforelse
+
 
                 </tbody>
 

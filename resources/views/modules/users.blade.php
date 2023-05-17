@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($employees as $employee)
+                    @forelse ($employees as $employee)
                         <tr>
                             <td>{{ $employee->fname }} {{ $employee->lname }}</td>
                             <td>{{ $employee->email }}</td>
@@ -34,7 +34,7 @@
                             <td></td>
                             <td>Enable</td>
                             <td> <span class="text-blue-500">
-                                    <a href="" uk-icon="search"></a>
+                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">
@@ -42,17 +42,38 @@
                                 </span>
                             </td>
                         </tr>
-                    @endforeach
+                        <script>
+                            $("#delete{{ $employee->id }}").click(function() {
+                                const formdata = new FormData()
+                                formdata.append("id", "{{ $employee->id }}")
+                                axios.post("/deleteUser", formdata)
+                                    .then(() => {
+                                        swal({
+                                            icon: "success",
+                                            title: "User Deleted!",
+                                            text: "User has been deleted successfully!",
+                                            buttons: false
+                                        }).then(() => {
+                                            location.reload()
+                                        })
+                                    })
+                            })
+
+                            $(document).ready(function() {
+                                $('#users_table').DataTable();
+                            });
+                        </script>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">No Employees yet</td>
+                        </tr>
+                    @endforelse
+
+
 
                 </tbody>
 
             </table>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#users_table').DataTable();
-        });
-    </script>
 @endsection

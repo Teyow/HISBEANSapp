@@ -43,6 +43,11 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
 
+    {{-- Axios --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+
+    {{-- SWAL --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -65,7 +70,7 @@
 
 
                 <div class="uk-navbar-center ">
-                    <img src="{{ asset('image/logo.png') }} " alt="" class="w-24 h-24 block lg:hidden ">
+                    <img src="{{ asset('images/hb1.png') }} " alt="" class="w-24 h-24 block lg:hidden ">
                 </div>
 
                 <div class="uk-navbar-right">
@@ -92,8 +97,8 @@
 
 
             <div id="offcanvas-slide" uk-offcanvas>
-                <div class="uk-offcanvas-bar h-screen  " style="background: rgb(9, 9, 83)">
-                    <legend class="text-center pb-20 pt-5 font-bold text-lg text-white">San Juan Portal</legend>
+                <div class="uk-offcanvas-bar h-screen  " style="background: #231f20">
+                    <legend class="text-center pb-20 pt-5 font-bold text-lg text-white">HISBEANS</legend>
                     @if (Auth::user()->user_role == 2)
                         <ul class="uk-nav uk-nav-default">
 
