@@ -19,6 +19,7 @@ class CreateMenuTable extends Migration
             $table->string('item_description');
             $table->string('price');
             $table->string('category');
+            $table->string('is_featured');
             $table->string('status');
             $table->timestamps();
         });

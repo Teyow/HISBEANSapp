@@ -48,6 +48,7 @@ class MenuController extends Controller
             'item_description' => $request->item_description,
             'price' => $request->price,
             'category' => $request->category,
+            'is_featured' => $request->is_featured,
             'status' => $request->status,
 
         ]);

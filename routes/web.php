@@ -16,9 +16,7 @@ use App\Http\Controllers\LoginController;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LoginController::class, 'login']);
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
