@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getAllMenu()
     {
         $menu = DB::table('menu')

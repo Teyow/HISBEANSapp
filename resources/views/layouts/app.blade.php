@@ -56,7 +56,8 @@
             <nav class="uk-navbar-container h-16" style="background-color:  #ffecd3" uk-navbar>
 
                 <div class="uk-navbar-left ">
-                    <a class="w-24 hidden lg:inline ml-36">
+                    <a class="w-24 hidden lg:inline ml-36" href="{{ route('dashboard') }}">
+
                         <img src="{{ asset('images/hb1.png') }}" alt="" height="1000" width="1000">
                     </a>
 

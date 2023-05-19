@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $employees = DB::table('users')
@@ -48,13 +52,15 @@ class UsersController extends Controller
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => ($request->password),
+            'password' => Hash::make($request->password),
             'role' => $request->role,
             'cnumber' => $request->cnumber,
+            'pincode' => $request->pincode,
             'status' => $request->status,
+
         ]);
 
-        return redirect('/addusers');
+        return redirect('/users');
         // dd($request->all());
     }
 
@@ -76,9 +82,10 @@ class UsersController extends Controller
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => ($request->password),
+            'password' => $request->password,
             'role' => $request->role,
             'cnumber' => $request->cnumber,
+            'pincode' => $request->pincode,
             'status' => $request->status,
         ]);
 

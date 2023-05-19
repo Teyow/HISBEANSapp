@@ -6,8 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Vouchers;
 use App\Models\Items;
-use App\Models\Category;
-use App\Models\Menu;
+
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -26,10 +25,10 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin123',
             'email' => 'admin123@gmail.com',
             'password' => Hash::make('admin123'),
-            'role' => 'admin',
+            'role' => 'Admin',
             'cnumber' => '0925778545',
+            'pincode' => '1111',
             'status' => 'enable',
-            //  'user_role' => '1',
             'email_verified_at' => now()
         ]);
 
@@ -41,6 +40,8 @@ class DatabaseSeeder extends Seeder
             'minimum_order' => '200',
             'valid_until' => 'September 14, 2023',
             'promo_details' => '20% Discount For 2 coffee',
+
+            'status' => 'Enable'
         ]);
 
         Items::create([

@@ -740,12 +740,6 @@ video {
 .rounded-xl {
   border-radius: 0.75rem;
 }
-.rounded-bl-2xl {
-  border-bottom-left-radius: 1rem;
-}
-.rounded-br-2xl {
-  border-bottom-right-radius: 1rem;
-}
 .border {
   border-width: 1px;
 }
