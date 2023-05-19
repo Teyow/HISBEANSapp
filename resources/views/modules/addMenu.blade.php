@@ -27,10 +27,18 @@
                     </div>
                     <div class="uk-margin">
                         <select class="uk-select" aria-label="Select" name="category" required>
-                            @foreach ($category as $cat)
+                            @forelse ($category as $cat)
                                 <option>{{ $cat->category_name }}</option>
-                            @endforeach
+                            @empty
+                                <option>No categories have been set...</option>
+                            @endforelse
 
+                        </select>
+                    </div>
+                    <div class="uk-margin">
+                        <select class="uk-select" aria-label="Select" name="is_featured" required>
+                            <option>Featured</option>
+                            <option>Not Featured</option>
                         </select>
                     </div>
                     <div class="uk-margin">

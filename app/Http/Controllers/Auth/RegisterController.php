@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -54,9 +55,9 @@ class RegisterController extends Controller
             'lname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
             'role' => ['required', 'string'],
-            'cnumber' => ['required', 'integer', 'max:10'],
+            'cnumber' => ['required', 'string'],
             'status' => ['required', 'string'],
         ]);
     }
@@ -79,5 +80,38 @@ class RegisterController extends Controller
             'cnumber' => $data['cnumber'],
             'status' => $data['status'],
         ]);
+    }
+
+    public function mobileRegister(Request $request)
+    {
+        $fields = $request->validate([
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'role' => ['required', 'string'],
+            'cnumber' => ['required', 'string'],
+            'status' => ['required', 'string'],
+        ]);
+
+        $user = User::create([
+            'fname' => $fields['fname'],
+            'lname' => $fields['lname'],
+            'username' => $fields['username'],
+            'email' => $fields['email'],
+            'password' => Hash::make($fields['password']),
+            'role' => $fields['role'],
+            'cnumber' => $fields['cnumber'],
+            'status' => $fields['status'],
+        ]);
+
+        $token = $user->createToken('myappToken')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
 }

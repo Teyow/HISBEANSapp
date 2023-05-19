@@ -14,6 +14,7 @@ class Menu extends Model
         'item_description',
         'price',
         'category',
+        'is_featured',
         'status',
 
     ];
