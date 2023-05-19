@@ -77,8 +77,8 @@
 
                     <div class="uk-inline mr-10">
 
-                        <span class="uk-margin-small-right flex justify-center items-center text-white">
-                            <div class="mr-4 text-white"></div>
+                        <span class="uk-margin-small-right flex justify-center items-center text-black">
+                            <div class="mr-4 text-black"></div>
                             <span uk-icon="chevron-down" class=""></span>
                         </span>
                         <div uk-drop="mode: click">

@@ -32,6 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/menu', [App\Http\Controllers\modules\MenuController::class, 'index'])->name('menu');
 Route::get('/addMenu', [App\Http\Controllers\modules\MenuController::class, 'addMenu'])->name('addMenu');
 Route::post('/createMenu', [App\Http\Controllers\modules\MenuController::class, 'create'])->name('createMenu');
+Route::post('/editMenu', [App\Http\Controllers\modules\MenuController::class, 'editMenu'])->name('editMenu');
 Route::post('/deleteMenu', [App\Http\Controllers\modules\MenuController::class, 'deleteMenu'])->name('deleteMenu');
 
 //MENU-CATEGORY

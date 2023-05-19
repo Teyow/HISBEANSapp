@@ -55,6 +55,16 @@ class MenuController extends Controller
         return redirect('/menu');
     }
 
+    public function editMenu($id)
+
+    {
+        $menus = Menu::find($id);
+
+        return view('modules.editMenu', [
+            'menus' => $menus
+        ]);
+    }
+
     public function deleteMenu(Request $request)
     {
         DB::table('menu')
