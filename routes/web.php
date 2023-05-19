@@ -3,6 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\modules\MenuController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\modules\InventoryController;
+use App\Http\Controllers\modules\UsersController;
+use App\Http\Controllers\modules\OrderPOSController;
+use App\Http\Controllers\modules\SalesController;
+use App\Http\Controllers\modules\MarketingController;
+use App\Http\Controllers\Modules\CategoryController;
+use Illuminate\Support\Facades\App;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,50 +34,62 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Auth::routes();
 //HOME
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
 
 //MENU-ITEM MENU
-Route::get('/menu', [App\Http\Controllers\modules\MenuController::class, 'index'])->name('menu');
-Route::get('/addMenu', [App\Http\Controllers\modules\MenuController::class, 'addMenu'])->name('addMenu');
-Route::post('/createMenu', [App\Http\Controllers\modules\MenuController::class, 'create'])->name('createMenu');
-Route::post('/editMenu', [App\Http\Controllers\modules\MenuController::class, 'editMenu'])->name('editMenu');
-Route::post('/deleteMenu', [App\Http\Controllers\modules\MenuController::class, 'deleteMenu'])->name('deleteMenu');
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+Route::get('/addMenu', [MenuController::class, 'addMenu'])->name('addMenu');
+Route::post('/createMenu', [MenuController::class, 'create'])->name('createMenu');
+Route::get('/editMenu/{id}', [MenuController::class, 'editMenu'])->name('editMenu');
+Route::post('/updateMenu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
+Route::post('/deleteMenu', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 
 //MENU-CATEGORY
-Route::get('/category', [App\Http\Controllers\modules\CategoryController::class, 'index'])->name('category');
-Route::get('/addCategory', [App\Http\Controllers\modules\CategoryController::class, 'addCategory'])->name('addCategory');
-Route::post('/createCategory', [App\Http\Controllers\Modules\CategoryController::class, 'create'])->name('createCategory');
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+Route::get('/addCategory', [CategoryController::class, 'addCategory'])->name('addCategory');
+Route::post('/createCategory', [CategoryController::class, 'create'])->name('createCategory');
+Route::get('/editCategory/{id}', [CategoryController::class, 'editCategory'])->name('editCategory');
+Route::post('/updateCategory/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+Route::post('/deleteCategory', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
 
 //ORDER/POS
-Route::get('/orderPOS', [App\Http\Controllers\modules\OrderPOSController::class, 'index'])->name('orderPOS');
+Route::get('/orderPOS', [OrderPOSController::class, 'index'])->name('orderPOS');
 
 //SALES
-Route::get('/sales', [App\Http\Controllers\modules\SalesController::class, 'index'])->name('sales');
+Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 
 //INVENTORY
-Route::get('/inventory', [App\Http\Controllers\modules\InventoryController::class, 'index'])->name('inventory');
-Route::get('/addItems', [App\Http\Controllers\modules\InventoryController::class, 'addItem'])->name('addItems');
-Route::post('/createItems', [App\Http\Controllers\modules\InventoryController::class, 'create'])->name('createItems');
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
+Route::get('/addItems', [InventoryController::class, 'addItem'])->name('addItems');
+Route::post('/createItems', [InventoryController::class, 'create'])->name('createItems');
+Route::get('/editInventory/{id}', [InventoryController::class, 'editInventory'])->name('editInventory');
+Route::post('/updateInventory/{id}', [InventoryController::class, 'updateInventory'])->name('updateInventory');
+Route::post('/deleteInventory', [InventoryController::class, 'deleteInventory'])->name('deleteInventory');
+
 //MARKETING
-Route::get('/marketing', [App\Http\Controllers\modules\MarketingController::class, 'index'])->name('marketing');
+//Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing');
 
 //MARKETING-VOUCHER
-Route::get('/vouchers', [App\Http\Controllers\modules\MarketingController::class, 'vouchers'])->name('vouchers');
-Route::get('/addVoucher', [App\Http\Controllers\modules\MarketingController::class, 'addVoucher'])->name('addVoucher');
-Route::post('/createVoucher', [App\Http\Controllers\modules\MarketingController::class, 'create'])->name('createVoucher');
-Route::post('/deleteVoucher', [App\Http\Controllers\modules\MarketingController::class, 'deleteVoucher'])->name('deleteVoucher');
-//Route::post('/viewVoucher', [App\Http\Controllers\modules\MarketingController::class, 'viewVoucher'])->name('viewVoucher');
+Route::get('/vouchers', [MarketingController::class, 'vouchers'])->name('vouchers');
+Route::get('/addVoucher', [MarketingController::class, 'addVoucher'])->name('addVoucher');
+Route::post('/createVoucher', [MarketingController::class, 'create'])->name('createVoucher');
+Route::get('/editVoucher/{id}', [MarketingController::class, 'editVoucher'])->name('editVoucher');
+Route::post('/updateVoucher/{id}', [MarketingController::class, 'updateVoucher'])->name('updateVoucher');
+Route::post('/deleteVoucher', [MarketingController::class, 'deleteVoucher'])->name('deleteVoucher');
+//Route::post('/viewVoucher', [MarketingController::class, 'viewVoucher'])->name('viewVoucher');
 
 
 //MARKETING-PROMOTIONS
-Route::get('/promotions', [App\Http\Controllers\modules\MarketingController::class, 'promotions'])->name('promotions');
-Route::get('/AddPromotions', [App\Http\Controllers\modules\MarketingController::class, 'AddPromotions'])->name('AddPromotions');
+Route::get('/promotions', [MarketingController::class, 'promotions'])->name('promotions');
+Route::get('/AddPromotions', [MarketingController::class, 'AddPromotions'])->name('AddPromotions');
 
 
 
 //USERS MANAGEMENT
-Route::get('/users', [App\Http\Controllers\modules\UsersController::class, 'index'])->name('users');
-Route::get('/addusers', [App\Http\Controllers\modules\UsersController::class, 'addusers'])->name('addusers');
-Route::post('/createUser', [App\Http\Controllers\modules\UsersController::class, 'create'])->name('createuser');
-//Route::post('/createUser', [App\Http\Controllers\modules\UsersController::class, 'usersView'])->name('usersView');
-Route::post('/deleteUser', [App\Http\Controllers\modules\UsersController::class, 'deleteEmployee'])->name('deleteEmployee');
+Route::get('/users', [UsersController::class, 'index'])->name('users');
+Route::get('/addusers', [UsersController::class, 'addusers'])->name('addusers');
+Route::post('/createUser', [UsersController::class, 'create'])->name('createuser');
+Route::get('/editUser/{id}', [UsersController::class, 'editUser'])->name('editUser');
+Route::post('/updateUser/{id}', [UsersController::class, 'updateUser'])->name('updateUser');
+//Route::post('/createUser', [UsersController::class, 'usersView'])->name('usersView');
+Route::post('/deleteUser', [UsersController::class, 'deleteEmployee'])->name('deleteEmployee');

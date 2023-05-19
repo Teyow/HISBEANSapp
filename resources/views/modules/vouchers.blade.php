@@ -34,8 +34,8 @@
                             <td>{{ $voucher->valid_until }}</td>
                             <td>{{ $voucher->promo_details }}</td>
                             <td>Enable</td>
-                            <td><span class="text-blue-500">
-                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
+                            <td><span class="text-green-500">
+                                    <a href="/editVoucher/{{ $voucher->id }}" uk-icon="pencil"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">

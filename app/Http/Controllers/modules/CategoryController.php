@@ -30,6 +30,41 @@ class CategoryController extends Controller
             'category_description' => $request->category_description,
             'status' => $request->status
         ]);
-        return redirect('/addCategory');
+        return redirect('/category');
+    }
+
+    public function editCategory($id)
+    {
+        $categories = DB::table('category')
+            ->where('id', $id)
+            ->first();
+
+        return view('modules.editCategory', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        $categories = DB::table('category')
+            ->where('id', $id)
+            ->update([
+                'category_name' => $request->category_name,
+                'category_description' => $request->category_description,
+                'status' => $request->status
+            ]);
+        // Category::where('id', $id)->update([
+
+        // ]);
+
+        return redirect('/category');
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        DB::table('category')
+            ->where('id', $request->id)
+            ->delete();
+        return redirect('/category');
     }
 }

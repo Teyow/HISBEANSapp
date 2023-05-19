@@ -31,7 +31,6 @@ class InventoryController extends Controller
         Items::create([
             'name' => $request->name,
             'cost_price' => $request->cost_price,
-            'username' => $request->username,
             'selling_price' => $request->selling_price,
             'quantity' => $request->quantity,
             'product_id' => $request->product_id,
@@ -41,5 +40,39 @@ class InventoryController extends Controller
 
         return redirect('/addItems');
         // dd($request->all());
+    }
+
+    public function editInventory($id)
+    {
+        $items = DB::table('items')
+            ->where('id', $id)
+            ->first();
+
+        return view('modules.editInventory', [
+            'items' => $items
+        ]);
+    }
+
+    public function updateInventory(Request $request, $id)
+    {
+        Items::where('id', $id)->update([
+            'name' => $request->name,
+            'cost_price' => $request->cost_price,
+            'selling_price' => $request->selling_price,
+            'quantity' => $request->quantity,
+            'product_id' => $request->product_id,
+            'supplier' => $request->supplier,
+
+        ]);
+
+        return redirect('/inventory');
+    }
+
+    public function deleteInventory(Request $request)
+    {
+        DB::table('items')
+            ->where('id', $request->id)
+            ->delete();
+        return redirect('/inventory');
     }
 }

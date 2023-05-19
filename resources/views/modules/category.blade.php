@@ -27,8 +27,8 @@
                             <td>{{ $category->category_name }}</td>
                             <td>{{ $category->category_description }}</td>
                             <td>{{ $category->status }}</td>
-                            <td><span class="text-blue-500">
-                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
+                            <td><span class="text-green-500">
+                                    <a href="/editCategory/{{ $category->id }}" uk-icon="pencil"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">
@@ -40,7 +40,7 @@
                             $("#delete{{ $category->id }}").click(function() {
                                 const formdata = new FormData()
                                 formdata.append("id", "{{ $category->id }}")
-                                axios.post("/d", formdata)
+                                axios.post("/deleteCategory", formdata)
                                     .then(() => {
                                         swal({
                                             icon: "success",

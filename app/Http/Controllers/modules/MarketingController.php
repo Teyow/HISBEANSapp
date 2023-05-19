@@ -53,6 +53,32 @@ class MarketingController extends Controller
         return redirect('/vouchers');
     }
 
+    public function editVoucher($id)
+    {
+        $vouchers = DB::table('vouchers')
+            ->where('id', $id)
+            ->first();
+
+        return view('modules.editVoucher', [
+            'vouchers' => $vouchers
+        ]);
+    }
+
+    public function updateVoucher(Request $request, $id)
+    {
+        Vouchers::where('id', $id)->update([
+            'type_of_voucher' => $request->type_of_voucher,
+            'voucher_name' => $request->voucher_name,
+            'voucher_code' => $request->voucher_code,
+            'minimum_order' => $request->minimum_order,
+            'valid_until' => $request->valid_until,
+            'promo_details' => $request->promo_details,
+
+        ]);
+
+        return redirect('/vouchers');
+    }
+
     public function deleteVoucher(Request $request)
     {
         DB::table('vouchers')

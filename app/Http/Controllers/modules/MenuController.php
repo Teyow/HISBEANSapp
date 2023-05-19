@@ -59,11 +59,51 @@ class MenuController extends Controller
     public function editMenu($id)
 
     {
-        $menus = Menu::find($id);
+
+
+        $menu = DB::table('menu')
+            ->where('id', $id)
+            ->first();
+
+        $category = DB::table('category')
+            ->where('status', 'Enable')
+            ->get();
+
+        //  dd($menu);
 
         return view('modules.editMenu', [
-            'menus' => $menus
+            'menu' => $menu,
+            'category' => $category
         ]);
+        //$menus = Menu::find($id);
+
+    }
+
+    public function updateMenu(Request $request, $id)
+    {
+
+        $menu = DB::table('menu')
+            ->where('id', $id)
+            ->update([
+                'item_name' => $request->item_name,
+                'item_description' => $request->item_description,
+                'price' => $request->price,
+                'category' => $request->category,
+                'is_featured' => $request->is_featured,
+                'status' => $request->status,
+
+            ]);
+
+        return redirect('/menu');
+        // Menu::where('id', $id)->update([
+        // 'item_name' => $request->item_name,
+        // 'item_description' => $request->item_description,
+        // 'price' => $request->price,
+        // 'category' => $request->category,
+        // 'is_featured' => $request->is_featured,
+        // 'status' => $request->status,
+
+        // ]);
     }
 
     public function deleteMenu(Request $request)

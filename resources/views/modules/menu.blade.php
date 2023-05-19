@@ -18,6 +18,7 @@
                         <th>Item Description</th>
                         <th>Price</th>
                         <th>Category</th>
+                        <th>Feature</th>
                         <th>Status</th>
                         <th>Action</th>
 
@@ -30,9 +31,10 @@
                             <td>{{ $menu->item_description }}</td>
                             <td>{{ $menu->price }}</td>
                             <td>{{ $menu->category }}</td>
+                            <td>{{ $menu->is_featured }}</td>
                             <td>{{ $menu->status }}</td>
                             <td><span class="text-green-500">
-                                    <a href="/editMenu{{ $menu->id }}" uk-icon="pencil"></a>
+                                    <a href="/editMenu/{{ $menu->id }}" uk-icon="pencil"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">

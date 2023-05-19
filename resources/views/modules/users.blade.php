@@ -32,9 +32,9 @@
                             <td>{{ $employee->role }}</td>
                             <td>{{ $employee->cnumber }}</td>
                             <td></td>
-                            <td>Enable</td>
-                            <td> <span class="text-blue-500">
-                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
+                            <td>{{ $employee->status }}</td>
+                            <td> <span class="text-green-500">
+                                    <a href="/editUser/{{ $employee->id }}" uk-icon="pencil"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">

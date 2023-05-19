@@ -34,8 +34,8 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ $item->product_id }}</td>
                             <td>{{ $item->supplier }}</td>
-                            <td><span class="text-blue-500">
-                                    <a href="      {{-- /usersView{{ $employee->id }} --}}" uk-icon="search"></a>
+                            <td><span class="text-green-500">
+                                    <a href="/editInventory/{{ $item->id }}" uk-icon="pencil"></a>
                                 </span>
 
                                 <span class="text-red-500 p-5">
@@ -47,7 +47,7 @@
                             $("#delete{{ $item->id }}").click(function() {
                                 const formdata = new FormData()
                                 formdata.append("id", "{{ $item->id }}")
-                                axios.post("/d", formdata)
+                                axios.post("/deleteInventory", formdata)
                                     .then(() => {
                                         swal({
                                             icon: "success",

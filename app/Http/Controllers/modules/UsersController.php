@@ -48,7 +48,7 @@ class UsersController extends Controller
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => ($request->password),
             'role' => $request->role,
             'cnumber' => $request->cnumber,
             'status' => $request->status,
@@ -56,6 +56,33 @@ class UsersController extends Controller
 
         return redirect('/addusers');
         // dd($request->all());
+    }
+
+    public function editUser($id)
+    {
+        $employee = DB::table('users')
+            ->where('id', $id)
+            ->first();
+
+        return view('modules.editUser', [
+            'employee' => $employee,
+        ]);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        User::where('id', $id)->update([
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => ($request->password),
+            'role' => $request->role,
+            'cnumber' => $request->cnumber,
+            'status' => $request->status,
+        ]);
+
+        return redirect('/users');
     }
 
     public function deleteEmployee(Request $request)
