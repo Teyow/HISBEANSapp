@@ -10,8 +10,9 @@ class Promotions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'image',
+        'name',
         'details',
         'status',
+        'image_path'
     ];
 }

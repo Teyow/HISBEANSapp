@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th>Picture</th>
+                        <th>Name</th>
                         <th>Details</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -24,7 +25,9 @@
 
                     @forelse ($promos as $promo)
                         <tr>
-                            <td>{{ $promo->image }}</td>
+
+                            <td><img src="{{ asset('image/promo/' . $promo->image_path) }}" class="w-40"></td>
+                            <td>{{ $promo->name }}</td>
                             <td> {{ $promo->details }}</td>
                             <td> {{ $promo->status }}</td>
 

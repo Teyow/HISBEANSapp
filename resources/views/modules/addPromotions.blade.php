@@ -8,15 +8,14 @@
         <div class="flex justify-center">
             <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
                 <legend class="text-center text-black text-2xl pb-10">Add Promotions</legend>
-                <form action="{{ route('createPromo') }}" method="POST">
+                <form action="{{ route('createPromo') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="js-upload uk-placeholder uk-text-center h-52">
-                        <span uk-icon="icon: cloud-upload"></span>
-                        <span class="uk-text-middle pt-20">Attach Picture by dropping them here or</span>
-                        <div uk-form-custom>
-                            <input type="file" name="image" multiple>
-                            <span class="uk-link">selecting one</span>
-                        </div>
+                    <div class=" uk-placeholder uk-text-center h-52">
+                        <input type="file" name="image">
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="Name" aria-label="Input" name="name"
+                            required>
                     </div>
                     <div class="uk-margin">
                         <input class="uk-input" type="text" placeholder="Details" aria-label="Input" name="details"

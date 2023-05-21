@@ -14,6 +14,7 @@
             <table id="menu_list" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
                 <thead>
                     <tr>
+                        <th>Picture</th>
                         <th>Item Name</th>
                         <th>Item Description</th>
                         <th>Price</th>
@@ -27,6 +28,7 @@
                 <tbody>
                     @forelse ($menus as $menu)
                         <tr>
+                            <td><img src="{{ asset('image/menu/' . $menu->image_path) }}" class="w-40"></td>
                             <td>{{ $menu->item_name }}</td>
                             <td>{{ $menu->item_description }}</td>
                             <td>{{ $menu->price }}</td>

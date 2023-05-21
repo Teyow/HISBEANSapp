@@ -37,16 +37,17 @@ class MenuController extends Controller
 
     protected function create(Request $request)
     {
-        // //dd($request->all());
-        // Menu::create([
-        // 'item_name' => $request->item_name,
-        // 'item_description' => $request->item_description,
-        // 'price' => $request->price,
-        // 'minimum_order' => $request->price,
-        // 'category' => $request->category,
-        // 'status' => $request->status,
+        $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg|max:5048'
+        ]);
 
-        // ]);
+        $newImageName = time() . '-' . $request->item_name . '.' .
+            $request->image->extension();
+        $request->image->move(public_path('image/menu'), $newImageName);
+
+
+
+
 
         DB::table('menu')->insert([
             'item_name' => $request->item_name,
@@ -55,6 +56,7 @@ class MenuController extends Controller
             'category' => $request->category,
             'is_featured' => $request->is_featured,
             'status' => $request->status,
+            'image_path' => $newImageName,
 
         ]);
 
@@ -74,18 +76,22 @@ class MenuController extends Controller
             ->where('status', 'Enable')
             ->get();
 
-        //  dd($menu);
+
 
         return view('modules.editMenu', [
             'menu' => $menu,
             'category' => $category
         ]);
-        //$menus = Menu::find($id);
-
     }
 
     public function updateMenu(Request $request, $id)
     {
+        $newImageName = time() . '-' . $request->item_name . '.' .
+            $request->image->extension();
+        $request->image->move(public_path('image/menu'), $newImageName);
+
+
+
 
         $menu = DB::table('menu')
             ->where('id', $id)
@@ -96,19 +102,11 @@ class MenuController extends Controller
                 'category' => $request->category,
                 'is_featured' => $request->is_featured,
                 'status' => $request->status,
+                'image_path' => $request->image_path,
 
             ]);
 
         return redirect('/menu');
-        // Menu::where('id', $id)->update([
-        // 'item_name' => $request->item_name,
-        // 'item_description' => $request->item_description,
-        // 'price' => $request->price,
-        // 'category' => $request->category,
-        // 'is_featured' => $request->is_featured,
-        // 'status' => $request->status,
-
-        // ]);
     }
 
     public function deleteMenu(Request $request)

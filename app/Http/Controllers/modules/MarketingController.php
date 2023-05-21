@@ -4,6 +4,7 @@ namespace App\Http\Controllers\modules;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Promotions;
@@ -113,12 +114,25 @@ class MarketingController extends Controller
 
     public function createPromo(Request $request)
     {
+        // dd($request->all());
+        $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg|max:5048'
+        ]);
+
+        $newImageName = time() . '-' . $request->name . '.' .
+            $request->image->extension();
+        $request->image->move(public_path('image/promo'), $newImageName);
+
+
 
         DB::table('promotion')->insert([
-            'image' => $request->image,
+            'name' => $request->name,
+            'image_path' => $newImageName,
             'details' => $request->details,
-            'status' => $request->status
+            'status' => $request->status,
+
         ]);
+
 
 
         return redirect('/promotions');

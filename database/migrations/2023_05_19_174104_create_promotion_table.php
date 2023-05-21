@@ -15,7 +15,8 @@ class CreatePromotionTable extends Migration
     {
         Schema::create('promotion', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            $table->string('name');
+            $table->string('image_path')->nullable();
             $table->string('details');
             $table->string('status');
             $table->timestamps();

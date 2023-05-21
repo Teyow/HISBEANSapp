@@ -7,10 +7,12 @@
         </div>
         <div class="flex justify-center">
             <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
-                <form action="{{ route('updateMenu', $menu->id) }}" method="post">
+                <form action="{{ route('updateMenu', $menu->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
 
-
+                    <div class=" uk-placeholder uk-text-center h-20">
+                        <input type="file" name="image" value="{{ $menu->image_path }}">
+                    </div>
                     <div class="uk-margin">
                         <input class="uk-input" type="text" placeholder="Item Name" aria-label="Input" name="item_name"
                             value="{{ $menu->item_name }}" required>

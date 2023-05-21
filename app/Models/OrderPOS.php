@@ -5,18 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class OrderPOS extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'item_name',
-        'item_description',
-        'price',
-        'category',
-        'is_featured',
-        'status',
-        'image_path'
+        'pincode',
+
 
     ];
 }

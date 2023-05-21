@@ -11,6 +11,7 @@ use App\Http\Controllers\modules\OrderPOSController;
 use App\Http\Controllers\modules\SalesController;
 use App\Http\Controllers\modules\MarketingController;
 use App\Http\Controllers\Modules\CategoryController;
+use App\Models\OrderPOS;
 use Illuminate\Support\Facades\App;
 
 
@@ -56,6 +57,7 @@ Route::post('/deleteCategory', [CategoryController::class, 'deleteCategory'])->n
 
 //ORDER/POS
 Route::get('/orderPOS', [OrderPOSController::class, 'index'])->name('orderPOS');
+Route::post('/loginPINCODE', [OrderPOSController::class, 'loginPINCODE'])->name('loginPINCODE');
 
 
 //SALES

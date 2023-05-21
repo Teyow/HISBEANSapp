@@ -17,13 +17,15 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input w-10" type="text" aria-label="Not clickable icon" name="username">
+                            <input class="uk-input w-10" type="text" aria-label="Not clickable icon" name="username"
+                                placeholder="Username">
                         </div>
                     </div>
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                            <input class="uk-input" type="password" aria-label="Not clickable icon" name="password">
+                            <input class="uk-input" type="password" aria-label="Not clickable icon" name="password"
+                                placeholder="Password">
                         </div>
                     </div>
                     <div class="row mb-3">

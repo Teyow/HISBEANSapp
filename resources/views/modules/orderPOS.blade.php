@@ -9,15 +9,26 @@
             <div class=" inset-0  flex  items-center justify-center">
                 <div class="bg-white rounded-lg shadow p-4" x-data="app()">
                     <div class="font-thin px-2 pb-4 text-lg">Enter your pin code</div>
-                    <div class="flex">
-                        <template x-for="(l,i) in pinlength" :key="`codefield_${i}`">
-                            <input :autofocus="i == 0" :id="`codefield_${i}`"
-                                class="h-16 w-12 border mx-2 rounded-lg flex items-center text-center font-thin text-3xl"
-                                value="" maxlength="1" max="9" min="0" inputmode="decimal"
-                                type="password" @keyup="stepForward(i)" @keydown.backspace="stepBack(i)"
-                                @focus="resetValue(i)"></input>
-                        </template>
-                    </div>
+                    <form action="{{ route('loginPINCODE') }}" method="post">
+                        @csrf
+
+
+                        <div class="uk-margin">
+                            <input class="uk-input text-center" type="password" placeholder="PIN CODE" aria-label="Input"
+                                name="pincode" maxlength="4" required>
+                        </div>
+                        {{-- <input :autofocus="i == 0" :id="`codefield_${i}`"
+                                    class="h-16 w-12 border mx-2 rounded-lg flex items-center text-center font-thin text-3xl"
+                                    value="" maxlength="1" max="9" min="0" inputmode="decimal"
+                                    name="pincode" type="text" @keyup="stepForward(i)" @keydown.backspace="stepBack(i)"
+                                    @focus="resetValue(i)"></input> --}}
+
+                        <div class="text-center"> <button type="submit"
+                                class="bg-blue-500 text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
+                                Login
+                            </button></div>
+
+                    </form>
                 </div>
             </div>
             <div class="uk-card uk-card-default uk-card-body text-center mt-10">

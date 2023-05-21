@@ -13,50 +13,18 @@
                     <table id="users_table" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th>Min. Order</th>
-                                <th>Valid Until</th>
-                                <th>Promo Details</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Order #</th>
+                                <th>Order</th>
+                                <th>Staff</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>December Promo</td>
-                                <td>Free Coffee</td>
-                                <td>GETFREECOFFEE123</td>
-                                <td>2 CUPS</td>
-                                <td>2/15/2023</td>
-                                <td>Sample Text</td>
-                                <td>Enable</td>
-                                <td>NA</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>g.winter@gmail.com</td>
-                                <td>Staff</td>
-                                <td>0926545484</td>
-                                <td>*******</td>
-                                <td>Enable</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009-01-12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012-03-29</td>
-                                <td>$433,060</td>
+                                <td>12255</td>
+                                <td>1 Cappoccino</td>
+                                <td>Theo</td>
+                                <td>160</td>
                             </tr>
 
 

@@ -8,9 +8,11 @@
         <div class="flex justify-center">
             <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
                 <legend class="text-center text-black text-2xl pb-10">Add an Item</legend>
-                <form method="POST" action="{{ route('createMenu') }}">
+                <form method="POST" action="{{ route('createMenu') }}" enctype="multipart/form-data">
                     @csrf
-
+                    <div class=" uk-placeholder uk-text-center h-20">
+                        <input type="file" name="image">
+                    </div>
 
                     <div class="uk-margin">
                         <input class="uk-input" type="text" placeholder="Item Name" aria-label="Input" name="item_name"
