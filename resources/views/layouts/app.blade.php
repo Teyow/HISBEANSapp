@@ -76,6 +76,23 @@
 
                 <div class="uk-navbar-right">
 
+                    <div class="uk-inline">
+
+                        <span class="uk-margin-small-right flex justify-center items-center text-black">
+                            <div class="mr-4 text-black"></div>
+                            <span uk-icon="bell" class=""></span>
+                        </span>
+                        <div uk-drop="mode: click">
+                            <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg mr-24">
+                                <form>
+                                    @csrf
+
+                                    <button type="submit">Notification</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="uk-inline mr-10">
 
                         <span class="uk-margin-small-right flex justify-center items-center text-black">
@@ -83,7 +100,7 @@
                             <span uk-icon="chevron-down" class=""></span>
                         </span>
                         <div uk-drop="mode: click">
-                            <div class="uk-card uk-card-body uk-card-default w-64 h-1">
+                            <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg ml-24">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
 
@@ -92,6 +109,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </nav>

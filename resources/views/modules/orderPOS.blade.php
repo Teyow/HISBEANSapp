@@ -23,13 +23,15 @@
                                     name="pincode" type="text" @keyup="stepForward(i)" @keydown.backspace="stepBack(i)"
                                     @focus="resetValue(i)"></input> --}}
 
-                        <div class="text-center"> <button type="submit"
+                        <div class="text-center"> <button type="submit" href="{{ route('OrderMenu') }}"
                                 class="bg-blue-500 text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
                                 Login
                             </button></div>
 
                     </form>
+
                 </div>
+
             </div>
             <div class="uk-card uk-card-default uk-card-body text-center mt-10">
                 <div class="grid grid-cols-3 pb-5">
@@ -92,7 +94,10 @@
                 </div>
 
 
-
+                <a type="" href="{{ route('OrderMenu') }}"
+                    class="bg-blue-500 text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
+                    Login
+                </a>
             </div>
 
             <script type="text/javascript">

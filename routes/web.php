@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\App;
 */
 
 
-Route::get('/', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
@@ -58,6 +58,9 @@ Route::post('/deleteCategory', [CategoryController::class, 'deleteCategory'])->n
 //ORDER/POS
 Route::get('/orderPOS', [OrderPOSController::class, 'index'])->name('orderPOS');
 Route::post('/loginPINCODE', [OrderPOSController::class, 'loginPINCODE'])->name('loginPINCODE');
+Route::get('/OrderMenu', [OrderPOSController::class, 'OrderMenu'])->name('OrderMenu');
+Route::get('/PayOrder', [OrderPOSController::class, 'PayOrder'])->name('PayOrder');
+Route::get('/PrintReceipt', [OrderPOSController::class, 'PrintReceipt'])->name('PrintReceipt');
 
 
 //SALES

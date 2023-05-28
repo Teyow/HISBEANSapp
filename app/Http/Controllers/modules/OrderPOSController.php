@@ -5,6 +5,9 @@ namespace App\Http\Controllers\modules;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+use PDF;
 
 class OrderPOSController extends Controller
 {
@@ -20,7 +23,7 @@ class OrderPOSController extends Controller
     public function loginPINCODE(Request $request)
     {
 
-        dd($request->all());
+
         $request->validate([
             'pincode' => 'required',
         ]);
@@ -32,5 +35,25 @@ class OrderPOSController extends Controller
         } else {
             return redirect('/orderPOS');
         }
+    }
+
+    public function OrderMenu()
+    {
+        $menus = DB::table('menu')
+            ->get();
+        return view('modules/OrderMenu', [
+            'menus' => $menus
+        ]);
+    }
+
+    public function PayOrder()
+    {
+        return view('modules/PayOrder');
+    }
+
+    public function PrintReceipt()
+    {
+        $pdf = PDF::loadview('modules.printReceipt');
+        return $pdf->download('weekly_reports.pdf');
     }
 }
