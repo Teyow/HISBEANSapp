@@ -76,7 +76,7 @@
 
                     <ul class="uk-switcher uk-margin">
                         <li>
-                            <form action="" method="get">
+                            <form action="{{ route('CreateOrder') }}" method="post">
                                 <div class="grid grid-cols-3">
                                     @forelse ($menus as $menu)
                                         <div class="col-span-1">

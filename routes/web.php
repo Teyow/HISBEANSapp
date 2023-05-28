@@ -61,6 +61,7 @@ Route::post('/loginPINCODE', [OrderPOSController::class, 'loginPINCODE'])->name(
 Route::get('/OrderMenu', [OrderPOSController::class, 'OrderMenu'])->name('OrderMenu');
 Route::get('/PayOrder', [OrderPOSController::class, 'PayOrder'])->name('PayOrder');
 Route::get('/PrintReceipt', [OrderPOSController::class, 'PrintReceipt'])->name('PrintReceipt');
+Route::post('/CreateOrder', [OrderPOSController::class, 'CreateOrder'])->name('CreateOrder');
 
 
 //SALES

@@ -56,4 +56,9 @@ class OrderPOSController extends Controller
         $pdf = PDF::loadview('modules.printReceipt');
         return $pdf->download('weekly_reports.pdf');
     }
+
+    public function CreateOrder(Request $request)
+    {
+        dd($request);
+    }
 }
