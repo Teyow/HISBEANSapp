@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\modules\mobile\AddOnsController;
 use App\Http\Controllers\modules\mobile\MenuController;
 use App\Http\Controllers\modules\mobile\UserController;
 use Illuminate\Http\Request;
@@ -29,6 +30,9 @@ Route::post("/editProfile", [UserController::class, 'editProfile']);
 Route::get('/getAllFeatured', [MenuController::class, 'getAllFeatured']);
 Route::get('/getAllCategories', [MenuController::class, 'getAllCategories']);
 Route::get('/getSpecificCategory/{category}', [MenuController::class, 'getSpecificCategory']);
+
+//Add ons
+Route::get('/getAllAddOns', [AddOnsController::class, 'getAllAddOns']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 });
