@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
-    public function getAllMenu()
+    public function getAllCategories()
     {
-        $menu = DB::table('menu')
+        return DB::table('category')
             ->get();
-        return $menu;
+    }
+
+    public function getSpecificCategory($category)
+    {
+        return DB::table('menu')
+            ->where('category', $category)
+            ->get();
     }
 
     public function getAllFeatured()

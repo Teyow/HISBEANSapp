@@ -26,7 +26,9 @@ Route::post('/logout', [LoginController::class, 'mobileLogout']);
 Route::post('/register', [RegisterController::class, 'mobileRegister']);
 Route::post('/login', [LoginController::class, 'mobileLogin']);
 Route::post("/editProfile", [UserController::class, 'editProfile']);
-Route::get('/getAllMenu', [MenuController::class, 'getAllMenu']);
 Route::get('/getAllFeatured', [MenuController::class, 'getAllFeatured']);
+Route::get('/getAllCategories', [MenuController::class, 'getAllCategories']);
+Route::get('/getSpecificCategory/{category}', [MenuController::class, 'getSpecificCategory']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
 });
