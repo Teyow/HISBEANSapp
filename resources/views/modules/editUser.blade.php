@@ -50,6 +50,10 @@
                             name="cnumber" value="{{ $employee->cnumber }}" required>
                     </div>
                     <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="PIN CODE" aria-label="Input" name="pincode"
+                            value="{{ $employee->pincode }}" required>
+                    </div>
+                    <div class="uk-margin">
                         <select class="uk-select" aria-label="Select" name="status" required>
                             <option value="Enable" {{ $employee->status == 'Enable' ? 'selected' : '' }}>Enable</option>
                             <option value="Disable" {{ $employee->status == 'Disable' ? 'selected' : '' }}>Disable</option>
@@ -58,10 +62,27 @@
                     <div class="pt-5  flex justify-center text-center pb-5">
                         <button
                             class="  bg-blue-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
-                            type="submit" href="">Submit</button>
+                            id="submit">Submit</button>
                     </div>
+                    <script>
+                        $("#submit{{ $employee->id }}").click(function() {
+                            const formdata = new FormData()
+                            formdata.append("id", "{{ $employee->id }}")
+
+                            axios.post("/updateUser", formdata)
+                                .then(() => {
+                                    swal({
+                                        icon: "success",
+                                        title: "Updated!",
+                                        text: "Edit was successfully!",
+                                        buttons: false
+                                    })
+                                })
+                        })
+                    </script>
                 </form>
             </div>
         </div>
+
     </div>
 @endsection

@@ -16,6 +16,7 @@ class Menu extends Model
         'category',
         'is_featured',
         'status',
+        'image_path'
 
     ];
 }

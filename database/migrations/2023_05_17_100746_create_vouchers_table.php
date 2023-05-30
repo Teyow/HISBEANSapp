@@ -21,6 +21,7 @@ class CreateVouchersTable extends Migration
             $table->string('minimum_order');
             $table->string('valid_until');
             $table->string('promo_details');
+            $table->string('status');
             $table->timestamps();
         });
     }

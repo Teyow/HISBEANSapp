@@ -10,8 +10,16 @@ use Illuminate\Support\Facades\Hash;
 
 class InventoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+
+
         $items = DB::table('items')
             ->get();
 

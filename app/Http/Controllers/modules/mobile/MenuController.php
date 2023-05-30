@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
-    public function getAllCategories()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function getAllMenu()
     {
         return DB::table('category')
             ->get();

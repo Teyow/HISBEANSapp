@@ -50,6 +50,10 @@
                             name="cnumber" required>
                     </div>
                     <div class="uk-margin">
+                        <input class="uk-input" type="number" placeholder="PINCODE" aria-label="Input" name="pincode"
+                            required>
+                    </div>
+                    <div class="uk-margin">
                         <select class="uk-select" aria-label="Select" name="status" required>
                             <option>Enable</option>
                             <option>Disable</option>

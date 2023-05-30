@@ -21,6 +21,7 @@ class CreateMenuTable extends Migration
             $table->string('category');
             $table->string('is_featured');
             $table->string('status');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

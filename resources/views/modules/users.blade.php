@@ -31,7 +31,7 @@
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->role }}</td>
                             <td>{{ $employee->cnumber }}</td>
-                            <td></td>
+                            <td>{{ $employee->pincode }}</td>
                             <td>{{ $employee->status }}</td>
                             <td> <span class="text-green-500">
                                     <a href="/editUser/{{ $employee->id }}" uk-icon="pencil"></a>
