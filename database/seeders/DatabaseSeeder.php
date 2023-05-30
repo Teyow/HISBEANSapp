@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Vouchers;
 use App\Models\Items;
+use App\Models\Addons;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -52,6 +53,14 @@ class DatabaseSeeder extends Seeder
             'quantity' => '50',
             'product_id' => '16554',
             'supplier' => 'Coffee Beans Inc.',
+        ]);
+
+
+
+        Addons::create([
+            'id' => '1',
+            'addons_name' => 'Ice Cream',
+            'price' => '30'
         ]);
     }
 }

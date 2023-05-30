@@ -17,6 +17,7 @@ class OrderPOSController extends Controller
     }
     public function index()
     {
+
         return view('modules/orderPOS');
     }
 
@@ -41,8 +42,15 @@ class OrderPOSController extends Controller
     {
         $menus = DB::table('menu')
             ->get();
+        $order = DB::table('order')
+            ->get();
+        $addons = DB::table('addons')
+            ->get();
+
         return view('modules/OrderMenu', [
-            'menus' => $menus
+            'menus' => $menus,
+            'order' => $order,
+            'addons' => $addons
         ]);
     }
 
@@ -59,6 +67,27 @@ class OrderPOSController extends Controller
 
     public function CreateOrder(Request $request)
     {
-        dd($request);
+
+
+        DB::table('order')->insert([
+            'item_name' => $request->item_name,
+            // 'price' => $request->price,
+            // 'quatity' => $request->quantity
+        ]);
+
+        return redirect('/OrderMenu');
+    }
+
+    public function CreateAddons(Request $request)
+    {
+
+        DB::table('addons')->insert([
+            'addons_name' => $request->addons_name,
+
+            'price' => $request->price,
+
+        ]);
+
+        return redirect('/OrderMenu');
     }
 }
