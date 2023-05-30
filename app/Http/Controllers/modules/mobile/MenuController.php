@@ -15,9 +15,15 @@ class MenuController extends Controller
 
     public function getAllMenu()
     {
-        $menu = DB::table('menu')
+        return DB::table('category')
             ->get();
-        return $menu;
+    }
+
+    public function getSpecificCategory($category)
+    {
+        return DB::table('menu')
+            ->where('category', $category)
+            ->get();
     }
 
     public function getAllFeatured()
