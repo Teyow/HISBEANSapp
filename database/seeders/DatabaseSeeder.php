@@ -58,9 +58,49 @@ class DatabaseSeeder extends Seeder
 
 
         Addons::create([
-            'id' => '1',
             'addons_name' => 'Ice Cream',
             'price' => '30'
+        ]);
+
+        Addons::create([
+            'addons_name' => "Espresso Shot",
+            'price' => "30"
+        ]);
+        Addons::create([
+            'addons_name' => "Whipping Cream",
+            'price' => "30"
+        ]);
+        Addons::create([
+            'addons_name' => "Choco Chips",
+            'price' => "30"
+        ]);
+        Addons::create([
+            'addons_name' => "Chocolate Sauce",
+            'price' => "25"
+        ]);
+        Addons::create([
+            'addons_name' => "Caramel Sauce",
+            'price' => "25"
+        ]);
+        Addons::create([
+            'addons_name' => "Strawberry Sauce",
+            'price' => "25"
+        ]);
+        Addons::create([
+            'addons_name' => "Honey",
+            'price' => "25"
+        ]);
+        Addons::create([
+            'addons_name' => "Vanilla Syrup",
+            'price' => "20"
+        ]);
+        Addons::create([
+            'addons_name' => "Caramel Syrup Syrup",
+            'price' => "20"
+        ]);
+        Addons::create([
+            'addons_name' => "Condensed Milk",
+            'price' => "20"
         ]);
     }
 }
