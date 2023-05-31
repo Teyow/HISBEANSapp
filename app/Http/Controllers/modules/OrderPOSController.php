@@ -62,7 +62,7 @@ class OrderPOSController extends Controller
     public function PrintReceipt()
     {
         $pdf = PDF::loadview('modules.printReceipt');
-        return $pdf->download('weekly_reports.pdf');
+        return $pdf->download('receipt.pdf');
     }
 
     public function CreateOrder(Request $request)
@@ -71,7 +71,7 @@ class OrderPOSController extends Controller
 
         DB::table('order')->insert([
             'item_name' => $request->item_name,
-            // 'price' => $request->price,
+            'price' => $request->price,
             // 'quatity' => $request->quantity
         ]);
 

@@ -32,7 +32,7 @@
                                             <td>{{ $addon->addons_name }}</td>
                                         @empty
                                         @endforelse
-                                        <td>{{ $orders->price }}</td>
+                                        <td>{{ $orders->price + $orders->price }} </td>
                                     </tr>
 
                                 @empty
@@ -50,10 +50,16 @@
                         </div>
                     </div>
                     <div class="pt-36">
+
                         <div class="grid grid-cols-2 pl-4 pr-4">
                             <div class="col-span-1"><span class="">Total:</span></div>
-                            <div class="col-span-1"><span class="flex justify-end">₱180</span></div>
+                            @forelse ($order as $orders)
+                                <div class="col-span-1"><span
+                                        class="flex justify-end">{{ $orders->price + $orders->price }}</span></div>
+                            @empty
+                            @endforelse
                         </div>
+
                         <div class="grid grid-cols-2">
                             <div class="col-span-1">
                                 <div class="pt-5  flex justify-center text-center pb-5">
@@ -106,8 +112,10 @@
                                                             <h3 class="uk-card-title text-center ">
                                                                 {{ $menu->item_name }}
                                                                 <input type="checkbox" name="item_name" width="10px"
-                                                                    height="10px"
-                                                                    value="{{ $menu->id }}, {{ $menu->item_name }}, {{ $menu->price }}">
+                                                                    height="10px" value=" {{ $menu->item_name }}">
+
+                                                                <input type="text" name="price" width="10px"
+                                                                    height="10px" value=" {{ $menu->price }}" hidden>
                                                             </h3>
 
                                                         </div>
@@ -174,7 +182,8 @@
                         </div>
                         <legend class="text-center text-black ">₱25</legend>
                         <div class="uk-margin uk-grid-small uk-child-width-auto text-center text-base">
-                            <label><input class="uk-checkbox" type="checkbox" value="Chocolate Sauce" name='addons_name'>
+                            <label><input class="uk-checkbox" type="checkbox" value="Chocolate Sauce"
+                                    name='addons_name'>
                                 <span class="pl-1">Chocolate Sauce</span>
                             </label>
                             <label><input class="uk-checkbox" type="checkbox" value="Caramel Sauce" name='addons_name'>
