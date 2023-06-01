@@ -27,12 +27,13 @@
                                     <tr>
                                         <td>{{ $orders->item_name }}</td>
                                         <td>{{ $orders->quantity }} </td>
-                                        <td>{{ $orders->price }}</td>
+                                        <td>{{ $orders->item_price }}</td>
+                                        <td></td>
                                         @forelse ($addons as $addon)
-                                            <td>{{ $addon->addons_name }}</td>
+                                            <td hidden> {{ $addon->price }} </td>
                                         @empty
                                         @endforelse
-                                        <td>{{ $orders->price + $orders->price }} </td>
+                                        <td>{{ $orders->item_price + $addon->price }} </td>
                                     </tr>
 
                                 @empty
@@ -55,7 +56,7 @@
                             <div class="col-span-1"><span class="">Total:</span></div>
                             @forelse ($order as $orders)
                                 <div class="col-span-1"><span
-                                        class="flex justify-end">{{ $orders->price + $orders->price }}</span></div>
+                                        class="flex justify-end">{{ $orders->item_price + $addon->price }}</span></div>
                             @empty
                             @endforelse
                         </div>
@@ -112,10 +113,11 @@
                                                             <h3 class="uk-card-title text-center ">
                                                                 {{ $menu->item_name }}
                                                                 <input type="checkbox" name="item_name" width="10px"
-                                                                    height="10px" value=" {{ $menu->item_name }}">
+                                                                    height="10px" value=" {{ $menu->item_name }}" checked>
 
-                                                                <input type="text" name="price" width="10px"
-                                                                    height="10px" value=" {{ $menu->price }}" hidden>
+                                                                <input type="checkbox" name="item_price" width="10px"
+                                                                    height="10px" value=" {{ $menu->price }}" checked>
+
                                                             </h3>
 
                                                         </div>
@@ -223,4 +225,5 @@
             {{-- END MODAL --}}
         @empty
         @endforelse
+
     @endsection
