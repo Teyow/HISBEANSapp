@@ -63,7 +63,7 @@
 
 
                     {{-- BURGER MENU --}}
-                    <div class="lg:hidden block  text-white">
+                    <div class="lg:hidden block  text-black">
                         <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle></a>
                     </div>
 
@@ -118,76 +118,110 @@
             <div id="offcanvas-slide" uk-offcanvas>
                 <div class="uk-offcanvas-bar h-screen  " style="background: #231f20">
                     <legend class="text-center pb-20 pt-5 font-bold text-lg text-white">HISBEANS</legend>
-                    @if (Auth::user()->user_role == 2)
-                        <ul class="uk-nav uk-nav-default">
-
-                            <li class="uk-active pb-6">
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="{{ route('home') }}">
-                                    <span class="text-black px-5">Dashboard</span>
-                                </a>
-                            </li>
-
-                            <li class="uk-active pb-6">
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Profile</span>
-                                </a>
-                            </li>
-
-                            <li class="uk-active pb-6">
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Attendance</span>
-                                </a>
-                            </li>
-                        </ul>
-                    @else
+                    @if (Auth::user()->role == 'Admin')
                         <ul class="uk-nav uk-nav-default">
 
                             <li class="uk-active pb-6">
                                 <legend class="text-left  pt-5 font-bold  text-white">Home</legend>
 
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Dashboard</span>
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('dashboard') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('dashboard') }}">
+                                    <div class="pl-5"><span uk-icon="icon: home; ratio: 1.2"></span></div><span
+                                        class="ml-4">Dashboard</span>
                                 </a>
 
 
                             </li>
-                            <li class="uk-active pb-6">
-                                <legend class="text-left  pt-5 font-bold  text-white">Time In/Time Out</legend>
-                                <a class="uk-button mx-4 text-md   bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5 ">Attendance</span>
+                            <li class="uk-parent px-6 py-4 ">
+                                <a href="#"
+                                    class=" hover:no-underline hover:text-blue-200 font-black  rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('menu', 'category') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
+                                    <div class="pl-5 "><span uk-icon="icon: menu; ratio: 1.2"></span></div><span
+                                        class="ml-4 ">Menu</span>
                                 </a>
-
+                                <ul class="uk-nav-sub pt-2">
+                                    <div class="pt-5">
+                                        <li
+                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('menu') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}">
+                                            <a href="{{ route('menu') }}" class="text-black"><span class="mt-1">Menu
+                                                    Items</span>
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('category') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
+                                            <a href="{{ route('category') }}" class="text-black "><span
+                                                    class="mt-1">Category</span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
                             </li>
 
-                            <li class="uk-active pb-6">
-                                <legend class="text-left  pt-5 font-bold  text-white">User Mamangement</legend>
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Manage Employee</span>
+                            <li class="uk-active px-6 py-4">
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('orderPOS') }}">
+                                    <div class="pl-5"><span uk-icon="icon: calendar; ratio: 1.2"></span></div><span
+                                        class="ml-4">Order/POS</span>
                                 </a>
                             </li>
 
-                            <li class="uk-active pb-6">
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Manage Attendance</span>
+                            <li class="uk-active px-6 py-4">
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('sales') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('sales') }}">
+                                    <div class="pl-5"><span uk-icon="icon: cart; ratio: 1.2"></span></div><span
+                                        class="ml-4">Sales</span>
                                 </a>
-
                             </li>
-                            <li class="uk-active pb-6">
-                                <a class="uk-button mx-4 text-md  bg-white hover:bg-slate-100 duration-100 rounded-lg"
-                                    href="">
-                                    <span class="text-black px-5">Manage Schedule</span>
+                            <li class="uk-active px-6 py-4">
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('inventory') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('inventory') }}">
+                                    <div class="pl-5"><span uk-icon="icon: bag; ratio: 1.2"></span></div><span
+                                        class="ml-4">Inventory</span>
+                                </a>
+                            </li>
+                            <li class="uk-parent px-6 py-4 ">
+                                <a href="#"
+                                    class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('vouchers', 'promotions') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
+                                    <div class="pl-5 "><span uk-icon="icon: world; ratio: 1.2"></span></div><span
+                                        class="ml-4 ">Marketing</span>
+                                </a>
+                                <ul class="uk-nav-sub pt-2">
+                                    <div class="pt-5">
+
+
+                                        <li
+                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('vouchers') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}">
+                                            <a href="{{ route('vouchers') }}" class="text-black"><span
+                                                    class="mt-1">Vouchers</span>
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('promotions') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
+                                            <a href="{{ route('promotions') }}" class="text-black "><span
+                                                    class="mt-1">Promotions</span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                            <li class="uk-active px-6 py-4">
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('users') ? 'bg-orange-700  first-letter: text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('users') }}">
+                                    <div class="pl-5"><span uk-icon="icon: users; ratio: 1.2"></span></div><span
+                                        class="ml-4">Users</span>
+                                </a>
+                            </li>
+                        </ul>
+                    @elseif (Auth::user()->role == 'Staff')
+                        <ul class=" uk-nav-parent-icon " uk-nav>
+                            <li class="uk-active px-6 py-4">
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                    href="{{ route('orderPOS') }}">
+                                    <div class="pl-5"><span uk-icon="icon: calendar; ratio: 1.2"></span></div><span
+                                        class="ml-4">Order/POS</span>
                                 </a>
                             </li>
                         </ul>
                     @endif
-
 
                 </div>
             </div>
