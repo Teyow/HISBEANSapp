@@ -1,6 +1,30 @@
 @extends('layouts.main')
 
 @section('pagecontent')
+    <style>
+        #myform {
+            text-align: center;
+            padding: 5px;
+            border: 1px dotted #ccc;
+            margin: 2%;
+        }
+
+        .qty {
+            width: 40px;
+            height: 25px;
+            text-align: center;
+        }
+
+        input.qtyplus {
+            width: 25px;
+            height: 25px;
+        }
+
+        input.qtyminus {
+            width: 25px;
+            height: 25px;
+        }
+    </style>
     <div class="row justify-content-center">
         <legend class="text-4xl text-black text-center">ORDER/POS</legend>
     </div>
@@ -27,13 +51,13 @@
                                     <tr>
                                         <td>{{ $orders->item_name }}</td>
                                         <td>{{ $orders->quantity }} </td>
-                                        <td>{{ $orders->item_price }}</td>
+                                        <td>{{ $orders->item_price * $orders->quantity }}</td>
                                         <td></td>
                                         @forelse ($addons as $addon)
                                             <td hidden> {{ $addon->price }} </td>
                                         @empty
                                         @endforelse
-                                        <td>{{ $orders->item_price + $addon->price }} </td>
+                                        <td>{{ $orders->item_price * $orders->quantity + $addon->price }} </td>
                                     </tr>
 
                                 @empty
@@ -93,7 +117,7 @@
                     <ul class="uk-switcher uk-margin">
                         <li>
 
-                            <form action="{{ route('CreateOrder') }}" method="post">
+                            <form action="{{ route('CreateOrder') }}" method="post" class='quantity'>
                                 @csrf
                                 <div class="grid grid-cols-3">
                                     @forelse ($menus as $menu)
@@ -111,7 +135,14 @@
                                                         <div class="uk-card-body bg-slate-200 rounded-b-2xl">
 
                                                             <h3 class="uk-card-title text-center ">
+                                                                <input type='button' value='-' class='qtyminus minus'
+                                                                    field='quantity' />
+                                                                <input type='text' name='quantity' value='0'
+                                                                    class='qty' />
+                                                                <input type='button' value='+' class='qtyplus plus'
+                                                                    field='quantity' /><br>
                                                                 {{ $menu->item_name }}
+
                                                                 <input type="checkbox" name="item_name" width="10px"
                                                                     height="10px" value=" {{ $menu->item_name }}" checked>
 
@@ -226,8 +257,22 @@
         @empty
         @endforelse
 
-<<<<<<< HEAD
+        <script>
+            jQuery(document).ready(($) => {
+                $('.quantity').on('click', '.plus', function(e) {
+                    let $input = $(this).prev('input.qty');
+                    let val = parseInt($input.val());
+                    $input.val(val + 1).change();
+                });
 
-=======
->>>>>>> 1dc51de17059934e3ac520e19a1e01647b0198b5
+                $('.quantity').on('click', '.minus',
+                    function(e) {
+                        let $input = $(this).next('input.qty');
+                        var val = parseInt($input.val());
+                        if (val > 0) {
+                            $input.val(val - 1).change();
+                        }
+                    });
+            });
+        </script>
     @endsection

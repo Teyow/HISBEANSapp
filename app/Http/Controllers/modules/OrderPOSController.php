@@ -42,12 +42,9 @@ class OrderPOSController extends Controller
     {
         $menus = DB::table('menu')
             ->get();
-
         $order = DB::table('order')
-
             ->get();
         $addons = DB::table('addons')
-
             ->get();
 
         return view('modules/OrderMenu', [
@@ -65,26 +62,27 @@ class OrderPOSController extends Controller
     public function PrintReceipt()
     {
         $pdf = PDF::loadview('modules.printReceipt');
-        return $pdf->download('receipt.pdf');
+        return $pdf->download('weekly_reports.pdf');
     }
 
     public function CreateOrder(Request $request)
     {
 
-        // dd($request->all());
-        DB::table('order')
 
+        DB::table('order')
             ->insert([
                 'id' => $request->id,
+
                 'item_name' => $request->item_name,
+
                 'item_price' => $request->item_price,
-                // 'quatity' => $request->quantity
+                'quantity' => $request->quantity
             ]);
 
         return redirect('/OrderMenu');
     }
 
- 
+
 
     public function CreateAddons(Request $request)
     {
