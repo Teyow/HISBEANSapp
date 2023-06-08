@@ -35,4 +35,11 @@ class MenuController extends Controller
             ->get();
         return $featured;
     }
+
+    public function getSpecificMenu(Request $request)
+    {
+        return DB::table('menu')
+            ->where("id", $request->id)
+            ->first();
+    }
 }

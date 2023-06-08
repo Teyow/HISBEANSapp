@@ -7,7 +7,9 @@ use App\Models\User;
 use App\Models\Vouchers;
 use App\Models\Items;
 use App\Models\Addons;
-
+use App\Models\Category;
+use App\Models\Menu;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -41,7 +43,8 @@ class DatabaseSeeder extends Seeder
             'minimum_order' => '200',
             'valid_until' => 'September 14, 2023',
             'promo_details' => '20% Discount For 2 coffee',
-
+            'voucher_discount' => '20',
+            'discount_type' => 'Percent',
             'status' => 'Enable'
         ]);
 
@@ -59,48 +62,66 @@ class DatabaseSeeder extends Seeder
 
         Addons::create([
             'addons_name' => 'Ice Cream',
-            'price' => '30'
+            'addons_price' => '30'
         ]);
 
         Addons::create([
             'addons_name' => "Espresso Shot",
-            'price' => "30"
+            'addons_price' => "30"
         ]);
         Addons::create([
             'addons_name' => "Whipping Cream",
-            'price' => "30"
+            'addons_price' => "30"
         ]);
         Addons::create([
             'addons_name' => "Choco Chips",
-            'price' => "30"
+            'addons_price' => "30"
         ]);
         Addons::create([
             'addons_name' => "Chocolate Sauce",
-            'price' => "25"
+            'addons_price' => "25"
         ]);
         Addons::create([
             'addons_name' => "Caramel Sauce",
-            'price' => "25"
+            'addons_price' => "25"
         ]);
         Addons::create([
             'addons_name' => "Strawberry Sauce",
-            'price' => "25"
+            'addons_price' => "25"
         ]);
         Addons::create([
             'addons_name' => "Honey",
-            'price' => "25"
+            'addons_price' => "25"
         ]);
         Addons::create([
             'addons_name' => "Vanilla Syrup",
-            'price' => "20"
+            'addons_price' => "20"
         ]);
         Addons::create([
             'addons_name' => "Caramel Syrup Syrup",
-            'price' => "20"
+            'addons_price' => "20"
         ]);
         Addons::create([
             'addons_name' => "Condensed Milk",
-            'price' => "20"
+            'addons_price' => "20"
         ]);
+
+        DB::table('category')
+            ->insert([
+                'category_name' => "Coffee",
+                'category_description' => "Coffee based",
+                'status' => "Enabled",
+            ]);
+
+        DB::table('menu')
+            ->insert([
+                'item_name' => 'Americano',
+                'item_description' => "Espresso shot + Water",
+                'price' => '120',
+                'category' => "Coffee",
+                'is_featured' => "Featured",
+                'status' => "Enabled",
+                'image_path' => "1685322737-Americano.jpg"
+            ]);
     }
 }

@@ -42,7 +42,7 @@ class OrderPOSController extends Controller
     {
         $menus = DB::table('menu')
             ->get();
-        $order = DB::table('order')
+        $order = DB::table('orders')
             ->get();
         $addons = DB::table('addons')
             ->get();
@@ -69,7 +69,7 @@ class OrderPOSController extends Controller
     {
 
 
-        DB::table('order')->insert([
+        DB::table('orders')->insert([
             'item_name' => $request->item_name,
             // 'price' => $request->price,
             // 'quatity' => $request->quantity

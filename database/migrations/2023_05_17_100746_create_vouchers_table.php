@@ -15,12 +15,14 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('type_of_voucher');
-            $table->string('voucher_name');
-            $table->string('voucher_code');
-            $table->string('minimum_order');
-            $table->string('valid_until');
-            $table->string('promo_details');
+            $table->string('type_of_voucher')->nullable();
+            $table->string('voucher_name')->nullable();
+            $table->string('voucher_code')->nullable();
+            $table->string('minimum_order')->nullable();
+            $table->string('valid_until')->nullable();
+            $table->string('promo_details')->nullable();
+            $table->string('voucher_discount')->nullable();
+            $table->string('discount_type')->nullable();
             $table->string('status');
             $table->timestamps();
         });

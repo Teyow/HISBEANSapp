@@ -16,6 +16,8 @@ class Vouchers extends Model
         'minimum_order',
         'valid_until',
         'promo_details',
-        'status'
+        'voucher_discount',
+        'discount_type',
+        'status',
     ];
 }
