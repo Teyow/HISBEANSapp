@@ -1,6 +1,30 @@
 @extends('layouts.main')
 
 @section('pagecontent')
+    <style>
+        #myform {
+            text-align: center;
+            padding: 5px;
+            border: 1px dotted #ccc;
+            margin: 2%;
+        }
+
+        .qty {
+            width: 40px;
+            height: 25px;
+            text-align: center;
+        }
+
+        input.qtyplus {
+            width: 25px;
+            height: 25px;
+        }
+
+        input.qtyminus {
+            width: 25px;
+            height: 25px;
+        }
+    </style>
     <div class="row justify-content-center">
         <legend class="text-4xl text-black text-center">ORDER/POS</legend>
     </div>
@@ -27,12 +51,13 @@
                                     <tr>
                                         <td>{{ $orders->item_name }}</td>
                                         <td>{{ $orders->quantity }} </td>
-                                        <td>{{ $orders->price }}</td>
+                                        <td>{{ $orders->item_price * $orders->quantity }}</td>
+                                        <td></td>
                                         @forelse ($addons as $addon)
-                                            <td>{{ $addon->addons_name }}</td>
+                                            <td hidden> {{ $addon->price }} </td>
                                         @empty
                                         @endforelse
-                                        <td>{{ $orders->price }}</td>
+                                        <td>{{ $orders->item_price * $orders->quantity + $addon->price }} </td>
                                     </tr>
 
                                 @empty
@@ -50,10 +75,16 @@
                         </div>
                     </div>
                     <div class="pt-36">
+
                         <div class="grid grid-cols-2 pl-4 pr-4">
                             <div class="col-span-1"><span class="">Total:</span></div>
-                            <div class="col-span-1"><span class="flex justify-end">₱180</span></div>
+                            @forelse ($order as $orders)
+                                <div class="col-span-1"><span
+                                        class="flex justify-end">{{ $orders->item_price + $addon->price }}</span></div>
+                            @empty
+                            @endforelse
                         </div>
+
                         <div class="grid grid-cols-2">
                             <div class="col-span-1">
                                 <div class="pt-5  flex justify-center text-center pb-5">
@@ -86,7 +117,7 @@
                     <ul class="uk-switcher uk-margin">
                         <li>
 
-                            <form action="{{ route('CreateOrder') }}" method="post">
+                            <form action="{{ route('CreateOrder') }}" method="post" class='quantity'>
                                 @csrf
                                 <div class="grid grid-cols-3">
                                     @forelse ($menus as $menu)
@@ -104,10 +135,20 @@
                                                         <div class="uk-card-body bg-slate-200 rounded-b-2xl">
 
                                                             <h3 class="uk-card-title text-center ">
+                                                                <input type='button' value='-' class='qtyminus minus'
+                                                                    field='quantity' />
+                                                                <input type='text' name='quantity' value='0'
+                                                                    class='qty' />
+                                                                <input type='button' value='+' class='qtyplus plus'
+                                                                    field='quantity' /><br>
                                                                 {{ $menu->item_name }}
+
                                                                 <input type="checkbox" name="item_name" width="10px"
-                                                                    height="10px"
-                                                                    value="{{ $menu->id }}, {{ $menu->item_name }}, {{ $menu->price }}">
+                                                                    height="10px" value=" {{ $menu->item_name }}" checked>
+
+                                                                <input type="checkbox" name="item_price" width="10px"
+                                                                    height="10px" value=" {{ $menu->price }}" checked>
+
                                                             </h3>
 
                                                         </div>
@@ -174,7 +215,8 @@
                         </div>
                         <legend class="text-center text-black ">₱25</legend>
                         <div class="uk-margin uk-grid-small uk-child-width-auto text-center text-base">
-                            <label><input class="uk-checkbox" type="checkbox" value="Chocolate Sauce" name='addons_name'>
+                            <label><input class="uk-checkbox" type="checkbox" value="Chocolate Sauce"
+                                    name='addons_name'>
                                 <span class="pl-1">Chocolate Sauce</span>
                             </label>
                             <label><input class="uk-checkbox" type="checkbox" value="Caramel Sauce" name='addons_name'>
@@ -214,4 +256,23 @@
             {{-- END MODAL --}}
         @empty
         @endforelse
+
+        <script>
+            jQuery(document).ready(($) => {
+                $('.quantity').on('click', '.plus', function(e) {
+                    let $input = $(this).prev('input.qty');
+                    let val = parseInt($input.val());
+                    $input.val(val + 1).change();
+                });
+
+                $('.quantity').on('click', '.minus',
+                    function(e) {
+                        let $input = $(this).next('input.qty');
+                        var val = parseInt($input.val());
+                        if (val > 0) {
+                            $input.val(val - 1).change();
+                        }
+                    });
+            });
+        </script>
     @endsection

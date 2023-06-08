@@ -69,14 +69,20 @@ class OrderPOSController extends Controller
     {
 
 
-        DB::table('orders')->insert([
-            'item_name' => $request->item_name,
-            // 'price' => $request->price,
-            // 'quatity' => $request->quantity
-        ]);
+        DB::table('order')
+            ->insert([
+                'id' => $request->id,
+
+                'item_name' => $request->item_name,
+
+                'item_price' => $request->item_price,
+                'quantity' => $request->quantity
+            ]);
 
         return redirect('/OrderMenu');
     }
+
+
 
     public function CreateAddons(Request $request)
     {
