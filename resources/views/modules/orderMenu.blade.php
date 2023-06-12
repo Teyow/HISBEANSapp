@@ -99,16 +99,58 @@
                                 <div class="pt-5  flex justify-center text-center pb-5">
                                     <button
                                         class="  bg-green-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
-                                        type="button" id="payButton">PAY</button>
+                                        type="button" id="payButton" uk-toggle="target: #payment">PAY</button>
+                                </div>
+                            </div>
+
+                            <div id="payment" uk-modal>
+                                <div class="uk-modal-dialog uk-modal-body rounded-3xl">
+                                    <p class="uk-modal-title text-center text-5xl  text-black">Order Confirmation</p>
+                                    <p class="text-center">Please verify the order to the Customer</p>
+                                    <p>
+                                    <table id="users_tables" class="uk-table uk-table-hover uk-table-striped text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th>Sample</th>
+                                            <th>sample</th>
+                                            <th>sample</th>
+                                        </tbody>
+
+                                    </table>
+                                    </p>
+
+                                    <div class="text-right pb-20 text-black">Subtotal: PRICE</div>
+                                    <div class="uk-margin">
+                                        <div class="text-center text-2xl pb-5 text-black">Apply Vouchers</div>
+                                        <div class="text-center pb-2">Select a voucher that may apply</div>
+                                        <select class="uk-select pb-10" aria-label="Select">
+                                            <option>Option 01</option>
+                                            <option>Option 02</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="uk-modal-footer uk-text-right">
+                                        <div class="text-center pb-10 text-black">Total:</div>
+                                        <button class="uk-button uk-button-default uk-modal-close"
+                                            type="button">Cancel</button>
+                                        <button class="uk-button uk-button-primary" type="button">Save</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {{-- <script>
-                    $(document).ready(function() {
-                        $('#users_table').DataTable();
-                    });
-                </script> --}}
+                        $(document).ready(function() {
+                            $('#users_tables').DataTable();
+                        });
+                    </script> --}}
 
                 </div>
                 <div class="col-span-4 ">
