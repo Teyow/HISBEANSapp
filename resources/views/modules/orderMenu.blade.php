@@ -46,7 +46,7 @@
                                     <th>Sub Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @forelse ($order as $orders)
                                     <tr>
                                         <td>{{ $orders->item_name }}</td>
@@ -62,27 +62,45 @@
 
                                 @empty
                                 @endforelse
-                            </tbody>
+                            </tbody> --}}
 
                         </table>
 
                     </div>
                     <div class="pt-5">
-                        <legend>Customer 2</legend>
-                        <div class="uk-margin mr-5">
+                        <div class="flex justify-between items-center">
+                            <label><input class="uk-radio" type="radio" name="radio2" id="registeredRadio" checked>
+                                Registered
+                                Customer</label>
+                            <label><input class="uk-radio" type="radio" name="radio2" id="unregisteredRadio">
+                                Unregistered Customer</label>
+                        </div>
+
+                        <div class="uk-margin" id="customerList">
+                            <select class="uk-select" aria-label="Select">
+                                @forelse ($users as $user)
+                                    <option>{{ $user->fname . ' ' . $user->lname }}</option>
+                                @empty
+                                    <option>No users yet...</option>
+                                @endforelse
+                            </select>
+                        </div>
+
+                        <div class="uk-margin ">
                             <input class="uk-input" type="text" placeholder="Item Name" aria-label="Input"
                                 name="item_name">
                         </div>
+
                     </div>
                     <div class="pt-36">
 
                         <div class="grid grid-cols-2 pl-4 pr-4">
                             <div class="col-span-1"><span class="">Total:</span></div>
-                            @forelse ($order as $orders)
+                            {{-- @forelse ($order as $orders)
                                 <div class="col-span-1"><span
                                         class="flex justify-end">{{ $orders->item_price + $addon->price }}</span></div>
                             @empty
-                            @endforelse
+                            @endforelse --}}
                         </div>
 
                         <div class="grid grid-cols-2">
@@ -108,156 +126,29 @@
 
                 </div>
                 <div class="col-span-4 ">
-                    <ul class="uk-subnav uk-subnav-pill flex justify-center items-center" uk-switcher>
-                        <li><a href="#">Coffee</a></li>
-                        <li><a href="#">Non-Coffee</a></li>
-                        <li><a href="#">Item</a></li>
-                    </ul>
+                    {{-- <ul class="uk-subnav uk-subnav-pill flex justify-center items-center" uk-switcher>
+                        @forelse ($categories as $category)
+                            <li><a href="#">{{ $category->category_name }}</a></li>
+                        @empty
+                            <li><a href="#">No Categories yet</a></li>
+                        @endforelse
+                    </ul> --}}
 
-                    <ul class="uk-switcher uk-margin">
-                        <li>
-
-                            <form action="{{ route('CreateOrder') }}" method="post" class='quantity'>
-                                @csrf
-                                <div class="grid grid-cols-3">
-                                    @forelse ($menus as $menu)
-                                        <div class="col-span-1">
-
-                                            <div>
-                                                <div class="uk-card uk-card-default ml-5 mr-5 mb-10 rounded-xl ">
-                                                    <div class="rounded-3xl">
-                                                        <a class="flex justify-center items-center" href="#modal-center"
-                                                            uk-toggle>
-                                                            <img src="{{ asset('image/menu/' . $menu->image_path) }}"
-                                                                width="500" height="500"></a>
-
-
-                                                        <div class="uk-card-body bg-slate-200 rounded-b-2xl">
-
-                                                            <h3 class="uk-card-title text-center ">
-                                                                <input type='button' value='-' class='qtyminus minus'
-                                                                    field='quantity' />
-                                                                <input type='text' name='quantity' value='0'
-                                                                    class='qty' />
-                                                                <input type='button' value='+' class='qtyplus plus'
-                                                                    field='quantity' /><br>
-                                                                {{ $menu->item_name }}
-
-                                                                <input type="checkbox" name="item_name" width="10px"
-                                                                    height="10px" value=" {{ $menu->item_name }}" checked>
-
-                                                                <input type="checkbox" name="item_price" width="10px"
-                                                                    height="10px" value=" {{ $menu->price }}" checked>
-
-                                                            </h3>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    @empty
-                                    @endforelse
-
-                                </div>
-                                <div class="pt-5  flex justify-center text-center pb-5">
-                                    <button
-                                        class="  bg-green-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
-                                        type="submit">SAVE</button>
-                                </div>
-                            </form>
-
-
-
-                        </li>
-                        <li>Hello again!</li>
-                        <li>Bazinga!</li>
-                    </ul>
+                    @forelse ($menus as $menu)
+                        <div>{{ $menu->item_name }}</div>
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
 
-        @forelse ($menus as $menu)
-            <!--MODAL-->
-            <div id="modal-center" class="uk-flex-top" uk-modal>
-
-                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-3xl">
-
-                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                    <form action="{{ route('CreateAddons') }}" method="post">
-                        @csrf
-                        <div class="text-center text-3xl mb-10 text-black">
-                            ADD-ONS
-
-                            <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500" height="500"
-                                class="mt-10">
-                            <legend class="text-center text-2xl text-black">
-                                {{ $menu->item_name }}</legend>
-                        </div>
-                        <legend class="text-center text-black ">₱30</legend>
-                        <div class="uk-margin uk-grid-small uk-child-width-auto" name='addons_name'>
-                            <label><input class="uk-checkbox" type="checkbox" value="Espresso shot" name='addons_name'>
-                                <span class="pl-1">Espresso shot</span>
-
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Whipping Cream" name='addons_name'>
-                                <span class="pl-1">Whipping Cream</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Ice Cream" name='addons_name'>
-                                <span class="pl-1">Ice Cream</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Choco Chips" name='addons_name'>
-                                <span class="pl-1">Choco Chips</span>
-                            </label>
-                        </div>
-                        <legend class="text-center text-black ">₱25</legend>
-                        <div class="uk-margin uk-grid-small uk-child-width-auto text-center text-base">
-                            <label><input class="uk-checkbox" type="checkbox" value="Chocolate Sauce"
-                                    name='addons_name'>
-                                <span class="pl-1">Chocolate Sauce</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Caramel Sauce" name='addons_name'>
-                                <span class="pl-1">Caramel Sauce</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Strawberry Sauce"
-                                    name='addons_name'>
-                                <span class="pl-1">Strawberry Sauce</span><br>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Honey" name='addons_name'>
-                                <span class="pl-1 mt-5">Honey</span>
-                            </label>
-                        </div>
-                        <legend class="text-center text-black ">₱20</legend>
-                        <div class="uk-margin uk-grid-small uk-child-width-auto text-center" name='addons_name'>
-                            <label><input class="uk-checkbox" type="checkbox" value="Vanilla Syrup" name='addons_name'>
-                                <span class="pl-1">Vanilla Syrup</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Caramel Syrup" name='addons_name'>
-                                <span class="pl-1">Caramel Syrup</span>
-                            </label>
-                            <label><input class="uk-checkbox" type="checkbox" value="Condensed Milk" name='addons_name'>
-                                <span class="pl-1">Condensed Milk</span>
-                            </label>
-
-                        </div>
-                        <div class="col-span-1">
-                            <div class="pt-5  flex justify-center text-center pb-5">
-                                <button
-                                    class="  bg-green-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
-                                    type="submit">Save</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {{-- END MODAL --}}
-        @empty
-        @endforelse
-
         <script>
+            $("#registeredRadio").click(() => {
+                $("#customerList").removeClass("hidden")
+            })
+            $("#unregisteredRadio").click(() => {
+                $("#customerList").addClass("hidden")
+            })
             jQuery(document).ready(($) => {
                 $('.quantity').on('click', '.plus', function(e) {
                     let $input = $(this).prev('input.qty');

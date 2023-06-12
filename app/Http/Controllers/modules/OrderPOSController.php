@@ -46,8 +46,17 @@ class OrderPOSController extends Controller
             ->get();
         $addons = DB::table('addons')
             ->get();
+        $allUsers = DB::table("users")
+            ->where('role', 3)
+            ->get();
+
+        $categories = DB::table("category")
+            ->where('status', "Enabled")
+            ->get();
 
         return view('modules/OrderMenu', [
+            'categories' => $categories,
+            "users" => $allUsers,
             'menus' => $menus,
             'order' => $order,
             'addons' => $addons
