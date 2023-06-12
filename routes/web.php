@@ -58,6 +58,7 @@ Route::post('/deleteCategory', [CategoryController::class, 'deleteCategory'])->n
 //ORDER/POS
 Route::get('/orderPOS', [OrderPOSController::class, 'index'])->name('orderPOS');
 Route::post('/loginPINCODE', [OrderPOSController::class, 'loginPINCODE'])->name('loginPINCODE');
+Route::post('/getSpecificAddons', [OrderPOSController::class, 'getSpecificAddons']);
 Route::get('/OrderMenu', [OrderPOSController::class, 'OrderMenu'])->name('OrderMenu');
 Route::get('/PayOrder', [OrderPOSController::class, 'PayOrder'])->name('PayOrder');
 Route::get('/PrintReceipt', [OrderPOSController::class, 'PrintReceipt'])->name('PrintReceipt');

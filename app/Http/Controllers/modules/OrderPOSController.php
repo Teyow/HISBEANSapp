@@ -105,4 +105,11 @@ class OrderPOSController extends Controller
 
         return redirect('/OrderMenu');
     }
+
+    public function getSpecificAddons(Request $request)
+    {
+        return DB::table('addons')
+            ->where('addons_name', $request->name)
+            ->first();
+    }
 }
