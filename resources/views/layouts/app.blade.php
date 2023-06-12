@@ -53,13 +53,10 @@
 <body>
     <div id="app">
         @auth
-            <nav class="uk-navbar-container h-16" style="background-color:  #ffecd3" uk-navbar>
+            <nav class="uk-navbar-container h-16" style="background-color:  #f25d3b" uk-navbar>
 
                 <div class="uk-navbar-left ">
-                    <a class="w-24 hidden lg:inline ml-36" href="{{ route('dashboard') }}">
 
-                        <img src="{{ asset('images/hb1.png') }}" alt="" height="1000" width="1000">
-                    </a>
 
 
                     {{-- BURGER MENU --}}

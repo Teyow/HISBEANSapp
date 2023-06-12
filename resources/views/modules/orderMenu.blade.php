@@ -133,37 +133,62 @@
                             <li><a href="#">No Categories yet</a></li>
                         @endforelse
                     </ul> --}}
+                    <div class="grid grid-cols-3">
+                        @forelse ($menus as $menu)
+                            <div class="col-span-1">
 
-                    @forelse ($menus as $menu)
-                        <div>{{ $menu->item_name }}</div>
-                    @empty
-                    @endforelse
+                                <div>
+                                    <div class="uk-card uk-card-default ml-5 mr-5 mb-10 rounded-xl ">
+                                        <div class="rounded-3xl">
+                                            <a class="flex justify-center items-center" href="#modal-center" uk-toggle>
+                                                <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
+                                                    height="500"></a>
+
+
+                                            <div class="uk-card-body bg-slate-200 rounded-b-2xl">
+
+                                                <h3 class="uk-card-title text-center ">
+                                                    {{ $menu->item_name }}
+
+                                                </h3>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        @empty
+                        @endforelse
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <script>
-            $("#registeredRadio").click(() => {
-                $("#customerList").removeClass("hidden")
-            })
-            $("#unregisteredRadio").click(() => {
-                $("#customerList").addClass("hidden")
-            })
-            jQuery(document).ready(($) => {
-                $('.quantity').on('click', '.plus', function(e) {
-                    let $input = $(this).prev('input.qty');
-                    let val = parseInt($input.val());
-                    $input.val(val + 1).change();
-                });
-
-                $('.quantity').on('click', '.minus',
-                    function(e) {
-                        let $input = $(this).next('input.qty');
-                        var val = parseInt($input.val());
-                        if (val > 0) {
-                            $input.val(val - 1).change();
-                        }
+            <script>
+                $("#registeredRadio").click(() => {
+                    $("#customerList").removeClass("hidden")
+                })
+                $("#unregisteredRadio").click(() => {
+                    $("#customerList").addClass("hidden")
+                })
+                jQuery(document).ready(($) => {
+                    $('.quantity').on('click', '.plus', function(e) {
+                        let $input = $(this).prev('input.qty');
+                        let val = parseInt($input.val());
+                        $input.val(val + 1).change();
                     });
-            });
-        </script>
-    @endsection
+
+                    $('.quantity').on('click', '.minus',
+                        function(e) {
+                            let $input = $(this).next('input.qty');
+                            var val = parseInt($input.val());
+                            if (val > 0) {
+                                $input.val(val - 1).change();
+                            }
+                        });
+                });
+            </script>
+        @endsection
