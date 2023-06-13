@@ -64,6 +64,8 @@ Route::get('/PayOrder', [OrderPOSController::class, 'PayOrder'])->name('PayOrder
 Route::get('/PrintReceipt', [OrderPOSController::class, 'PrintReceipt'])->name('PrintReceipt');
 Route::post('/CreateOrder/{id}', [OrderPOSController::class, 'CreateOrder'])->name('CreateOrder');
 Route::post('/CreateAddons', [OrderPOSController::class, 'CreateAddons'])->name('CreateAddons');
+Route::post('/addOrder', [OrderPOSController::class, 'addOrder']);
+Route::post('/addOrderItems', [OrderPOSController::class, 'addOrderItems']);
 
 
 //SALES

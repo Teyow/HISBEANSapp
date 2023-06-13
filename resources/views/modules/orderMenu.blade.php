@@ -30,6 +30,8 @@
     </div>
     <div class="flex justify-center pt-20">
         <input type="text" class="hidden" id="count" value="0">
+        <input type="text" class="hidden" id="userId" value="0">
+        <input type="text" class="hidden" id="voucherId" value="0">
         <div class="uk-card uk-card-default uk-card-body rounded-2xl">
             <div class="grid grid-cols-6">
                 <div class="col-span-2 ">
@@ -108,7 +110,7 @@
                                     <p class="uk-modal-title text-center text-5xl  text-black">Order Confirmation</p>
                                     <p class="text-center">Please verify the order to the Customer</p>
                                     <p>
-                                    <table id="users_tables" class="uk-table uk-table-hover uk-table-striped text-center">
+                                    <table id="paymentTable" class="uk-table uk-table-hover uk-table-striped text-center">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -118,29 +120,54 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <th>Sample</th>
-                                            <th>sample</th>
-                                            <th>sample</th>
                                         </tbody>
 
                                     </table>
                                     </p>
 
-                                    <div class="text-right pb-20 text-black">Subtotal: PRICE</div>
+                                    <div class="text-right pb-20 text-black">Subtotal: P<span id="paymentTotal"></span>
+                                    </div>
                                     <div class="uk-margin">
                                         <div class="text-center text-2xl pb-5 text-black">Apply Vouchers</div>
                                         <div class="text-center pb-2">Select a voucher that may apply</div>
-                                        <select class="uk-select pb-10" aria-label="Select">
-                                            <option>Option 01</option>
-                                            <option>Option 02</option>
+                                        <select class="uk-select pb-10" aria-label="Select" name="vouchers" id="vouchers">
+                                            <option></option>
+                                            <option value="0">No Voucher</option>
+                                            @forelse ($vouchers as $voucher)
+                                                <option value="{{ $voucher->id }}">{{ $voucher->voucher_name }}</option>
+                                                <script>
+                                                    $("#vouchers").on("change", (e) => {
+                                                        const voucherType = "{{ $voucher->discount_type }}"
+                                                        const voucherDiscount = "{{ $voucher->voucher_discount }}"
+                                                        let totalWithVoucher = $("#paymentTotal").html()
+                                                        $("#voucherId").val(e.target.value)
+                                                        if (e.target.value != 0) {
+                                                            if (voucherType == 'Percent') {
+                                                                totalWithVoucher = Number(totalWithVoucher) * (1 - (Number(voucherDiscount) / 100))
+                                                                console.log(totalWithVoucher)
+                                                                $("#totalWithVoucher").html(totalWithVoucher)
+                                                            }
+                                                        } else {
+                                                            totalWithVoucher = $("#paymentTotal").html()
+                                                            console.log(totalWithVoucher)
+                                                            $("#totalWithVoucher").html(totalWithVoucher)
+                                                        }
+                                                    })
+                                                </script>
+                                            @empty
+
+                                                <option>nothing to display here</option>
+                                            @endforelse
                                         </select>
                                     </div>
 
                                     <div class="uk-modal-footer uk-text-right">
-                                        <div class="text-center pb-10 text-black">Total:</div>
+                                        <div class="text-center pb-10 text-black">Total: P<span
+                                                id="totalWithVoucher">0</span></div>
                                         <button class="uk-button uk-button-default uk-modal-close"
                                             type="button">Cancel</button>
-                                        <button class="uk-button uk-button-primary" type="button">Save</button>
+                                        <button class="uk-button uk-button-primary" type="button"
+                                            id="finishPayment">Finish</button>
                                     </div>
                                 </div>
                             </div>
@@ -221,6 +248,14 @@
                                         </span>
 
                                     </div>
+                                    <h3 class="text-3xl font-bold">Temperature</h3>
+                                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                        <label><input class="uk-radio" type="radio" name="drinkTemp" value="Hot"
+                                                checked>
+                                            Hot</label>
+                                        <label><input class="uk-radio" type="radio" name="drinkTemp" value="Iced">
+                                            Iced</label>
+                                    </div>
                                     <h3 class="text-3xl font-bold">Add Ons</h3>
                                     <div class="grid grid-cols-3 gap-1 mb-5">
                                         @foreach ($addons as $addon)
@@ -276,12 +311,14 @@
                                 $("#onSave{{ $menu->id }}").click(() => {
                                     let totalPrice = Number("{{ $menu->price }}")
                                     let mainTotalPrice = $("#totalPrice").html()
+                                    let drinkTemp = $('input[name="drinkTemp"]:checked').val();;
                                     let price = Number("{{ $menu->price }}")
                                     const quantity = $("#quantity{{ $menu->id }}").html()
                                     const menuName = "{{ $menu->item_name }}"
                                     let addOns = []
                                     let count = $("#count").val()
                                     let addOnsName = ''
+                                    let addOnsNameArray = []
                                     $("input:checkbox[name='checkbox']:checked").each(function() {
                                         addOns.push($(this).val());
                                     });
@@ -290,19 +327,33 @@
                                         totalPrice = totalPrice + Number($(`#price${item}`).html())
                                         price = price + Number($(`#price${item}`).html())
                                         addOnsName = addOnsName + " " + $(`#name${item}`).html()
+                                        addOnsNameArray.push($(`#name${item}`).html())
                                     })
+
+                                    addOnsNameArray = JSON.stringify(addOnsNameArray)
 
                                     totalPrice = totalPrice * quantity
                                     mainTotalPrice = Number(mainTotalPrice) + totalPrice
                                     $("#totalPrice").html(mainTotalPrice)
+                                    $("#paymentTotal").html(mainTotalPrice)
 
                                     $('#users_table tbody').append(`
                                     <tr id="order${count}">
+                                        <td class="hidden" id="menuId${count}">{{ $menu->id }}</td>
+                                        <td class="hidden" id="menuAddOns${count}">${addOnsNameArray}</td>
+                                        <td class="hidden" id="drinkTemp${count}">${drinkTemp}</td>
                                         <td id="orderName${count}">${menuName}</td>
                                         <td id="orderQuantity${count}">${quantity}</td>
                                         <td>P<span id="orderPrice${count}">${price}</span></td>
                                         <td id="orderAddOns${count}">${addOnsName}</td>
                                         <td>P<span id="orderTotal${count}">${totalPrice}</span></td>
+                                    </tr>
+                                        `)
+                                    $('#paymentTable tbody').append(`
+                                    <tr id="payment${count}">
+                                        <td id="paymentName${count}">${menuName}</td>
+                                        <td id="paymentQuantity${count}">${quantity}</td>
+                                        <td>P<span id="paymentTotal${count}">${totalPrice}</span></td>
                                         </tr>
                                         `)
                                     count = Number(count) + 1
@@ -326,6 +377,37 @@
             </div>
 
             <script>
+                let order;
+                $("#finishPayment").click(() => {
+                    axios.post('/addOrder', {
+                        voucher_id: $("#voucherId").val(),
+                        total_price: $("#totalWithVoucher").html(),
+                        order_status: "Pending",
+                        mode_of_payment: "Cash",
+                        payment_status: "Completed",
+                    }).then(response => {
+                        order = response.data
+                        const count = $("#count").val()
+                        for (let i = 0; i < count; i++) {
+                            axios.post('/addOrderItems', {
+                                menu_id: $(`#menuId${i}`).html(),
+                                order_id: order.id,
+                                addons_id: $(`#menuAddOns${i}`).html(),
+                                drink_temperature: $(`#drinkTemp${i}`).html(),
+                                drink_name: $(`#orderName${i}`).html(),
+                                drink_quantity: $(`#orderQuantity${i}`).html(),
+                                drink_price: $(`#orderTotal${i}`).html(),
+                            }).then(response => {
+                                console.log(response.data)
+                            }).catch(err => {
+                                console.log(err.response)
+                            })
+                        }
+                    }).catch(err => {
+                        console.log(err.response)
+                    })
+                })
+
                 $("#registeredRadio").click(() => {
                     $("#customerList").removeClass("hidden")
                 })
