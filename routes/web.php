@@ -37,6 +37,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
 
 
+
 //MENU-ITEM MENU
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/addMenu', [MenuController::class, 'addMenu'])->name('addMenu');

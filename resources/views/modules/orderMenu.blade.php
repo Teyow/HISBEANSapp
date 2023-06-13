@@ -81,8 +81,10 @@
                     </div>
                     <div class="pt-36">
 
-                        <div class="grid grid-cols-2 pl-4 pr-4">
-                            <div class="col-span-1">Total: P<span class="" id="totalPrice">0</span></div>
+                        <div class=" pl-4 pr-4">
+                            <div class=" text-right">Total: ₱<span class="text-black text-3xl text-right"
+                                    id="totalPrice">0</span>
+                            </div>
                             {{-- @forelse ($order as $orders)
                                 <div class="col-span-1"><span
                                         class="flex justify-end">{{ $orders->item_price + $addon->price }}</span></div>
@@ -110,12 +112,11 @@
                                     <p class="uk-modal-title text-center text-5xl  text-black">Order Confirmation</p>
                                     <p class="text-center">Please verify the order to the Customer</p>
                                     <p>
-                                    <table id="paymentTable" class="uk-table uk-table-hover uk-table-striped text-center">
+                                    <table id="paymentTable" class="uk-table uk-table-hover uk-table-striped ">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Quantity</th>
-
                                                 <th>Price</th>
                                             </tr>
                                         </thead>
@@ -125,7 +126,7 @@
                                     </table>
                                     </p>
 
-                                    <div class="text-right pb-20 text-black">Subtotal: P<span id="paymentTotal"></span>
+                                    <div class="text-right pb-20 text-black">Subtotal: ₱<span id="paymentTotal"></span>
                                     </div>
                                     <div class="uk-margin">
                                         <div class="text-center text-2xl pb-5 text-black">Apply Vouchers</div>
@@ -162,11 +163,11 @@
                                     </div>
 
                                     <div class="uk-modal-footer uk-text-right">
-                                        <div class="text-center pb-10 text-black">Total: P<span
+                                        <div class="text-center pb-10 text-black">Total: ₱<span
                                                 id="totalWithVoucher">0</span></div>
                                         <button class="uk-button uk-button-default uk-modal-close"
                                             type="button">Cancel</button>
-                                        <button class="uk-button uk-button-primary" type="button"
+                                        <button class="uk-button uk-button-primary rounded-xl" type="button"
                                             id="finishPayment">Finish</button>
                                     </div>
                                 </div>
@@ -222,13 +223,13 @@
                             </div>
 
                             <div id="menuModal{{ $menu->id }}" uk-modal>
-                                <div class="uk-modal-dialog uk-modal-body">
+                                <div class="uk-modal-dialog uk-modal-body rounded-3xl">
                                     <div class="flex justify-center items-center">
                                         <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
                                             height="500">
                                     </div>
-                                    <div class="text-3xl">{{ $menu->item_name }}</div>
-                                    <div class="text-xl font-bold">Quantity:<span class="flex flex-row">
+                                    <div class="text-3xl text-center text-black">{{ $menu->item_name }}</div>
+                                    <div class="text-xl font-bold text-center pb-5">Quantity:<span class="flex flex-row">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 id="subQuantity{{ $menu->id }}" fill="currentColor"
                                                 class="bi bi-dash-square" viewBox="0 0 16 16">
@@ -236,7 +237,7 @@
                                                     d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                             </svg>
-                                            <span class="text-xl" id="quantity{{ $menu->id }}">1</span>
+                                            <span class="text-xl text-center" id="quantity{{ $menu->id }}">1</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 id="addQuantity{{ $menu->id }}" fill="currentColor"
                                                 class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -263,7 +264,7 @@
                                                 <div class="col-span-1">
                                                     <label><input class="uk-checkbox" type="checkbox"
                                                             value="{{ $addon->id }}" name="checkbox">
-                                                        P<span id="price{{ $addon->id }}">30</span>
+                                                        ₱<span id="price{{ $addon->id }}">30</span>
                                                         <span
                                                             id="name{{ $addon->id }}">{{ $addon->addons_name }}</span></label>
                                                 </div>
@@ -275,7 +276,7 @@
                                             @if ($addon->addons_price == 25)
                                                 <div class="col-span-1">
                                                     <label><input class="uk-checkbox" type="checkbox"
-                                                            value="{{ $addon->id }}" name="checkbox"> P<span
+                                                            value="{{ $addon->id }}" name="checkbox"> ₱<span
                                                             id="price{{ $addon->id }}">25</span>
                                                         <span
                                                             id="name{{ $addon->id }}">{{ $addon->addons_name }}</span></label>
@@ -288,7 +289,7 @@
                                             @if ($addon->addons_price == 20)
                                                 <div class="col-span-1">
                                                     <label><input class="uk-checkbox" type="checkbox"
-                                                            value="{{ $addon->id }}" name="checkbox"> P<span
+                                                            value="{{ $addon->id }}" name="checkbox">₱<span
                                                             id="price{{ $addon->id }}">20</span>
                                                         <span
                                                             id="name{{ $addon->id }}">{{ $addon->addons_name }}</span></label>

@@ -1,9 +1,16 @@
 @extends('layouts.app')
+{{--
+    DARK GREEN - #23442B
+    DARK BROWN - #231F20
+    LIGHT BROWN - #FFECD3
+    ORANGE - #F15A38
+    WHITE- FFFFFF
 
+    --}}
 @section('content')
     <div class="grid grid-cols-5 gap-4  uk-position-z-index">
         <div class="hidden lg:col-span-1 lg:inline ">
-            <div class="uk-card uk-card-default uk-card-body min-h-screen  " style="background: #231f20">
+            <div class="uk-card uk-card-default uk-card-body min-h-screen  " style="background: #23442B">
                 <div class="flex justify-center items-center pb-10">
                     <a class=" hidden lg:inline " href="{{ route('dashboard') }}">
 
@@ -13,7 +20,7 @@
                 @if (Auth::user()->role == 'Admin')
                     <ul class=" uk-nav-parent-icon " uk-nav>
                         <li class="uk-active px-6 py-4 ">
-                            <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('dashboard') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+                            <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('dashboard') ? 'bg-stone-400 text-black' : 'bg-white text-black' }}"
                                 href="{{ route('dashboard') }}">
                                 <div class="pl-5"><span uk-icon="icon: home; ratio: 1.2"></span></div><span
                                     class="ml-4">Dashboard</span>
