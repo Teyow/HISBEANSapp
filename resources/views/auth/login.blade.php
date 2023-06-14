@@ -10,7 +10,8 @@
                     <img class=" text-center" src="{{ asset('images/hb1.png') }} " alt="" srcset="" width="300"
                         height="300">
                 </div>
-                <legend class="mt-10 mb-5 text-black ">Please input your Credentials to continue.</legend>
+                <legend class="mt-10 mb-2 text-black text-2xl ">Welcome!</legend>
+                <legend class="mt-2 mb-5 text-black text-sm">Please input your Credentials to continue.</legend>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
