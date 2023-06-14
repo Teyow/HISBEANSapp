@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class=" h-screen w-full" style="background-image: url(images/cover.jpg)">
+    <div class=" h-screen w-full" style="background-image: url(images/cover.png)">
 
 
         <div class="flex justify-center  items-center  pt-48 ">

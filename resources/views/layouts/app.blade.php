@@ -37,6 +37,7 @@
     {{-- Chart JS --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
     <script src="data_chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- Data Tables CSS --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.uikit.min.css">
@@ -50,6 +51,9 @@
 
     {{-- SWAL --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {{-- CHART --}}
+    <script src="{{ asset('js/chart.js') }}"></script>
 </head>
 
 <body>
@@ -74,12 +78,15 @@
                 </div>
 
                 <div class="uk-navbar-right">
-
+                    <div class="text-white">
+                        {{ Auth::user()->fname }} {{ Auth::user()->lname }}
+                    </div>
                     <div class="uk-inline">
 
                         <span class="uk-margin-small-right flex justify-center items-center text-black">
-                            <div class="mr-4 text-black"></div>
-                            <span uk-icon="bell" class=""></span>
+                            <div class="text-white">
+                                <span uk-icon="bell" class=""></span>
+                            </div>
                         </span>
                         <div uk-drop="mode: click">
                             <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg mr-24">
@@ -95,8 +102,9 @@
                     <div class="uk-inline mr-10">
 
                         <span class="uk-margin-small-right flex justify-center items-center text-black">
-                            <div class="mr-4 text-black"></div>
-                            <span uk-icon="chevron-down" class=""></span>
+                            <div class="mr-4 text-white">
+                                <span uk-icon="user" class="text-white"></span>
+                            </div>
                         </span>
                         <div uk-drop="mode: click">
                             <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg ml-24">

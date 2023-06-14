@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,10 +32,17 @@ class HomeController extends Controller
         $order = DB::table('orders')
             ->get();
 
+        $total = DB::table('orders')
+            ->where('payment_status', 'Completed')
+            ->sum('total_price');
+        // DB::table('orders')
+        // ->sum('total_price');
+
 
 
         return view('modules/home', [
             'sale' => $sale,
+            'total' => $total,
             'order' => $order
 
         ]);

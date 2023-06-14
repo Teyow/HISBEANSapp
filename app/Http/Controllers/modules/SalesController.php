@@ -4,6 +4,7 @@ namespace App\Http\Controllers\modules;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -13,6 +14,11 @@ class SalesController extends Controller
     }
     public function index()
     {
-        return view('modules/Sales');
+
+        $data = DB::table('orders')
+            ->first();
+        return view('modules/Sales', [
+            'data' => $data
+        ]);
     }
 }

@@ -1,11 +1,281 @@
 @extends('layouts.main')
 
 @section('pagecontent')
-    <div class="container">
-        <div class="row justify-content-center">
-            <legend class="text-4xl text-black text-center">SALES</legend>
-            <div class="uk-card uk-card-default uk-card-body">
-                <div class="text-center  w-full">
+    <div class="container pb-20" style="background: rgb(238, 238, 238)">
+        <div class="row justify-content-center ">
+
+            <div class="uk-card uk-card-default uk-card-body " style="background: rgb(238, 238, 238)">
+                <ul class="uk-subnav uk-subnav-pill flex justify-center items-center" uk-switcher>
+                    <li><a href="#">Sales Dashboard</a></li>
+                    <li><a href="#">POS Report</a></li>
+                    <li><a href="#">Pivot</a></li>
+                </ul>
+
+                <ul class="uk-switcher uk-margin">
+                    <li>
+                        <div class="grid grid-cols-8 pb-5">
+                            <div class="col-span-5 pb-5 ">
+                                <div class="uk-card uk-card-default uk-card-body mr-2 rounded-3xl "
+                                    style="background: rgb(255, 255, 255)">
+                                    <div>
+                                        <legend class="text-center text-black">Monthly Sale Status</legend>
+                                        {{-- MONTHLY SALES --}}
+                                        <canvas id="linebarChart" style="height: 80px"></canvas>
+                                    </div>
+
+                                </div>
+                                <div class=" mt-5">
+                                    <div class="">
+                                        <div class="uk-card uk-card-default uk-card-body mr-4 rounded-3xl"
+                                            style="background: rgb(255, 255, 255)">
+                                            <div>
+                                                <legend class="text-center text-black">Sales Analysis Index</legend>
+                                                <div class="grid grid-cols-3">
+                                                    <div class="col-span-1 pt-10">
+
+                                                        {{-- SALES ANALYSIS INDEX --}}
+                                                        <canvas id="doughChart1"></canvas>
+                                                        <legend class="text-center text-black  pt-2">All
+                                                            Product Type
+                                                        </legend>
+                                                    </div>
+                                                    <div class="col-span-1">
+                                                        {{-- SALES ANALYSIS INDEX --}}
+                                                        <canvas id="doughChart2"></canvas>
+                                                        <legend class="text-center text-black pt-2">Drinks Only Sales
+                                                        </legend>
+                                                    </div>
+                                                    <div class="col-span-1 pt-10">
+                                                        {{-- SALES ANALYSIS INDEX --}}
+                                                        <canvas id="doughChart3"></canvas>
+                                                        <legend class="text-center text-black pt-2">By Sales Type</legend>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="grid grid-cols-2 pt-5 text-center">
+                                                <div class="col-span-1 ">
+                                                    <div class="grid grid-cols-2">
+                                                        <div class="col-span-1">
+                                                            <div class="">Total Sales:</div>
+                                                            <div class="">Weekdays</div>
+                                                            <div class="">Weekends/Holiday</div>
+                                                        </div>
+                                                        <div class="col-span-1">
+                                                            <div class="">P5464</div>
+                                                            <div class="">P5464</div>
+                                                            <div class="">P5464</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-1 ">
+                                                    <div class="grid grid-cols-2">
+                                                        <div class="col-span-1">
+                                                            <div class="">Sales Quantity:</div>
+                                                            <div class=""># of Customers</div>
+                                                        </div>
+                                                        <div class="col-span-1">
+                                                            <div class="">2244</div>
+                                                            <div class="">150</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-span-3">
+                                <div class="grid grid-rows-2">
+                                    <div class="row-span-1">
+                                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
+                                            style="background: rgb(255, 255, 255)">
+                                            <legend class="text-center text-black pt-2">Top 10 Products sold</legend>
+                                            <canvas id="horizontalbarChartSales" style="height: 10px; width: 14px"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="row-span-1">
+                                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
+                                            style="background: rgb(255, 255, 255)">
+                                            <legend class="text-center text-black pt-2">Top 10 Products sold by Quantity
+                                            </legend>
+                                            <canvas id="horizontalbarChartQuantity"
+                                                style="height: 10px; width: 14px"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>Hello again!</li>
+                    <li>Bazinga!</li>
+                </ul>
+
+                {{-- linebarChart CHART Monthly Sale Status --}}
+                <script>
+                    const linebarChart = document.getElementById('linebarChart').getContext('2d');
+
+
+                    new Chart(linebarChart, {
+                        type: 'bar',
+                        data: {
+                            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                                'October',
+                                'November', 'December'
+                            ],
+                            datasets: [{
+                                label: 'Total Quantity of Product Sold',
+                                data: [6, 1, 3, 5, 2, 4],
+                                borderWidth: 1,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+
+                                ],
+
+                            }, {
+                                type: 'line',
+                                label: 'Total Sales',
+                                data: [1, 4, 3, 6, 1, 5, 2],
+                                fill: false,
+                                borderColor: 'rgb(54, 162, 235)'
+                            }]
+                        },
+                        options: {
+                            scales: {
+
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+                {{-- Doughnut1 CHART SALES ANALYSIS INDEX --}}
+                <script>
+                    const doughChart1 = document.getElementById('doughChart1');
+
+                    new Chart(doughChart1, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                label: 'Monthly Sale Status',
+                                data: [6, 1, 3, 5, 2, 3],
+                                borderWidth: 1
+                            }]
+                        },
+
+                    });
+                </script>
+
+                {{-- Doughnut2 CHART SALES ANALYSIS INDEX --}}
+                <script>
+                    const doughChart2 = document.getElementById('doughChart2');
+
+                    new Chart(doughChart2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                label: 'Monthly Sale Status',
+                                data: [6, 1, 3, 5, 2, 3],
+                                borderWidth: 1
+                            }]
+                        },
+
+                    });
+                </script>
+
+
+                {{-- Doughnut2 CHART SALES ANALYSIS INDEX --}}
+                <script>
+                    const doughChart3 = document.getElementById('doughChart3');
+
+                    new Chart(doughChart3, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                label: 'Monthly Sale Status',
+                                data: [6, 1, 3, 5, 2, 3],
+                                borderWidth: 1
+                            }]
+                        },
+
+                    });
+                </script>
+
+
+                {{-- horizontalbarChartSales1 --}}
+                <script>
+                    const horizontalbarChartSales = document.getElementById('horizontalbarChartSales');
+
+                    new Chart(horizontalbarChartSales, {
+                        type: 'bar',
+                        data: {
+                            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9',
+                                '10',
+
+                            ],
+                            datasets: [{
+                                label: 'Total Sales',
+                                data: [6, 1, 3, 5, 2, 3],
+                                borderWidth: 1,
+                                backgroundColor: [
+                                    '#23442b',
+
+                                ],
+                            }]
+                        },
+
+                        options: {
+                            indexAxis: 'y',
+
+                        }
+
+
+                    });
+                </script>
+
+
+
+                {{-- horizontalbarChartSales2 --}}
+                <script>
+                    const horizontalbarChartQuantity = document.getElementById('horizontalbarChartQuantity');
+
+                    new Chart(horizontalbarChartQuantity, {
+                        type: 'bar',
+                        data: {
+                            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9',
+                                '10',
+
+                            ],
+                            datasets: [{
+                                label: 'Total Quantity Sold',
+                                data: [6, 1, 3, 5, 2, 3],
+                                borderWidth: 1,
+                                backgroundColor: [
+                                    '#f15a38',
+
+                                ],
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+
+                        }
+
+
+                    });
+                </script>
+
+
+
+                {{-- <div class="text-center  w-full">
                     <legend class="text-2xl text-black pb-5">Year 2022-2023 </legend>
                     <canvas id="myChart"></canvas>
                 </div>
@@ -31,20 +301,18 @@
                         </tbody>
 
                     </table>
-                </div>
+                </div> --}}
             </div>
 
-            <script>
+            {{-- <script>
                 $(document).ready(function() {
                     $('#users_table').DataTable();
                 });
-            </script>
+            </script> --}}
         </div>
     </div>
 
-    </div>
-    </div>
-
+    {{--
     <script>
         const ctx = document.getElementById("myChart").getContext("2d");
         const labels = [
@@ -113,5 +381,5 @@
                 },
             });
         @endisset
-    </script>
+    </script> --}}
 @endsection
