@@ -152,7 +152,7 @@
                 })
 
                 $("#submitPin").click(() => {
-                    if ($("#pinCode").val() === "1234") {
+                    if ($("#pinCode").val() === "{{ Auth::user()->pincode }}") {
                         swal({
                             icon: "success",
                             title: "Success!",
@@ -161,7 +161,11 @@
                             location.replace('OrderMenu')
                         })
                     } else {
-                        console.log('false')
+                        swal({
+                            icon: "error",
+                            title: "Error!",
+                            text: "Pin Code is incorrect!",
+                        })
                     }
                 })
 
