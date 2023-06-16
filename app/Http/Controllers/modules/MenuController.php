@@ -86,9 +86,9 @@ class MenuController extends Controller
 
     public function updateMenu(Request $request, $id)
     {
-        $newImageName = time() . '-' . $request->item_name . '.' .
-            $request->image->extension();
-        $request->image->move(public_path('image/menu'), $newImageName);
+        // $newImageName = time() . '-' . $request->item_name . '.' .
+        //     $request->image->extension();
+        // $request->image->move(public_path('image/menu'), $newImageName);
 
 
 
@@ -102,7 +102,7 @@ class MenuController extends Controller
                 'category' => $request->category,
                 'is_featured' => $request->is_featured,
                 'status' => $request->status,
-                'image_path' => $request->image_path,
+                // 'image_path' => $request->image_path,
 
             ]);
 

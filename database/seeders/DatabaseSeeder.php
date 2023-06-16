@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'Admin',
             'cnumber' => '0925778545',
             'pincode' => '1111',
-            'status' => 'enable',
+            'status' => 'Enable',
             'email_verified_at' => now()
         ]);
 
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 'price' => '120',
                 'category' => "Coffee",
                 'is_featured' => "Featured",
-                'status' => "Enabled",
+                'status' => "Enable",
                 'image_path' => "1685322737-Americano.jpg"
             ]);
     }

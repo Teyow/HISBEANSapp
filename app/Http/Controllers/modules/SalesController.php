@@ -14,11 +14,21 @@ class SalesController extends Controller
     }
     public function index()
     {
+        $total = DB::table('orders')
+            ->where('payment_status', 'Completed')
+            ->sum('total_price');
+
 
         $data = DB::table('orders')
-            ->first();
+            ->count('id');
+
+        $order_quantity = DB::table('order_items')
+            ->count('drink_quantity');
+
         return view('modules/Sales', [
-            'data' => $data
+            'data' => $data,
+            'total' => $total,
+            'order_quantity' => $order_quantity
         ]);
     }
 }

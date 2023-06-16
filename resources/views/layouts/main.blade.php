@@ -10,7 +10,7 @@
 @section('content')
     <div class="grid grid-cols-5 gap-4  uk-position-z-index">
         <div class="hidden lg:col-span-1 lg:inline ">
-            <div class="uk-card uk-card-default uk-card-body min-h-full  " style="background: #231F20">
+            <div class="uk-card uk-card-default uk-card-body min-h-screen  " style="background: #231F20">
                 <div class="flex justify-center items-center pb-10">
                     <a class=" hidden lg:inline " href="{{ route('dashboard') }}">
 

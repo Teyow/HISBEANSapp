@@ -8,7 +8,7 @@
                 <ul class="uk-subnav uk-subnav-pill flex justify-center items-center" uk-switcher>
                     <li><a href="#">Sales Dashboard</a></li>
                     <li><a href="#">POS Report</a></li>
-                    <li><a href="#">Pivot</a></li>
+
                 </ul>
 
                 <ul class="uk-switcher uk-margin">
@@ -62,7 +62,7 @@
                                                             <div class="">Weekends/Holiday</div>
                                                         </div>
                                                         <div class="col-span-1">
-                                                            <div class="">P5464</div>
+                                                            <div class="text-black">₱{{ $total }}</div>
                                                             <div class="">P5464</div>
                                                             <div class="">P5464</div>
                                                         </div>
@@ -75,12 +75,13 @@
                                                             <div class=""># of Customers</div>
                                                         </div>
                                                         <div class="col-span-1">
-                                                            <div class="">2244</div>
-                                                            <div class="">150</div>
+                                                            <div class="text-black">{{ $order_quantity }}</div>
+                                                            <div class="text-black">{{ $data }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
 
                                         </div>
                                     </div>
@@ -111,7 +112,7 @@
                         </div>
                     </li>
                     <li>Hello again!</li>
-                    <li>Bazinga!</li>
+
                 </ul>
 
                 {{-- linebarChart CHART Monthly Sale Status --}}
@@ -128,7 +129,7 @@
                             ],
                             datasets: [{
                                 label: 'Total Quantity of Product Sold',
-                                data: [6, 1, 3, 5, 2, 4],
+                                data: [{{ $order_quantity }}],
                                 borderWidth: 1,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -138,7 +139,7 @@
                             }, {
                                 type: 'line',
                                 label: 'Total Sales',
-                                data: [1, 4, 3, 6, 1, 5, 2],
+                                data: [{{ $data }}],
                                 fill: false,
                                 borderColor: 'rgb(54, 162, 235)'
                             }]
@@ -161,10 +162,10 @@
                     new Chart(doughChart1, {
                         type: 'doughnut',
                         data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            labels: ['COFFEE', 'NON-COFFEE', 'HIBEANCCINO', 'BREWED TEA', 'ADE', 'PARTIES', 'PASTA'],
                             datasets: [{
                                 label: 'Monthly Sale Status',
-                                data: [6, 1, 3, 5, 2, 3],
+                                data: [6, 1, 3, 5, 2, 3, 1],
                                 borderWidth: 1
                             }]
                         },
@@ -179,10 +180,10 @@
                     new Chart(doughChart2, {
                         type: 'doughnut',
                         data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            labels: ['COFFEE', 'NON-COFFEE', 'HIBEANCCINO', 'BREWED TEA', 'ADE'],
                             datasets: [{
                                 label: 'Monthly Sale Status',
-                                data: [6, 1, 3, 5, 2, 3],
+                                data: [6, 1, 3, 5, 2],
                                 borderWidth: 1
                             }]
                         },
@@ -198,10 +199,10 @@
                     new Chart(doughChart3, {
                         type: 'doughnut',
                         data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            labels: ['GENERAL SALES', 'SENIOR DISCOUNT', 'PWD DISCOUNT'],
                             datasets: [{
                                 label: 'Monthly Sale Status',
-                                data: [6, 1, 3, 5, 2, 3],
+                                data: [6, 1, 3],
                                 borderWidth: 1
                             }]
                         },
