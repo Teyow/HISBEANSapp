@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\App;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::post('/', [LoginController::class, 'login'])->name('login');
+// Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
 

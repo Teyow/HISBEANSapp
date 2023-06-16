@@ -51,7 +51,7 @@ class HomeController extends Controller
 
 
 
-        //Products sold Analysis
+        //Products sold Analysis on Coffee
         $americano = DB::table('order_items')
             ->where('drink_name', 'Americano')
             ->count("menu_id");
@@ -107,8 +107,7 @@ class HomeController extends Controller
 
 
 
-        //Products sold by Quantity Analysis
-
+        //Products sold by Quantity Analysis on Coffee
         $americano_quantity = DB::table('order_items')
             ->where('drink_name', 'Americano')
             ->sum("drink_quantity");
@@ -155,7 +154,40 @@ class HomeController extends Controller
 
 
 
+        //Products sold Analysis on Non Coffee
+        $chocolate_latte = DB::table('order_items')
+            ->where('drink_name', 'Chocolate Latte')
+            ->count("menu_id");
 
+        $earl_grey_latte = DB::table('order_items')
+            ->where('drink_name', 'Earl Grey Latte')
+            ->count("menu_id");
+
+        $greentea_latte = DB::table('order_items')
+            ->where('drink_name', 'Greentea Latte')
+            ->count("menu_id");
+
+        $real_strawberry_latte = DB::table('order_items')
+            ->where('drink_name', 'Real Strawberry Latte')
+            ->count("menu_id");
+
+
+        //Products sold by Quantity Analysis on Coffee
+        $chocolate_latte_quantity = DB::table('order_items')
+            ->where('drink_name', 'Chocolate Latte')
+            ->sum("drink_quantity");
+
+        $earl_grey_latte_quantity = DB::table('order_items')
+            ->where('drink_name', 'Earl Grey Latte')
+            ->sum("drink_quantity");
+
+        $greentea_latte_quantity = DB::table('order_items')
+            ->where('drink_name', 'Greentea Latte')
+            ->sum("drink_quantity");
+
+        $real_strawberry_latte_quantity = DB::table('order_items')
+            ->where('drink_name', 'Real Strawberry Latte')
+            ->sum("drink_quantity");
 
 
 
@@ -186,7 +218,14 @@ class HomeController extends Controller
             "cold_brew_latte_quantity" => $cold_brew_latte_quantity,
             "einispanner_quantity" => $einispanner,
             "einispanner_latte_quantity" => $einispanner_latte_quantity,
-
+            'chocolate_latte' => $chocolate_latte,
+            'earl_grey_latte' => $earl_grey_latte,
+            'greentea_latte' => $greentea_latte,
+            'real_strawberry_latte' => $real_strawberry_latte,
+            'chocolate_latte_quantity' => $chocolate_latte_quantity,
+            'earl_grey_latte_quantity' => $earl_grey_latte_quantity,
+            'greentea_latte_quantity' => $greentea_latte_quantity,
+            'real_strawberry_latte_quantity' => $real_strawberry_latte_quantity,
 
 
 
