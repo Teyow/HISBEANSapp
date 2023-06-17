@@ -49,7 +49,8 @@ class HomeController extends Controller
             ->sum('total_price');
 
 
-
+        $americano_name = DB::table('menu')
+            ->get('item_name');
 
         //Products sold Analysis
         $americano = DB::table('order_items')
@@ -186,6 +187,7 @@ class HomeController extends Controller
             "cold_brew_latte_quantity" => $cold_brew_latte_quantity,
             "einispanner_quantity" => $einispanner,
             "einispanner_latte_quantity" => $einispanner_latte_quantity,
+            'americano_name', $americano_name,
 
 
 
