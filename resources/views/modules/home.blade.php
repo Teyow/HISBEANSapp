@@ -224,15 +224,16 @@
                 const cold_brew_latte = [{{ $cold_brew_latte }}];
                 const einispanner = [{{ $einispanner }}];
                 const einispanner_latte = [{{ $einispanner_latte }}];
+                // const topProducts = [{{ $topProducts }}];
 
-
+                var data = ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
+                    'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
+                    'Einspanner Latte'
+                ]
                 new Chart(horizontalbarChartSales, {
                     type: 'bar',
                     data: {
-                        labels: ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
-                            'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
-                            'Einspanner Latte'
-                        ],
+                        labels: data,
                         datasets: [{
                                 label: 'Product Sold',
                                 data: [americano, cafe_latte, cappuccino, caramel_macchiato, cafe_mocha, vanilla_latte,
@@ -272,13 +273,14 @@
                 const cold_brew_latte_quantity = [{{ $cold_brew_latte_quantity }}];
                 const einispanner_quantity = [{{ $einispanner_quantity }}];
                 const einispanner_latte_quantity = [{{ $einispanner_latte_quantity }}];
-                const americano_name = [{{ $americano_name }}];
+
+
 
 
                 new Chart(horizontalbarChartQuantity, {
                     type: 'bar',
                     data: {
-                        labels: [americano_name, 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
+                        labels: ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
                             'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
                             'Einspanner Latte'
                         ],

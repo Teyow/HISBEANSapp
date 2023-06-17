@@ -49,6 +49,14 @@ class HomeController extends Controller
             ->sum('total_price');
 
 
+        $topProducts = DB::table('order_items')
+            ->where('drink_name', 'Americano')
+
+            // ->orWhere('drink_name', 'Cafe Latte')
+            // ->orWhere('drink_name', 'Vanilla Latte')
+            // ->get('drink_name');
+            ->count();
+
 
         //Products sold Analysis on Coffee
         $americano = DB::table('order_items')
@@ -215,7 +223,7 @@ class HomeController extends Controller
             "spanish_latte_quantity" => $spanish_latte_quantity,
             "cold_brew_quantity" => $cold_brew_quantity,
             "cold_brew_latte_quantity" => $cold_brew_latte_quantity,
-            "einispanner_quantity" => $einispanner,
+            "einispanner_quantity" =>   $einispanner_quantity,
             "einispanner_latte_quantity" => $einispanner_latte_quantity,
             'chocolate_latte' => $chocolate_latte,
             'earl_grey_latte' => $earl_grey_latte,
@@ -225,9 +233,9 @@ class HomeController extends Controller
             'earl_grey_latte_quantity' => $earl_grey_latte_quantity,
             'greentea_latte_quantity' => $greentea_latte_quantity,
             'real_strawberry_latte_quantity' => $real_strawberry_latte_quantity,
-            'americano_name', $americano_name,
 
 
+            'topProducts' => $topProducts,
 
 
 
