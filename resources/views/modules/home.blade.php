@@ -127,7 +127,7 @@
                         <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
                             style="background: rgb(255, 255, 255)">
                             <legend class="text-center text-black pt-2">Products sold Analysis on Non-Coffee</legend>
-                            <canvas id="horizontalbarChartSales" style="height: 7   px; width: 14px"></canvas>
+                            <canvas id="horizontalbarChartSalesNonCoffee" style="height: 7   px; width: 14px"></canvas>
                         </div>
                     </div>
                     <div class="col-span-1">
@@ -135,7 +135,7 @@
                             style="background: rgb(255, 255, 255)">
                             <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on Non-Coffee
                             </legend>
-                            <canvas id="horizontalbarChartQuantity" style="height: 7px; width: 14px"></canvas>
+                            <canvas id="horizontalbarChartQuantityNonCoffee" style="height: 7px; width: 14px"></canvas>
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
 
 
 
-            {{-- horizontalbarChartSales1 --}}
+            {{-- horizontalbarChartSalesCoffee --}}
             <script>
                 const horizontalbarChartSales = document.getElementById('horizontalbarChartSalesCoffee');
                 const americano = [{{ $americano }}];
@@ -258,7 +258,7 @@
 
 
 
-            {{-- horizontalbarChartSales2 --}}
+            {{-- horizontalbarChartQuantityCoffee --}}
             <script>
                 const horizontalbarChartQuantity = document.getElementById('horizontalbarChartQuantityCoffee');
                 const americano_quantity = [{{ $americano_quantity }}];
@@ -305,6 +305,82 @@
 
                 });
             </script>
+
+
+
+            {{-- horizontalbarChartSalesNonCoffee --}}
+            <script>
+                const horizontalbarChartSalesNonCoffee = document.getElementById('horizontalbarChartSalesNonCoffee');
+                const chocolate_latte = [{{ $chocolate_latte }}];
+                const earl_grey_latte = [{{ $earl_grey_latte }}];
+                const greentea_latte = [{{ $greentea_latte }}];
+                const real_strawberry_latte = [{{ $real_strawberry_latte }}];
+
+
+                new Chart(horizontalbarChartSalesNonCoffee, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Chocolate Latte', 'Earl Grey Latte', 'Greentea Latte', 'Real Strawberry Latte', ],
+                        datasets: [{
+                                label: 'Product Sold',
+                                data: [chocolate_latte, earl_grey_latte, greentea_latte, real_strawberry_latte],
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Customize the colors
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            },
+
+
+                        ]
+                    },
+
+                    options: {
+                        indexAxis: 'y',
+
+                    }
+
+
+                });
+            </script>
+
+
+
+            {{-- horizontalbarChartQuantityNonCoffee --}}
+            <script>
+                const horizontalbarChartQuantityNonCoffee = document.getElementById('horizontalbarChartQuantityNonCoffee');
+                const chocolate_latte_quantity = [{{ $chocolate_latte_quantity }}];
+                const earl_grey_latte_quantity = [{{ $earl_grey_latte_quantity }}];
+                const greentea_latte_quantity = [{{ $greentea_latte_quantity }}];
+                const real_strawberry_latte_quantity = [{{ $real_strawberry_latte_quantity }}];
+
+                new Chart(horizontalbarChartQuantityNonCoffee, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Chocolate Latte', 'Earl Grey Latte', 'Greentea Latte', 'Real Strawberry Latte'],
+                        datasets: [{
+                            label: 'Total Quantity Sold',
+                            data: [chocolate_latte_quantity, earl_grey_latte_quantity, greentea_latte_quantity,
+                                real_strawberry_latte_quantity,
+                            ],
+                            borderWidth: 1,
+                            borderColor: 'rgba(, 99, 132, 1)',
+                            backgroundColor: [
+                                'rgba(20, 99, 132, 0.3)',
+
+                            ],
+                        }, ]
+                    },
+                    options: {
+                        indexAxis: 'y',
+
+                    }
+
+
+                });
+            </script>
+
+
+
+
     </div>
     </div>
 @endsection
