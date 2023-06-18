@@ -25,8 +25,38 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
     public function index()
     {
+
+        $sample = DB::table('order_items')
+
+            ->join('menu', 'order_items.menu_id', '=', 'menu.id')
+            ->select('menu.item_name as name', DB::raw('count(order_items.drink_name) as quantity'))
+            ->orderBy('quantity', 'desc')
+            ->groupBy('menu.item_name')
+            ->take(10)
+            ->get();
+
+        $sample2 = $sample->mapWithKeys(function ($item, $key) {
+            return [$item->name => $item->quantity];
+        });
+
+
+        $sampleq = DB::table('order_items')
+            ->join('menu', 'order_items.menu_id', '=', 'menu.id')
+            ->select('menu.item_name as name', DB::raw('sum(order_items.drink_quantity) as quantity'))
+            ->orderBy('name', 'desc')
+            ->groupBy('menu.item_name')
+            ->take(10)
+            ->get();
+
+        $sampleq2 = $sampleq->mapWithKeys(function ($item, $key) {
+            return [$item->name => $item->quantity];
+        });
+
+
         $sale = DB::table('orders')
             ->count('id');
 
@@ -233,8 +263,8 @@ class HomeController extends Controller
             'earl_grey_latte_quantity' => $earl_grey_latte_quantity,
             'greentea_latte_quantity' => $greentea_latte_quantity,
             'real_strawberry_latte_quantity' => $real_strawberry_latte_quantity,
-
-
+            'sample2' => $sample2,
+            'sampleq2' => $sampleq2,
             'topProducts' => $topProducts,
 
 

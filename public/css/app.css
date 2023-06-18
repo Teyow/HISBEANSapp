@@ -628,6 +628,12 @@ video {
 .mt-8 {
   margin-top: 2rem;
 }
+.ml-20 {
+  margin-left: 5rem;
+}
+.mr-20 {
+  margin-right: 5rem;
+}
 .block {
   display: block;
 }
@@ -932,6 +938,12 @@ video {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pl-20 {
+  padding-left: 5rem;
+}
+.pr-20 {
+  padding-right: 5rem;
 }
 .text-left {
   text-align: left;
