@@ -272,13 +272,13 @@
                 const cold_brew_latte_quantity = [{{ $cold_brew_latte_quantity }}];
                 const einispanner_quantity = [{{ $einispanner_quantity }}];
                 const einispanner_latte_quantity = [{{ $einispanner_latte_quantity }}];
-                const americano_name = [{{ $americano_name }}];
+
 
 
                 new Chart(horizontalbarChartQuantity, {
                     type: 'bar',
                     data: {
-                        labels: [americano_name, 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
+                        labels: ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
                             'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
                             'Einspanner Latte'
                         ],

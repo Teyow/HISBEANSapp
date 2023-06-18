@@ -33,16 +33,7 @@ class HomeController extends Controller
 
 
         $order = DB::table('order_items')
-
-            ->count("id");
-
-        // $a = OrderItem::withCount('drink_name')
-        //     ->orderByDesc('quantity')
-        //     ->take(10)
-        //     ->get();
-        // dd($a);
-
-
+            ->count("order_id");
 
         $total = DB::table('orders')
             ->where('payment_status', 'Completed')
@@ -225,7 +216,7 @@ class HomeController extends Controller
             'earl_grey_latte_quantity' => $earl_grey_latte_quantity,
             'greentea_latte_quantity' => $greentea_latte_quantity,
             'real_strawberry_latte_quantity' => $real_strawberry_latte_quantity,
-            'americano_name', $americano_name,
+
 
 
 
