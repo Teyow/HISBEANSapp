@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\modules;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class SalesController extends Controller
 {
@@ -24,6 +26,9 @@ class SalesController extends Controller
 
         $order_quantity = DB::table('order_items')
             ->count('drink_quantity');
+
+
+
 
         $sample = DB::table('order_items')
 
@@ -55,19 +60,38 @@ class SalesController extends Controller
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
             ->select('menu.category as name', DB::raw('count(menu.category) as quantity'))
             ->groupBy('menu.category')
-            ->get();
 
+            ->get();
+        // dd($samplepie);
         $sampleqpie2 = $samplepie->mapWithKeys(function ($item, $key) {
             return [$item->name => $item->quantity];
         });
         // dd($sampleqpie2);
 
+        // $orderss = DB::table('order_items')
+        //     ->join('menu', 'order_items.menu_id', '=', 'menu.id')
+
+        //     ->select('order_items.id', 'order_items.created_at', 'menu.category')
+        //     ->get();
+        // dd($orderss);
+
         $orders = DB::table('order_items')
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
+
+            ->select(
+                'order_items.id',
+                'order_items.created_at',
+                'menu.category',
+                'order_items.drink_name',
+                'order_items.menu_id',
+                'order_items.drink_quantity',
+                'order_items.drink_price'
+            )
+            // ->select('order_items.created_at')
             ->get();
-        // ->select('order_items.created_at')
-        // ->get();
-        // dd($orders);
+
+
+
 
         return view('modules/Sales', [
             'data' => $data,
@@ -78,6 +102,7 @@ class SalesController extends Controller
             'samplepie' => $samplepie,
             'sampleqpie2' => $sampleqpie2,
             'orders' => $orders,
+
 
         ]);
     }

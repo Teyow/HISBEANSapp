@@ -103,8 +103,6 @@
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Day</th>
-                                    <th>Time</th>
                                     <th>Product Code</th>
                                     <th>Product Name</th>
                                     <th>Product Type</th>
@@ -121,12 +119,12 @@
                             <tbody>
                                 @forelse ($orders as $order)
                                     <tr>
-                                        <td>{{ date('m-d-Y', strtotime($order->created_at)) }}</td>
-                                        <td>{{ date('D', strtotime($order->created_at)) }}</td>
-                                        <td>{{ date('h:i:s A', strtotime($order->created_at)) }}</td>
+
+                                        <td>{{ $order->created_at }}</td>
+
                                         <td>{{ $order->menu_id }}</td>
                                         <td>{{ $order->drink_name }}</td>
-                                        <td></td>
+                                        <td>{{ $order->category }}</td>
                                         <td>{{ $order->drink_quantity }}</td>
                                         <td>{{ $order->drink_price }}</td>
                                         <td>{{ $order->drink_price }}</td>
