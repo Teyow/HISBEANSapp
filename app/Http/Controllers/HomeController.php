@@ -70,13 +70,6 @@ class HomeController extends Controller
             ->sum('total_price');
 
 
-        $topProducts = DB::table('order_items')
-            ->where('drink_name', 'Americano')
-
-            // ->orWhere('drink_name', 'Cafe Latte')
-            // ->orWhere('drink_name', 'Vanilla Latte')
-            // ->get('drink_name');
-            ->count();
 
 
 
@@ -84,39 +77,9 @@ class HomeController extends Controller
             'sale' => $sale,
             'total' => $total,
             'order' => $order,
-            'americano' => $americano,
-            'cafelatte' => $cafelatte,
-            'cappuccino' => $cappuccino,
-            "caramel_macchiato" => $caramel_macchiato,
-            "cafe_mocha" => $cafe_mocha,
-            "vanilla_latte" => $vanilla_latte,
-            "spanish_latte" => $spanish_latte,
-            "cold_brew" => $cold_brew,
-            "cold_brew_latte" => $cold_brew_latte,
-            "einispanner" => $einispanner,
-            "einispanner_latte" => $einispanner_latte,
-            'americano_quantity' => $americano_quantity,
-            'cafelatte_quantity' => $cafelatte_quantity,
-            'cappuccino_quantity' => $cappuccino_quantity,
-            "caramel_macchiato_quantity" => $caramel_macchiato_quantity,
-            "cafe_mocha_quantity" => $cafe_mocha_quantity,
-            "vanilla_latte_quantity" => $vanilla_latte_quantity,
-            "spanish_latte_quantity" => $spanish_latte_quantity,
-            "cold_brew_quantity" => $cold_brew_quantity,
-            "cold_brew_latte_quantity" => $cold_brew_latte_quantity,
-            "einispanner_quantity" => $einispanner,
-            "einispanner_latte_quantity" => $einispanner_latte_quantity,
-            'chocolate_latte' => $chocolate_latte,
-            'earl_grey_latte' => $earl_grey_latte,
-            'greentea_latte' => $greentea_latte,
-            'real_strawberry_latte' => $real_strawberry_latte,
-            'chocolate_latte_quantity' => $chocolate_latte_quantity,
-            'earl_grey_latte_quantity' => $earl_grey_latte_quantity,
-            'greentea_latte_quantity' => $greentea_latte_quantity,
-            'real_strawberry_latte_quantity' => $real_strawberry_latte_quantity,
             'sample2' => $sample2,
             'sampleq2' => $sampleq2,
-            'topProducts' => $topProducts,
+
 
 
 
