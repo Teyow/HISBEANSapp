@@ -90,296 +90,113 @@
 
 
 
-        <ul class="flex justify-center items-center uk-subnav uk-subnav-pill" uk-switcher>
-            <li><a href="#">Coffee</a></li>
-            <li><a href="#">Non-Coffee</a></li>
-            <li><a href="#">Organic Brewed Tea</a></li>
-            <li><a href="#">HISBEANCCINO</a></li>
-            <li><a href="#">ADE</a></li>
-        </ul>
+        <div class="">
+            <ul class="flex justify-center items-center uk-subnav uk-subnav-pill" uk-switcher>
+                <li><a href="#">Day</a></li>
+                <li><a href="#">Month</a></li>
+                <li><a href="#">Year</a></li>
 
-        <ul class="uk-switcher uk-margin">
-            {{-- COFFEE --}}
-            <li>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2">Products sold Analysis on Coffee</legend>
-                            <canvas id="horizontalbarChartSalesCoffee" style="height: 7   px; width: 14px"></canvas>
-                        </div>
+            </ul>
+
+            <ul class="uk-switcher uk-margin">
+                {{-- day --}}
+                <li>
+
+                    <div class="uk-card uk-card-default uk-card-body rounded-3xl ml-20 mr-20 "
+                        style="background: rgb(255, 255, 255)">
+                        <legend class="text-center text-black pt-2 ">Top 10 Products Today</legend>
+                        <canvas id="linebarChart1" style="height: 2px; width: 9px"></canvas>
                     </div>
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on Coffee
-                            </legend>
-                            <canvas id="horizontalbarChartQuantityCoffee" style="height: 7px; width: 14px"></canvas>
-                        </div>
+
+
+                </li>
+
+                {{-- month --}}
+                <li>
+                    <div class="uk-card uk-card-default uk-card-body  rounded-3xl ml-20 mr-20"
+                        style="background: rgb(255, 255, 255)">
+                        <legend class="text-center text-black pt-2">Top 10 Products this Month</legend>
+                        <canvas id="myChart" style="height: 2px; width: 9px"></canvas>
                     </div>
-                </div>
-            </li>
 
-            {{-- NON-COFFEE --}}
-            <li>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2">Products sold Analysis on Non-Coffee</legend>
-                            <canvas id="horizontalbarChartSalesNonCoffee" style="height: 7   px; width: 14px"></canvas>
-                        </div>
+                </li>
+
+                {{-- year --}}
+                <li>
+                    <div class="uk-card uk-card-default uk-card-body  rounded-3xl ml-20 mr-20"
+                        style="background: rgb(255, 255, 255)">
+                        <legend class="text-center text-black pt-2">Top 10 Products this Year</legend>
+                        <canvas id="linebarChart2" style="height: 2px; width: 9px"></canvas>
                     </div>
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on Non-Coffee
-                            </legend>
-                            <canvas id="horizontalbarChartQuantityNonCoffee" style="height: 7px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
 
-            {{-- ORGANIC BREWED TEA --}}
-            <li>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2">Products sold Analysis on Organic Brewed Tea
-                            </legend>
-                            <canvas id="horizontalbarChartSales" style="height: 7   px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on Organic
-                                Brewed Tea
-                            </legend>
-                            <canvas id="horizontalbarChartQuantity" style="height: 7px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            {{-- HISBEANCCINO --}}
-            <li>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2">Products sold Analysis on HISBEANCCINO</legend>
-                            <canvas id="horizontalbarChartSales" style="height: 7   px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on HISBEANCCINO
-                            </legend>
-                            <canvas id="horizontalbarChartQuantity" style="height: 7px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            {{-- ADE --}}
-            <li>
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl "
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2">Products sold Analysis on ADE</legend>
-                            <canvas id="horizontalbarChartSales" style="height: 7   px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-span-1">
-                        <div class="uk-card uk-card-default uk-card-body ml-2 rounded-3xl mt-2"
-                            style="background: rgb(255, 255, 255)">
-                            <legend class="text-center text-black pt-2"> Products sold by Quantity Analysis on ADE
-                            </legend>
-                            <canvas id="horizontalbarChartQuantity" style="height: 7px; width: 14px"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </li>
+                </li>
 
 
+        </div>
+        <script>
+            var sample2 = @json($sample2);
+            var sampleq2 = @json($sampleq2);
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="{{ asset('js/chart.js') }}"></script>
 
 
+        <script>
+            // Assuming you have your dataset with timestamps and values
+            var dataset = [{
+                    timestamp: '2023-06-16 10:00:00',
+                    value: 10
+                },
+                {
+                    timestamp: '2023-06-17 14:00:00',
+                    value: 15
+                },
+                {
+                    timestamp: '2023-06-18 09:00:00',
+                    value: 20
+                },
+                // ... more data
+            ];
 
-            {{-- horizontalbarChartSalesCoffee --}}
-            <script>
-                const horizontalbarChartSales = document.getElementById('horizontalbarChartSalesCoffee');
-                const americano = [{{ $americano }}];
-                const cafe_latte = [{{ $cafelatte }}];
-                const cappuccino = [{{ $cappuccino }}];
-                const caramel_macchiato = [{{ $caramel_macchiato }}];
-                const cafe_mocha = [{{ $cafe_mocha }}];
-                const vanilla_latte = [{{ $vanilla_latte }}];
-                const spanish_latte = [{{ $spanish_latte }}];
-                const cold_brew = [{{ $cold_brew }}];
-                const cold_brew_latte = [{{ $cold_brew_latte }}];
-                const einispanner = [{{ $einispanner }}];
-                const einispanner_latte = [{{ $einispanner_latte }}];
+            // Filter by day, month, or year
+            var filteredData = dataset.filter(function(data) {
+                var timestamp = new Date(data.timestamp);
+                // Filter by day
+                return timestamp.getDate() === 16;
 
+                // Filter by month
+                return timestamp.getMonth() === 5; // Note: JavaScript months are zero-based (0-11)
 
-                new Chart(horizontalbarChartSales, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
-                            'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
-                            'Einspanner Latte'
-                        ],
-                        datasets: [{
-                                label: 'Product Sold',
-                                data: [americano, cafe_latte, cappuccino, caramel_macchiato, cafe_mocha, vanilla_latte,
-                                    spanish_latte, cold_brew, cold_brew_latte, einispanner, einispanner_latte,
-                                ],
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Customize the colors
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1
-                            },
+                // Filter by year
+                return timestamp.getFullYear() === 2023;
+            });
 
+            // Extract timestamps and values from filtered data
+            var labels = filteredData.map(function(data) {
+                return data.timestamp;
+            });
 
-                        ]
-                    },
+            var values = filteredData.map(function(data) {
+                return data.value;
+            });
 
-                    options: {
-                        indexAxis: 'y',
-
-                    }
-
-
-                });
-            </script>
-
-
-
-            {{-- horizontalbarChartQuantityCoffee --}}
-            <script>
-                const horizontalbarChartQuantity = document.getElementById('horizontalbarChartQuantityCoffee');
-                const americano_quantity = [{{ $americano_quantity }}];
-                const cafe_latte_quantity = [{{ $cafelatte_quantity }}];
-                const cappuccino_quantity = [{{ $cappuccino_quantity }}];
-                const caramel_macchiato_quantity = [{{ $caramel_macchiato_quantity }}];
-                const cafe_mocha_quantity = [{{ $cafe_mocha_quantity }}];
-                const vanilla_latte_quantity = [{{ $vanilla_latte_quantity }}];
-                const spanish_latte_quantity = [{{ $spanish_latte_quantity }}];
-                const cold_brew_quantity = [{{ $cold_brew_quantity }}];
-                const cold_brew_latte_quantity = [{{ $cold_brew_latte_quantity }}];
-                const einispanner_quantity = [{{ $einispanner_quantity }}];
-                const einispanner_latte_quantity = [{{ $einispanner_latte_quantity }}];
-
-
-
-                new Chart(horizontalbarChartQuantity, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Americano', 'Cafe Latte', 'Cappuccino', 'Caramel Macchiato', 'Cafe Mocha',
-                            'Vanilla Latte', 'Spanish Latte', 'Cold Brew', 'Cold Brew Latte', 'Einspanner',
-                            'Einspanner Latte'
-                        ],
-                        datasets: [{
-                            label: 'Total Quantity Sold',
-                            data: [americano_quantity, cafe_latte_quantity, cappuccino_quantity,
-                                caramel_macchiato_quantity, cafe_mocha_quantity, vanilla_latte_quantity,
-                                spanish_latte_quantity, cold_brew_quantity, cold_brew_latte_quantity,
-                                einispanner_quantity, einispanner_latte_quantity,
-                            ],
-                            borderWidth: 1,
-                            borderColor: 'rgba(, 99, 132, 1)',
-                            backgroundColor: [
-                                'rgba(20, 99, 132, 0.3)',
-
-                            ],
-                        }, ]
-                    },
-                    options: {
-                        indexAxis: 'y',
-
-                    }
-
-
-                });
-            </script>
-
-
-
-            {{-- horizontalbarChartSalesNonCoffee --}}
-            <script>
-                const horizontalbarChartSalesNonCoffee = document.getElementById('horizontalbarChartSalesNonCoffee');
-                const chocolate_latte = [{{ $chocolate_latte }}];
-                const earl_grey_latte = [{{ $earl_grey_latte }}];
-                const greentea_latte = [{{ $greentea_latte }}];
-                const real_strawberry_latte = [{{ $real_strawberry_latte }}];
-
-
-                new Chart(horizontalbarChartSalesNonCoffee, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Chocolate Latte', 'Earl Grey Latte', 'Greentea Latte', 'Real Strawberry Latte', ],
-                        datasets: [{
-                                label: 'Product Sold',
-                                data: [chocolate_latte, earl_grey_latte, greentea_latte, real_strawberry_latte],
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Customize the colors
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1
-                            },
-
-
-                        ]
-                    },
-
-                    options: {
-                        indexAxis: 'y',
-
-                    }
-
-
-                });
-            </script>
-
-
-
-            {{-- horizontalbarChartQuantityNonCoffee --}}
-            <script>
-                const horizontalbarChartQuantityNonCoffee = document.getElementById('horizontalbarChartQuantityNonCoffee');
-                const chocolate_latte_quantity = [{{ $chocolate_latte_quantity }}];
-                const earl_grey_latte_quantity = [{{ $earl_grey_latte_quantity }}];
-                const greentea_latte_quantity = [{{ $greentea_latte_quantity }}];
-                const real_strawberry_latte_quantity = [{{ $real_strawberry_latte_quantity }}];
-
-                new Chart(horizontalbarChartQuantityNonCoffee, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Chocolate Latte', 'Earl Grey Latte', 'Greentea Latte', 'Real Strawberry Latte'],
-                        datasets: [{
-                            label: 'Total Quantity Sold',
-                            data: [chocolate_latte_quantity, earl_grey_latte_quantity, greentea_latte_quantity,
-                                real_strawberry_latte_quantity,
-                            ],
-                            borderWidth: 1,
-                            borderColor: 'rgba(, 99, 132, 1)',
-                            backgroundColor: [
-                                'rgba(20, 99, 132, 0.3)',
-
-                            ],
-                        }, ]
-                    },
-                    options: {
-                        indexAxis: 'y',
-
-                    }
-
-
-                });
-            </script>
-
-
-
+            // Pass the filtered data to Chart.js
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Data',
+                        data: values,
+                        backgroundColor: 'rgba(0, 123, 255, 0.6)' // Replace with your desired background color
+                    }]
+                },
+                options: {
+                    // Configure chart options as needed
+                }
+            });
+        </script>
 
     </div>
     </div>
