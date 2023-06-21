@@ -7,7 +7,7 @@ var chart;
         // var category_name = Object.keys($sampleqpie2);
         // var category_quantity = Object.values($sampleqpie2)
 
-        var ctx = document.getElementById("linebarChart1").getContext("2d");
+        var ctx = document.getElementById("linebarChart1");
         chart.ChartData(ctx, "bar", name, data, quantity);
     });
     //    linebarChart CHART Monthly Sale Status
@@ -52,9 +52,7 @@ var pieChart;
         // var category_name = Object.keys($sampleqpie2);
         // var category_quantity = Object.values($sampleqpie2)
 
-        var doughChart1s = document
-            .getElementById("doughChart1s")
-            .getContext("2d");
+        var doughChart1s = document.getElementById("doughChart1s");
         pieChart.ChartData(doughChart1s, "doughnut", name, data, quantity);
     });
     //    linebarChart CHART Monthly Sale Status
@@ -73,12 +71,12 @@ var pieChart;
                                 "rgb(54, 162, 235)",
                                 "rgb(255, 205, 86)",
                                 "rgb(23, 205, 86)",
-                                "rgb(865, 205, 86)",
+                                "rgb(75 , 34, 86)",
                                 "rgb(97, 205, 86)",
-                                "rgb(12, 205, 86)",
-                                "rgb(3, 205, 86)",
+                                "rgb(122, 205, 86)",
+                                "rgb(355, 205, 86)",
                             ],
-                            borderColor: "rgba(255, 99, 132, 1)",
+                            borderColor: "rgba(2, 99, 132, 1)",
                             borderWidth: 1,
                         },
                     ],

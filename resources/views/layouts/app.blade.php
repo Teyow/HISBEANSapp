@@ -36,7 +36,7 @@
 
     {{-- Chart JS --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
-    <script src="data_chart.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- Data Tables CSS --}}
@@ -54,6 +54,12 @@
 
     {{-- CHART --}}
     <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/barchart.js') }}"></script>
+    <script src="{{ asset('js/piechart.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js">
+    </script>
+
+
 </head>
 
 <body>

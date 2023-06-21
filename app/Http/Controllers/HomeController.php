@@ -72,7 +72,6 @@ class HomeController extends Controller
 
 
 
-
         return view('modules/home', [
             'sale' => $sale,
             'total' => $total,

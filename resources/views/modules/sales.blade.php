@@ -19,7 +19,8 @@
                                     <div>
                                         <legend class="text-center text-black">Monthly Sale Status</legend>
                                         {{-- MONTHLY SALES --}}
-                                        <canvas id="linebarChart" style="height: 20px" width="60px"></canvas>
+                                        <canvas id="linebarChart23" style="height: 20px" width="60px"></canvas>
+
                                     </div>
 
                                 </div>
@@ -39,13 +40,13 @@
                                                     </div>
                                                     <div class="col-span-1">
                                                         {{-- SALES ANALYSIS INDEX --}}
-                                                        <canvas id="doughChart2"></canvas>
+                                                        <canvas id="DrinkOnlyChart"></canvas>
                                                         <legend class="text-center text-black pt-2">Drinks Only Sales
                                                         </legend>
                                                     </div>
                                                     <div class="col-span-1 pt-10">
                                                         {{-- SALES ANALYSIS INDEX --}}
-                                                        <canvas id="doughChart3"></canvas>
+                                                        <canvas id="samplesample"></canvas>
                                                         <legend class="text-center text-black pt-2">By Sales Type</legend>
                                                     </div>
                                                 </div>
@@ -139,7 +140,7 @@
 
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">No Employees yet</td>
+                                        <td colspan="5" class="text-center">No Data yet</td>
                                     </tr>
                                 @endforelse
                                 <script>
@@ -165,33 +166,28 @@
         </div>
     </div>
 
-    <script>
-        var sample2 = @json($sample2);
-        var sampleq2 = @json($sampleq2);
-        var sampleqpie2 = @json($sampleqpie2);
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ asset('js/chart.js') }}"></script>
-    <script src="{{ asset('js/piechart.js') }}"></script>
+
 
 
 
     {{-- linebarChart CHART Monthly Sale Status --}}
     <script>
-        const linebarChart = document.getElementById('linebarChart').getContext('2d');
+        const linebarChart23 = document.getElementById('linebarChart23');
+        let month = {!! json_encode($month) !!};
+        let total_sold = {!! json_encode($total_sold) !!};
+        let total_sales = {!! json_encode($total_sales) !!};
 
 
-        new Chart(linebarChart, {
+
+        new Chart(linebarChart23, {
             type: 'bar',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                    'October',
-                    'November', 'December'
-                ],
+                labels: month,
                 datasets: [{
                     label: 'Total Quantity of Product Sold',
-                    data: [{{ $order_quantity }}],
+                    data: total_sold,
                     borderWidth: 1,
+                    borderColor: 'rgb(54, 162, 235)',
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
 
@@ -200,14 +196,20 @@
                 }, {
                     type: 'line',
                     label: 'Total Sales',
-                    data: [{{ $data }}],
+                    data: total_sales,
                     fill: false,
-                    borderColor: 'rgb(54, 162, 235)'
+                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgb(42, 234, 123)'
                 }]
             },
             options: {
                 scales: {
-
+                    // x: {
+                    //     type: 'time',
+                    //     time: {
+                    //         unit: 'day'
+                    //     }
+                    // },
                     y: {
                         beginAtZero: true
                     }
@@ -215,16 +217,21 @@
             }
         });
     </script>
-
+    {{-- <script>
+        function filterChart(this) {
+            console.log(month.value)
+        }
+    </script> --}}
 
     {{-- Doughnut2 CHART SALES ANALYSIS INDEX --}}
-    <script>
+    {{-- <script>
         const doughChart2 = document.getElementById('doughChart2');
+        let name = {!! json_encode($drinkQuantity) !!};
 
         new Chart(doughChart2, {
             type: 'doughnut',
             data: {
-                labels: ['COFFEE', 'NON-COFFEE', 'HIBEANCCINO', 'BREWED TEA', 'ADE'],
+                labels: name,
                 datasets: [{
                     label: 'Monthly Sale Status',
                     data: [6, 1, 3, 5, 2],
@@ -233,12 +240,12 @@
             },
 
         });
-    </script>
+    </script> --}}
 
 
     {{-- Doughnut2 CHART SALES ANALYSIS INDEX --}}
     <script>
-        const doughChart3 = document.getElementById('doughChart3');
+        const doughChart3 = document.getElementById('samplesample');
 
         new Chart(doughChart3, {
             type: 'doughnut',
@@ -253,4 +260,16 @@
 
         });
     </script>
+
+    <script>
+        var sample2 = @json($sample2);
+        var sampleq2 = @json($sampleq2);
+        var sampleqpie2 = @json($sampleqpie2);
+        var drinks = @json($drinks);
+        var drinkQuantity = @json($drinkQuantity);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('/js/chart.js') }}"></script>
+    <script src="{{ asset('/js/piechart.js') }}"></script>
+    <script src="{{ asset('/js/barchart.js') }}"></script>
 @endsection

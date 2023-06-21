@@ -4,6 +4,7 @@ namespace App\Http\Controllers\modules;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderItem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,7 @@ class SalesController extends Controller
     }
     public function index()
     {
+
         $total = DB::table('orders')
             ->where('payment_status', 'Completed')
             ->sum('total_price');
@@ -27,9 +29,23 @@ class SalesController extends Controller
         $order_quantity = DB::table('order_items')
             ->count('drink_quantity');
 
+        // $date = DB::table('order_items')
+        //     ->get('created_at');
+
+        // dd($date);
+
+        // $date = DB::table('order_items')
+        //     ->select('order_items.created_at as name', DB::raw('count(order_items.created_at) as quantity'))
+        //     ->groupBy('order_items.created_at')
+        //     ->take(1)
+        //     ->get();
 
 
+        // $dates = $date->mapWithKeys(function ($item, $key) {
+        //     return [$item->name => $item->quantity];
+        // });
 
+        // // dd($dates);
         $sample = DB::table('order_items')
 
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
@@ -61,11 +77,31 @@ class SalesController extends Controller
             ->select('menu.category as name', DB::raw('count(menu.category) as quantity'))
             ->groupBy('menu.category')
 
+
             ->get();
-        // dd($samplepie);
+
         $sampleqpie2 = $samplepie->mapWithKeys(function ($item, $key) {
             return [$item->name => $item->quantity];
         });
+        //dd($sampleqpie2);
+
+
+        $drinks = DB::table('order_items')
+            ->join('menu', 'order_items.menu_id', '=', 'menu.id')
+            ->select('menu.category as name', DB::raw('sum(menu.category) as quantity'))
+            ->where('menu.category', 'Coffee')
+            ->orWhere('menu.category', 'ADE')
+            ->orWhere('menu.category', 'Non-Coffee')
+            ->orWhere('menu.category', 'Hisbeanccino')
+            ->orWhere('menu.category', 'Organic Brewed Tea')
+            ->groupBy('menu.category')
+            ->get();
+
+        $drinkQuantity = $drinks->mapWithKeys(function ($item, $key) {
+            return [$item->name => $item->quantity];
+        });
+        // dd($drinkQuantity);
+
         // dd($sampleqpie2);
 
         // $orderss = DB::table('order_items')
@@ -87,8 +123,29 @@ class SalesController extends Controller
                 'order_items.drink_quantity',
                 'order_items.drink_price'
             )
-            // ->select('order_items.created_at')
             ->get();
+
+        $now = Carbon::now()->format('Y-m-d');
+        $month = Carbon::now()->format('m');
+        $created_date = OrderItem::where('drink_quantity', $now)->count();
+
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+
+
+        $total_sold = [];
+        foreach ($months as $key => $value) {
+            $total_sold[] = DB::table('order_items')
+                ->where(\DB::raw('DATE_FORMAT(created_at, "%M")'), $value)
+                ->count('drink_quantity');
+        }
+
+        $total_sales = [];
+        foreach ($months as $key => $value) {
+            $total_sales[] = DB::table('order_items')
+                ->where(\DB::raw('DATE_FORMAT(created_at, "%M")'), $value)
+                ->sum('drink_quantity');
+        }
 
 
 
@@ -102,6 +159,12 @@ class SalesController extends Controller
             'samplepie' => $samplepie,
             'sampleqpie2' => $sampleqpie2,
             'orders' => $orders,
+            'total_sales' => $total_sales,
+            'month' => $months,
+            'total_sold' => $total_sold,
+            'drinks' => $drinks,
+            'drinkQuantity' => $drinkQuantity,
+            // 'dates' => $dates
 
 
         ]);
