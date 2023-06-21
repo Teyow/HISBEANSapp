@@ -59,7 +59,7 @@ var pieChart;
     pieChart = {
         ChartData: function (ctx, type, name, data, quantity) {
             new Chart(ctx, {
-                type: "doughnut",
+                type: type,
                 data: {
                     labels: name,
                     datasets: [

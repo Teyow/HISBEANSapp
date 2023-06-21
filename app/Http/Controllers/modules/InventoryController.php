@@ -47,7 +47,7 @@ class InventoryController extends Controller
 
         ]);
 
-        return redirect('/addItems');
+        return redirect('/inventory');
         // dd($request->all());
     }
 

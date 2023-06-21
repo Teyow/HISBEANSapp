@@ -75,6 +75,7 @@ class SalesController extends Controller
         $samplepie = DB::table('order_items')
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
             ->select('menu.category as name', DB::raw('count(menu.category) as quantity'))
+
             ->groupBy('menu.category')
 
 
@@ -88,7 +89,7 @@ class SalesController extends Controller
 
         $drinks = DB::table('order_items')
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
-            ->select('menu.category as name', DB::raw('sum(menu.category) as quantity'))
+            ->select('menu.category as name', DB::raw('count(menu.category) as quantity'))
             ->where('menu.category', 'Coffee')
             ->orWhere('menu.category', 'ADE')
             ->orWhere('menu.category', 'Non-Coffee')

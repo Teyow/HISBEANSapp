@@ -9,9 +9,9 @@ var DrinkOnly;
     });
     //    linebarChart CHART Monthly Sale Status
     DrinkOnly = {
-        ChartData: function (ctxs, type, name, data, quantity) {
-            new Chart(ctxs, {
-                type: "doughnut",
+        ChartData: function (sample, type, name, quantity) {
+            new Chart(sample, {
+                type: type,
                 data: {
                     labels: name,
                     datasets: [
