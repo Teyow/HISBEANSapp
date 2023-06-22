@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('cnumber');
             $table->string('pincode')->nullable();
             $table->string('status')->nullable();
+            $table->string('notification_token', 1000)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -8,6 +8,9 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Kreait\Firebase\Contract\Messaging;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
 
 use PDF;
 
@@ -123,6 +126,7 @@ class OrderPOSController extends Controller
     public function addOrder(Request $request)
     {
         $order = Order::create([
+            'user_id' => $request->user_id,
             'voucher_id' => $request->voucher_id,
             'total_price' => $request->total_price,
             'mode_of_payment' => "Cash",
@@ -144,5 +148,21 @@ class OrderPOSController extends Controller
             'drink_quantity' => $request->drink_quantity,
             'drink_price' => $request->drink_price
         ]);
+    }
+
+    public function completeStatus(Request $request)
+    {
+        $order = DB::table('orders')
+            ->where('id', $request->order_id)
+            ->update([
+                'order_status' => 'Completed'
+            ]);
+        $messaging = app('firebase.messaging');
+        $deviceToken = $request->deviceToken;
+        $message = CloudMessage::withTarget('token', $deviceToken)
+            ->withNotification(Notification::create("Your order #$request->order_id is completed!", "Please proceed to the counter to get your drink!"))
+            ->withData(['key' => 'value']);
+
+        $messaging->send($message);
     }
 }
