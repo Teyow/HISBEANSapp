@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\App;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+// Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
 
@@ -80,6 +80,7 @@ Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
 Route::get('/addItems', [InventoryController::class, 'addItem'])->name('addItems');
 Route::post('/createItems', [InventoryController::class, 'create'])->name('createItems');
+Route::get('/PrintInventory', [InventoryController::class, 'PrintInventory'])->name('PrintInventory');
 Route::get('/editInventory/{id}', [InventoryController::class, 'editInventory'])->name('editInventory');
 Route::post('/updateInventory/{id}', [InventoryController::class, 'updateInventory'])->name('updateInventory');
 Route::post('/deleteInventory', [InventoryController::class, 'deleteInventory'])->name('deleteInventory');

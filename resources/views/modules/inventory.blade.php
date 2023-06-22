@@ -10,6 +10,11 @@
                 <a class="  bg-blue-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
                     href="{{ route('addItems') }}">+ Add
                     Item</a>
+
+            </div>
+            <div class="pt-5  flex justify-center text-center pb-5">
+                <a class="  bg-blue-500 text-white rounded-xl p-2 w-40 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
+                    href="{{ route('PrintInventory') }}" type="submit">Print Iventory</a>
             </div>
             <table id="inventory_table" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
                 <thead>
@@ -71,6 +76,7 @@
                 </tbody>
 
             </table>
+
         </div>
     </div>
 

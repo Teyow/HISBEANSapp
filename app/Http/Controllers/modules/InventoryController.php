@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Items;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class InventoryController extends Controller
 {
@@ -46,8 +47,19 @@ class InventoryController extends Controller
 
         ]);
 
-        return redirect('/addItems');
+        return redirect('/inventory');
         // dd($request->all());
+    }
+
+    public function PrintInventory()
+    {
+        $iventory = DB::table('items')
+            ->get();
+
+        $pdf = PDF::loadview('modules.printInventory', [
+            'inventory' => $iventory
+        ]);
+        return $pdf->download('inventory.pdf');
     }
 
     public function editInventory($id)

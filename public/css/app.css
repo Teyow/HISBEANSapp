@@ -509,6 +509,9 @@ video {
     max-width: 1536px;
   }
 }
+.collapse {
+  visibility: collapse;
+}
 .fixed {
   position: fixed;
 }
@@ -539,9 +542,6 @@ video {
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
-.row-span-1 {
-  grid-row: span 1 / span 1;
-}
 .m-0 {
   margin: 0px;
 }
@@ -562,6 +562,9 @@ video {
 .mb-10 {
   margin-bottom: 2.5rem;
 }
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .mb-3 {
   margin-bottom: 0.75rem;
 }
@@ -580,6 +583,9 @@ video {
 .ml-2 {
   margin-left: 0.5rem;
 }
+.ml-20 {
+  margin-left: 5rem;
+}
 .ml-24 {
   margin-left: 6rem;
 }
@@ -594,6 +600,9 @@ video {
 }
 .mr-2 {
   margin-right: 0.5rem;
+}
+.mr-20 {
+  margin-right: 5rem;
 }
 .mr-24 {
   margin-right: 6rem;
@@ -621,9 +630,6 @@ video {
 }
 .mt-8 {
   margin-top: 2rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 .block {
   display: block;
@@ -667,9 +673,6 @@ video {
 .h-screen {
   height: 100vh;
 }
-.min-h-full {
-  min-height: 100%;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -706,6 +709,9 @@ video {
 .max-w-6xl {
   max-width: 72rem;
 }
+.border-collapse {
+  border-collapse: collapse;
+}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -723,9 +729,6 @@ video {
 }
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -906,6 +909,9 @@ video {
 .pt-0 {
   padding-top: 0px;
 }
+.pt-1 {
+  padding-top: 0.25rem;
+}
 .pt-10 {
   padding-top: 2.5rem;
 }
@@ -966,10 +972,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 .font-black {
   font-weight: 900;
@@ -1044,6 +1046,9 @@ video {
 }
 .grayscale {
   --tw-grayscale: grayscale(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .hover\:bg-slate-400:hover {
