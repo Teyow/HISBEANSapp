@@ -542,6 +542,9 @@ video {
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
+.row-span-1 {
+  grid-row: span 1 / span 1;
+}
 .m-0 {
   margin: 0px;
 }
@@ -706,6 +709,12 @@ video {
 .w-full {
   width: 100%;
 }
+.w-20 {
+  width: 5rem;
+}
+.w-32 {
+  width: 8rem;
+}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -729,6 +738,9 @@ video {
 }
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+.grid-rows-2 {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;

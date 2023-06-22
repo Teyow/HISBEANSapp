@@ -7,6 +7,10 @@
         </div>
         <div class="flex justify-center">
             <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
+                <div class="pt-5   text-left pb-5">
+                    <a class="  bg-green-500 text-white rounded-xl p-2 w-24 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
+                        type="submit" href="{{ route('menu') }}">Back</a>
+                </div>
                 <legend class="text-center text-black text-2xl pb-10">Add an Item</legend>
                 <form method="POST" action="{{ route('createMenu') }}" enctype="multipart/form-data">
                     @csrf
