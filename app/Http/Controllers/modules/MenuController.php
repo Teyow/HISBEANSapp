@@ -7,6 +7,10 @@ use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Kreait\Firebase\Contract\Messaging;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+
 class MenuController extends Controller
 {
     public function __construct()
@@ -18,9 +22,13 @@ class MenuController extends Controller
     {
         $menus = DB::table('menu')
             ->get();
+        $orders = DB::table('users')
+            ->join('orders', 'users.id', 'orders.user_id')
+            ->get();
 
         return view('modules/menu', [
-            'menus' => $menus
+            'menus' => $menus,
+            'orders' => $orders
         ]);
     }
 
@@ -29,6 +37,7 @@ class MenuController extends Controller
         $category = DB::table('category')
             ->where('status', 'Enable')
             ->get();
+        dd($category);
         return view('modules/addMenu', [
             'category' => $category
         ]);
@@ -114,6 +123,7 @@ class MenuController extends Controller
         DB::table('menu')
             ->where('id', $request->id)
             ->delete();
+
         return redirect('/menu');
     }
 }

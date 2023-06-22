@@ -8,6 +8,9 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ui\Presets\React;
+use Kreait\Firebase\Contract\Messaging;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
 
 class OrderController extends Controller
 {
@@ -121,4 +124,32 @@ class OrderController extends Controller
                 'payment_status' => "Refunded"
             ]);
     }
+
+    public function updateToken(Request $request)
+    {
+        DB::table('users')
+            ->where('id', $request->id)
+            ->update(['notification_token' => $request->token]);
+        return response('token updated!');
+    }
+
+    // DEBUGGING LANG
+
+    public function sendNotif(Request $request)
+    {
+        $messaging = app('firebase.messaging');
+        $deviceToken = $request->deviceToken;
+        $title = 'Test Title';
+        $body = 'Test Body';
+        $notification = Notification::fromArray([
+            'title' => $title,
+            'body' => $body,
+        ]);
+        $message = CloudMessage::withTarget('token', $deviceToken)
+            ->withNotification(Notification::create('Your order has been completed!', "Please proceed to the counter to get your drink!"))
+            ->withData(['key' => 'value']);
+
+        $messaging->send($message);
+    }
+    // DEBUGGING LANG
 }

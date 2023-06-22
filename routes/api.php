@@ -53,6 +53,14 @@ Route::post('/cancelOrder', [OrderController::class, 'cancelOrder']);
 
 //voucher
 Route::get('/useVoucher', [VoucherController::class, 'useVoucher']);
+Route::post('/getPunchCard', [VoucherController::class, 'getPunchCard']);
+Route::post('/getUserVouchers', [VoucherController::class, 'getUserVouchers']);
+Route::post('/addUserVoucher', [VoucherController::class, 'addUserVoucher']);
+
+//FCM
+Route::post('/updateToken', [OrderController::class, 'updateToken']);
+Route::post('/sendNotif', [OrderController::class, 'sendNotif']);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 });

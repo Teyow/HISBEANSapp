@@ -64,9 +64,10 @@
                         </div>
 
                         <div class="uk-margin" id="customerList">
-                            <select class="uk-select" aria-label="Select">
+                            <select class="uk-select" aria-label="Select" id="userSelect">
+                                <option value="0">No users selected...</option>
                                 @forelse ($users as $user)
-                                    <option>{{ $user->fname . ' ' . $user->lname }}</option>
+                                    <option value="{{ $user->id }}">{{ $user->fname . ' ' . $user->lname }}</option>
                                 @empty
                                     <option>No users yet...</option>
                                 @endforelse
@@ -380,33 +381,66 @@
             <script>
                 let order;
                 $("#finishPayment").click(() => {
-                    axios.post('/addOrder', {
-                        voucher_id: $("#voucherId").val(),
-                        total_price: $("#totalWithVoucher").html(),
-                        order_status: "Pending",
-                        mode_of_payment: "Cash",
-                        payment_status: "Completed",
-                    }).then(response => {
-                        order = response.data
-                        const count = $("#count").val()
-                        for (let i = 0; i < count; i++) {
-                            axios.post('/addOrderItems', {
-                                menu_id: $(`#menuId${i}`).html(),
-                                order_id: order.id,
-                                addons_id: $(`#menuAddOns${i}`).html(),
-                                drink_temperature: $(`#drinkTemp${i}`).html(),
-                                drink_name: $(`#orderName${i}`).html(),
-                                drink_quantity: $(`#orderQuantity${i}`).html(),
-                                drink_price: $(`#orderTotal${i}`).html(),
-                            }).then(response => {
-                                console.log(response.data)
-                            }).catch(err => {
-                                console.log(err.response)
-                            })
-                        }
-                    }).catch(err => {
-                        console.log(err.response)
-                    })
+                    const user = $('#userSelect').val()
+                    if (user == 'No users yet...' || user == 0) {
+                        axios.post('/addOrder', {
+                            user_id: null,
+                            voucher_id: $("#voucherId").val(),
+                            total_price: $("#totalWithVoucher").html(),
+                            order_status: "Pending",
+                            mode_of_payment: "Cash",
+                            payment_status: "Completed",
+                        }).then(response => {
+                            order = response.data
+                            const count = $("#count").val()
+                            for (let i = 0; i < count; i++) {
+                                axios.post('/addOrderItems', {
+                                    menu_id: $(`#menuId${i}`).html(),
+                                    order_id: order.id,
+                                    addons_id: $(`#menuAddOns${i}`).html(),
+                                    drink_temperature: $(`#drinkTemp${i}`).html(),
+                                    drink_name: $(`#orderName${i}`).html(),
+                                    drink_quantity: $(`#orderQuantity${i}`).html(),
+                                    drink_price: $(`#orderTotal${i}`).html(),
+                                }).then(response => {
+                                    console.log(response.data)
+                                }).catch(err => {
+                                    console.log(err.response)
+                                })
+                            }
+                        }).catch(err => {
+                            console.log(err.response)
+                        })
+                    } else {
+                        axios.post('/addOrder', {
+                            user_id: user,
+                            voucher_id: $("#voucherId").val(),
+                            total_price: $("#totalWithVoucher").html(),
+                            order_status: "Pending",
+                            mode_of_payment: "Cash",
+                            payment_status: "Completed",
+                        }).then(response => {
+                            order = response.data
+                            const count = $("#count").val()
+                            for (let i = 0; i < count; i++) {
+                                axios.post('/addOrderItems', {
+                                    menu_id: $(`#menuId${i}`).html(),
+                                    order_id: order.id,
+                                    addons_id: $(`#menuAddOns${i}`).html(),
+                                    drink_temperature: $(`#drinkTemp${i}`).html(),
+                                    drink_name: $(`#orderName${i}`).html(),
+                                    drink_quantity: $(`#orderQuantity${i}`).html(),
+                                    drink_price: $(`#orderTotal${i}`).html(),
+                                }).then(response => {
+                                    console.log(response.data)
+                                }).catch(err => {
+                                    console.log(err.response)
+                                })
+                            }
+                        }).catch(err => {
+                            console.log(err.response)
+                        })
+                    }
                 })
 
                 $("#registeredRadio").click(() => {
@@ -414,6 +448,10 @@
                 })
                 $("#unregisteredRadio").click(() => {
                     $("#customerList").addClass("hidden")
+                })
+
+                $("#userSelect").on('change', () => {
+                    console.log($('#userSelect').val())
                 })
 
                 $("#payButton").click(() => {
