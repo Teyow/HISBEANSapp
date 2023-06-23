@@ -76,6 +76,7 @@ class SalesController extends Controller
             ->join('menu', 'order_items.menu_id', '=', 'menu.id')
             ->select('menu.category as name', DB::raw('count(menu.category) as quantity'))
 
+
             ->groupBy('menu.category')
 
 

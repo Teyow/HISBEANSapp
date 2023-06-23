@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class=" h-screen w-full" style="background-image: url(images/cover.png)">
+    <div class=" h-screen w-screen" style="background-image: url(images/login-cover.png)">
 
 
         <div class="flex justify-center  items-center  pt-48 ">
@@ -44,13 +44,13 @@
 
                     <div class="row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <div class=""> <button type="submit"
-                                    class="bg-blue-500 text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
+                            <div class=""> <button style="background-color: #F25D3B" type="submit"
+                                    class=" text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
                                     {{ __('Login') }}
                                 </button></div>
 
                             @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('password.request') }}" style="color: #F25D3B">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             @endif

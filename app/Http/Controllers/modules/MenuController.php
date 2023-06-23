@@ -37,7 +37,7 @@ class MenuController extends Controller
         $category = DB::table('category')
             ->where('status', 'Enable')
             ->get();
-        dd($category);
+        // dd($category);
         return view('modules/addMenu', [
             'category' => $category
         ]);

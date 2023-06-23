@@ -73,22 +73,27 @@
 
 
 
-                    {{-- BURGER MENU --}}
-                    <div class="lg:hidden block  text-black">
-                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle></a>
+                    <div class="uk-inline">
+                        {{-- BURGER MENU --}}
+
+                        <div class="lg:hidden block  text-black pl-10 ">
+                            <span class="uk-margin-small-right flex justify-center items-center text-black">
+                                <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle> <span
+                                        uk-icon="icon: menu; ratio: 1.5 " style="color: #ffffff"></span></a>
+                            </span>
+                        </div>
+
                     </div>
 
                 </div>
 
 
                 <div class="uk-navbar-center ">
-                    <img src="{{ asset('images/hb1.png') }} " alt="" class="w-24 h-24 block lg:hidden ">
+                    <img src="{{ asset('images/logo-image.png') }} " alt="" class="w-24  block lg:hidden ">
                 </div>
 
                 <div class="uk-navbar-right">
-                    <div class="text-white">
-                        {{ Auth::user()->fname }} {{ Auth::user()->lname }}
-                    </div>
+
                     <div class="uk-inline">
 
                         <span class="uk-margin-small-right flex justify-center items-center text-black">
@@ -96,6 +101,7 @@
                                 <span uk-icon="bell" class=""></span>
                             </div>
                         </span>
+
                         <div uk-drop="mode: click">
                             <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg mr-24">
                                 <form>
@@ -106,8 +112,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="uk-inline mr-10">
+                    <div class="text-white">
+                        {{ Auth::user()->fname }} {{ Auth::user()->lname }}
+                    </div>
+                    <div class="uk-inline xl:mr-10">
 
                         <span class="uk-margin-small-right flex justify-center items-center text-black">
                             <div class="mr-4 text-white">
@@ -119,7 +127,7 @@
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
 
-                                    <button type="submit">logout</button>
+                                    <button type="submit">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -130,49 +138,58 @@
             </nav>
 
 
-            <div id="offcanvas-slide" uk-offcanvas>
+            <div id="offcanvas-slide" uk-offcanvas="mode: push; overlay: true">
                 <div class="uk-offcanvas-bar h-screen  " style="background: #231f20">
-                    <legend class="text-center pb-20 pt-5 font-bold text-lg text-white">HISBEANS</legend>
+                    <legend class="text-center pb-10 pt-5 font-bold text-lg text-white">HISBEANS</legend>
                     @if (Auth::user()->role == 'Admin')
                         <ul class="uk-nav uk-nav-default">
 
-                            <li class="uk-active pb-6">
-                                <legend class="text-left  pt-5 font-bold  text-white">Home</legend>
+                            <li class=" px-6 py-4">
 
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('dashboard') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+
+                                <a class=" hover:no-underline hover:text-white   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('dashboard') ? 'bg-orange-700 text-white' : 'bg-black text-black' }}"
                                     href="{{ route('dashboard') }}">
-                                    <div class="pl-5"><span uk-icon="icon: home; ratio: 1.2"></span></div><span
-                                        class="ml-4">Dashboard</span>
+                                    <div class="pl-5 text-white"><span uk-icon="icon: home; ratio: 1.2"></span></div><span
+                                        class="ml-4 text-white">Dashboard</span>
                                 </a>
 
 
                             </li>
                             <li class="uk-parent px-6 py-4 ">
-                                <a href="#"
-                                    class=" hover:no-underline hover:text-blue-200 font-black  rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('menu', 'category') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
-                                    <div class="pl-5 "><span uk-icon="icon: menu; ratio: 1.2"></span></div><span
-                                        class="ml-4 ">Menu</span>
-                                </a>
-                                <ul class="uk-nav-sub pt-2">
-                                    <div class="pt-5">
-                                        <li
-                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('menu') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}">
-                                            <a href="{{ route('menu') }}" class="text-black"><span class="mt-1">Menu
-                                                    Items</span>
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('category') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
-                                            <a href="{{ route('category') }}" class="text-black "><span
-                                                    class="mt-1">Category</span>
-                                            </a>
-                                        </li>
-                                    </div>
+                                <ul class="uk-nav-default" uk-nav>
+                                    <li class="uk-parent">
+                                        <a href="#"
+                                            class=" hover:no-underline hover:text-blue-200 font-black  rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('menu', 'category') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}">
+                                            <div class="pl-5 text-white "><span uk-icon="icon: menu; ratio: 1.2"></span>
+                                            </div><span class="ml-4 text-white">Menu </span>
+                                        </a>
+
+                                        <ul class="uk-nav-sub pt-2">
+                                            <div class="pt-5">
+                                                <li
+                                                    class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('menu') ? 'bg-orange-700 text-white' : 'bg-black text-black' }}">
+                                                    <a href="{{ route('menu') }}" class="text-black"><span
+                                                            class="mt-1">Menu
+                                                            Items</span>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('category') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}">
+                                                    <a href="{{ route('category') }}" class="text-black "><span
+                                                            class="mt-1">Category</span>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
 
+
+
+
                             <li class="uk-active px-6 py-4">
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}"
                                     href="{{ route('orderPOS') }}">
                                     <div class="pl-5"><span uk-icon="icon: calendar; ratio: 1.2"></span></div><span
                                         class="ml-4">Order/POS</span>
@@ -180,46 +197,49 @@
                             </li>
 
                             <li class="uk-active px-6 py-4">
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('sales') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('sales') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}"
                                     href="{{ route('sales') }}">
                                     <div class="pl-5"><span uk-icon="icon: cart; ratio: 1.2"></span></div><span
                                         class="ml-4">Sales</span>
                                 </a>
                             </li>
                             <li class="uk-active px-6 py-4">
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('inventory') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('inventory') ? 'bg-orange-700 text-white' : 'bg-black text-black' }}"
                                     href="{{ route('inventory') }}">
                                     <div class="pl-5"><span uk-icon="icon: bag; ratio: 1.2"></span></div><span
                                         class="ml-4">Inventory</span>
                                 </a>
                             </li>
                             <li class="uk-parent px-6 py-4 ">
-                                <a href="#"
-                                    class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('vouchers', 'promotions') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
-                                    <div class="pl-5 "><span uk-icon="icon: world; ratio: 1.2"></span></div><span
-                                        class="ml-4 ">Marketing</span>
-                                </a>
-                                <ul class="uk-nav-sub pt-2">
-                                    <div class="pt-5">
+                                <ul class="uk-nav-default" uk-nav>
+                                    <li class="uk-parent"><a href="#"
+                                            class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('vouchers', 'promotions') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}">
+                                            <div class="pl-5 text-white"><span uk-icon="icon: world; ratio: 1.2"></span>
+                                            </div><span class="ml-4 text-white">Marketing</span>
+                                        </a>
+                                        <ul class="uk-nav-sub pt-2">
+                                            <div class="pt-5">
 
 
-                                        <li
-                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('vouchers') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}">
-                                            <a href="{{ route('vouchers') }}" class="text-black"><span
-                                                    class="mt-1">Vouchers</span>
-                                            </a>
-                                        </li>
-                                        <li
-                                            class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('promotions') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}">
-                                            <a href="{{ route('promotions') }}" class="text-black "><span
-                                                    class="mt-1">Promotions</span>
-                                            </a>
-                                        </li>
-                                    </div>
+                                                <li
+                                                    class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5  w-auto hover:bg-slate-400 duration-10 mb-5 {{ Route::is('vouchers') ? 'bg-orange-700 text-white' : 'bg-black text-black' }}">
+                                                    <a href="{{ route('vouchers') }}" class="text-black"><span
+                                                            class="mt-1">Vouchers</span>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="ml-5 hover:no-underline hover:text-white   rounded-md h-10  pl-5 w-auto hover:bg-slate-400 duration-10  {{ Route::is('promotions') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}">
+                                                    <a href="{{ route('promotions') }}" class="text-black "><span
+                                                            class="mt-1">Promotions</span>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="uk-active px-6 py-4">
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('users') ? 'bg-orange-700  first-letter: text-white' : 'bg-white text-black' }}"
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('users') ? 'bg-orange-700  first-letter: text-white' : 'bg-black text-black' }}"
                                     href="{{ route('users') }}">
                                     <div class="pl-5"><span uk-icon="icon: users; ratio: 1.2"></span></div><span
                                         class="ml-4">Users</span>
@@ -229,7 +249,7 @@
                     @elseif (Auth::user()->role == 'Staff')
                         <ul class=" uk-nav-parent-icon " uk-nav>
                             <li class="uk-active px-6 py-4">
-                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-white text-black' }}"
+                                <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700  text-white' : 'bg-black text-black' }}"
                                     href="{{ route('orderPOS') }}">
                                     <div class="pl-5"><span uk-icon="icon: calendar; ratio: 1.2"></span></div><span
                                         class="ml-4">Order/POS</span>

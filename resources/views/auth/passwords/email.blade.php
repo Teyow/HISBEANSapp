@@ -39,7 +39,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="bg-blue-500 text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5">
+                            <div class=" text-white rounded-xl pl-10 pr-10 pt-2 pb-2 mt-5"
+                                style="background-color: #F25D3B">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Send Password Reset Link') }}
                                 </button>

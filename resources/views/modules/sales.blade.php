@@ -1,10 +1,17 @@
 @extends('layouts.main')
 
 @section('pagecontent')
-    <div class="container pb-20">
+    <style>
+        div.a {
+            height: 580px;
+
+            overflow: auto;
+        }
+    </style>
+    <div class=" pb-20">
         <div class="row justify-content-center ">
 
-            <div class="uk-card uk-card-default uk-card-body ">
+            <div class="uk-card  uk-card-body ">
                 <ul class="uk-subnav uk-subnav-pill flex justify-center items-center" uk-switcher>
                     <li><a href="#">Sales Dashboard</a></li>
                     <li><a href="#">Sales Report</a></li>
@@ -99,60 +106,67 @@
                             </div>
                         </div>
                     </li>
-                    <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl">
-                        <table id="users_table" class="uk-table uk-table-hover uk-table-striped" style="">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Product Code</th>
-                                    <th>Product Name</th>
-                                    <th>Product Type</th>
-                                    <th>Total Quantity</th>
-                                    <th>Price</th>
-                                    <th>Gross Sale</th>
-                                    <th>Reg %</th>
-                                    <th>Senior %</th>
-                                    <th>PWD %</th>
-                                    <th>Total Sale</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($orders as $order)
+                    <div class="uk-card uk-card-default uk-card-body mt-10  rounded-xl ">
+                        <div class="a">
+                            <table id="users_table" class="uk-table uk-table-hover uk-table-striped ">
+                                <thead>
                                     <tr>
-
-                                        <td>{{ $order->created_at }}</td>
-
-                                        <td>{{ $order->menu_id }}</td>
-                                        <td>{{ $order->drink_name }}</td>
-                                        <td>{{ $order->category }}</td>
-                                        <td>{{ $order->drink_quantity }}</td>
-                                        <td>{{ $order->drink_price }}</td>
-                                        <td>{{ $order->drink_price }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ $order->drink_price }}</td>
-
-
+                                        <th>Date</th>
+                                        <th>Product Code</th>
+                                        <th>Product Name</th>
+                                        <th>Product Type</th>
+                                        <th>Total Quantity</th>
+                                        <th>Price</th>
+                                        <th>Gross Sale</th>
+                                        <th>Reg %</th>
+                                        <th>Senior %</th>
+                                        <th>PWD %</th>
+                                        <th>Total Sale</th>
 
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($orders as $order)
+                                        <tr>
 
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">No Data yet</td>
-                                    </tr>
-                                @endforelse
-                                <script>
-                                    $(document).ready(function() {
-                                        $('#users_table').DataTable();
-                                    });
-                                </script>
+                                            <td>{{ $order->created_at }}</td>
+
+                                            <td>{{ $order->menu_id }}</td>
+                                            <td>{{ $order->drink_name }}</td>
+                                            <td>{{ $order->category }}</td>
+                                            <td>{{ $order->drink_quantity }}</td>
+                                            <td>{{ $order->drink_price }}</td>
+                                            <td>{{ $order->drink_price }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{ $order->drink_price }}</td>
 
 
-                            </tbody>
 
-                        </table>
+                                        </tr>
+
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">No Data yet</td>
+                                        </tr>
+                                    @endforelse
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#users_table').DataTable({
+                                                dom: "Bfrltip",
+                                                lengthMenu: [1, 5, 10, 20, 50],
+                                                pageLength: 5,
+                                            });
+                                        });
+                                    </script>
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
                     </li>
 

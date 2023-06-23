@@ -1,7 +1,14 @@
 @extends('layouts.main')
 
 @section('pagecontent')
-    <div class="container">
+    <style>
+        div.a {
+            height: 580px;
+
+            overflow: auto;
+        }
+    </style>
+    <div class="">
         <div class="row justify-content-center">
             <legend class="text-4xl text-black text-center">USERS</legend>
         </div>
@@ -11,69 +18,75 @@
                     href="{{ route('addusers') }}">+ Add
                     User</a>
             </div>
-            <table id="users_table" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Contact No.</th>
-                        <th>PIN Code</th>
-                        <th>Status</th>
-                        <th>Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($employees as $employee)
+            <div class="a">
+                <table id="users_tables" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
+                    <thead>
                         <tr>
-                            <td>{{ $employee->fname }} {{ $employee->lname }}</td>
-                            <td>{{ $employee->email }}</td>
-                            <td>{{ $employee->role }}</td>
-                            <td>{{ $employee->cnumber }}</td>
-                            <td>{{ $employee->pincode }}</td>
-                            <td>{{ $employee->status }}</td>
-                            <td> <span class="text-green-500">
-                                    <a href="/editUser/{{ $employee->id }}" uk-icon="pencil"></a>
-                                </span>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Contact No.</th>
+                            <th>PIN Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
 
-                                <span class="text-red-500 p-5">
-                                    <button id="delete{{ $employee->id }}" uk-icon="trash"></button>
-                                </span>
-                            </td>
                         </tr>
-                        <script>
-                            $("#delete{{ $employee->id }}").click(function() {
-                                const formdata = new FormData()
-                                formdata.append("id", "{{ $employee->id }}")
-                                axios.post("/deleteUser", formdata)
-                                    .then(() => {
-                                        swal({
-                                            icon: "success",
-                                            title: "User Deleted!",
-                                            text: "User has been deleted successfully!",
-                                            buttons: false
-                                        }).then(() => {
-                                            location.reload()
+                    </thead>
+                    <tbody>
+                        @forelse ($employees as $employee)
+                            <tr>
+                                <td>{{ $employee->fname }} {{ $employee->lname }}</td>
+                                <td>{{ $employee->email }}</td>
+                                <td>{{ $employee->role }}</td>
+                                <td>{{ $employee->cnumber }}</td>
+                                <td>{{ $employee->pincode }}</td>
+                                <td>{{ $employee->status }}</td>
+                                <td> <span class="text-green-500">
+                                        <a href="/editUser/{{ $employee->id }}" uk-icon="pencil"></a>
+                                    </span>
+
+                                    <span class="text-red-500 p-5">
+                                        <button id="delete{{ $employee->id }}" uk-icon="trash"></button>
+                                    </span>
+                                </td>
+                            </tr>
+                            <script>
+                                $("#delete{{ $employee->id }}").click(function() {
+                                    const formdata = new FormData()
+                                    formdata.append("id", "{{ $employee->id }}")
+                                    axios.post("/deleteUser", formdata)
+                                        .then(() => {
+                                            swal({
+                                                icon: "success",
+                                                title: "User Deleted!",
+                                                text: "User has been deleted successfully!",
+                                                buttons: false
+                                            }).then(() => {
+                                                location.reload()
+                                            })
                                         })
-                                    })
-                            })
+                                })
 
-                            $(document).ready(function() {
-                                $('#users_table').DataTable();
-                            });
-                        </script>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center">No Employees yet</td>
-                        </tr>
-                    @endforelse
+                                $(document).ready(function() {
+                                    $('#users_tables').DataTable({
+
+                                        lengthMenu: [5, 10, 20, 50],
+                                        pageLength: 5,
+                                    });
+                                });
+                            </script>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No Employees yet</td>
+                            </tr>
+                        @endforelse
 
 
 
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
