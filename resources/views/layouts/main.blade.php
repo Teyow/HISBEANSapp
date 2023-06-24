@@ -112,7 +112,7 @@
                 @elseif (Auth::user()->role == 'Staff')
                     <ul class=" uk-nav-parent-icon " uk-nav>
                         <li class="uk-active px-6 py-4">
-                            <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
+                            <a class=" hover:no-underline hover:text-blue-200   rounded-md h-12  p-10 w-auto hover:bg-slate-400 duration-10  {{ Route::is('orderPOS', 'OrderMenu') ? 'bg-orange-700 text-white' : 'bg-white text-black' }}"
                                 href="{{ route('orderPOS') }}">
                                 <div class="pl-5 2xl:inline hidden"><span uk-icon="icon: calendar; ratio: 1.2"></span></div>
                                 <span class="ml-4">Order/POS</span>

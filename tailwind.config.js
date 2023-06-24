@@ -6,7 +6,11 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: {
+                "hero-pattern": "url('/images/login-cover.png')",
+            },
+        },
     },
     plugins: [],
 };

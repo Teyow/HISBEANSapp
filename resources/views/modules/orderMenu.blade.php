@@ -39,7 +39,7 @@
     <div class="row justify-content-center">
         <legend class="text-4xl text-black text-center">ORDER/POS</legend>
     </div>
-    <div class="flex justify-center pt-20">
+    <div class="flex justify-center pt-5">
         <input type="text" class="hidden" id="count" value="0">
         <input type="text" class="hidden" id="userId" value="0">
         <input type="text" class="hidden" id="voucherId" value="0">
@@ -378,16 +378,16 @@
                                         <td class="hidden" id="drinkTemp${count}">${drinkTemp}</td>
                                         <td id="orderName${count}">${menuName}</td>
                                         <td id="orderQuantity${count}">${quantity}</td>
-                                        <td>P<span id="orderPrice${count}">${price}</span></td>
+                                        <td>₱<span id="orderPrice${count}">${price}</span></td>
                                         <td id="orderAddOns${count}">${addOnsName}</td>
-                                        <td>P<span id="orderTotal${count}">${totalPrice}</span></td>
+                                        <td>₱<span id="orderTotal${count}">${totalPrice}</span></td>
                                     </tr>
                                         `)
                                         $('#paymentTable tbody').append(`
                                     <tr id="payment${count}">
                                         <td id="paymentName${count}">${menuName}</td>
                                         <td id="paymentQuantity${count}">${quantity}</td>
-                                        <td>P<span id="paymentTotal${count}">${totalPrice}</span></td>
+                                        <td>₱<span id="paymentTotal${count}">${totalPrice}</span></td>
                                         </tr>
                                         `)
                                         count = Number(count) + 1

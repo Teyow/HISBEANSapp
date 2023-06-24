@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class=" h-screen w-screen" style="background-image: url(images/login-cover.png)">
+    <style>
+        body {
+            background-image: url(images/login-cover.png);
+            background-repeat: no-repeat;
+            background-size: 2000px 1000px;
+
+        }
+    </style>
+    <div class=" h-screen w-screen">
+
 
 
         <div class="flex justify-center  items-center  pt-48 ">
@@ -60,6 +69,7 @@
                 </form>
             </div>
         </div>
+
 
     </div>
 @endsection
