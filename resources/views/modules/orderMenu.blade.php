@@ -62,6 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                 </tbody>
 
                             </table>
@@ -435,7 +436,14 @@
                                     drink_quantity: $(`#orderQuantity${i}`).html(),
                                     drink_price: $(`#orderTotal${i}`).html(),
                                 }).then(response => {
-                                    console.log(response.data)
+                                    swal({
+                                        icon: "success",
+                                        title: "Order was Added!",
+                                        text: "Order was successfully!",
+                                        buttons: false
+                                    }).then(() => {
+                                        location.reload()
+                                    })
                                 }).catch(err => {
                                     console.log(err.response)
                                 })
@@ -464,7 +472,14 @@
                                     drink_quantity: $(`#orderQuantity${i}`).html(),
                                     drink_price: $(`#orderTotal${i}`).html(),
                                 }).then(response => {
-                                    console.log(response.data)
+                                    swal({
+                                        icon: "success",
+                                        title: "User Deleted!",
+                                        text: "User has been deleted successfully!",
+                                        buttons: false
+                                    }).then(() => {
+                                        location.reload()
+                                    })
                                 }).catch(err => {
                                     console.log(err.response)
                                 })
