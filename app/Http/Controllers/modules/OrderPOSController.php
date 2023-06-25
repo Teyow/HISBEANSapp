@@ -63,7 +63,7 @@ class OrderPOSController extends Controller
             ->where('status', "Enable")
             ->get();
 
-        return view('modules/OrderMenu', [
+        return view('modules/orderMenu', [
             'categories' => $categories,
             "users" => $allUsers,
             'menus' => $menus,
