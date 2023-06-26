@@ -60,7 +60,7 @@
     <script src="{{ asset('js/piechart.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js">
     </script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 
 </head>
 
@@ -76,10 +76,14 @@
                     <div class="uk-inline">
                         {{-- BURGER MENU --}}
 
-                        <div class="lg:hidden block  text-black pl-10 ">
+                        <div class="  text-black pl-10 ">
                             <span class="uk-margin-small-right flex justify-center items-center text-black">
-                                <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle> <span
-                                        uk-icon="icon: menu; ratio: 1.5 " style="color: #ffffff"></span></a>
+                                <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-7 h-7 text-white">
+                                        <path d="M3 12h18M3 6h18M3 18h18"></path>
+                                    </svg></a>
                             </span>
                         </div>
 
@@ -136,7 +140,6 @@
                 </div>
 
             </nav>
-
 
             <div id="offcanvas-slide" uk-offcanvas="mode: push; overlay: true">
                 <div class="uk-offcanvas-bar h-screen  " style="background: #231f20">

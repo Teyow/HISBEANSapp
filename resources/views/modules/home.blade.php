@@ -6,10 +6,10 @@
             <legend class="text-4xl text-black text-center pt-10">DASHBOARD</legend>
         </div>
 
-        <ul class="flex justify-center items-center uk-subnav uk-subnav-pill" uk-switcher>
-            <li><a href="#">Day</a></li>
-            <li><a href="#">Month</a></li>
-            <li><a href="#">Year</a></li>
+        <ul class="flex justify-center items-center uk-subnav uk-subnav-pill" name="date_filter" uk-switcher>
+            <li value="Day"><a href="Day">Day</a></li>
+            <li value="Month"><a href="Month">Month</a></li>
+            <li value="Year"><a href="Year">Year</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
@@ -22,7 +22,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Orders</h3>
-                                    <p class="text-4xl text-black">{{ $order }}</p>
+                                    <p class="text-4xl text-black">{{ $today_total_order }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -37,7 +37,7 @@
                             <div class="grid grid-cols-6">
                                 <div class="col-span-5">
                                     <h3 class="uk-card-title text-xl">Total Customers</h3>
-                                    <p class="text-4xl text-black">{{ $sale }}</p>
+                                    <p class="text-4xl text-black">{{ $today_total_customer }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -52,7 +52,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Revenue</h3>
-                                    <p class="text-4xl text-black">{{ $total }}</p>
+                                    <p class="text-4xl text-black">₱{{ $today_total_revenue }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -73,7 +73,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Orders</h3>
-                                    <p class="text-4xl text-black"></p>
+                                    <p class="text-4xl text-black">{{ $monthly_total_order }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -88,7 +88,7 @@
                             <div class="grid grid-cols-6">
                                 <div class="col-span-5">
                                     <h3 class="uk-card-title text-xl">Total Customers</h3>
-                                    <p class="text-4xl text-black"></p>
+                                    <p class="text-4xl text-black">{{ $monthly_total_customer }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -103,7 +103,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Revenue</h3>
-                                    <p class="text-4xl text-black"></p>
+                                    <p class="text-4xl text-black">₱{{ $monthly_total_revenue }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -124,7 +124,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Orders</h3>
-                                    <p class="text-4xl text-black">{{ $order }}</p>
+                                    <p class="text-4xl text-black">{{ $yearly_total_order }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -139,11 +139,12 @@
                             <div class="grid grid-cols-6">
                                 <div class="col-span-5">
                                     <h3 class="uk-card-title text-xl">Total Customers</h3>
-                                    <p class="text-4xl text-black">{{ $sale }}</p>
+                                    <p class="text-4xl text-black">{{ $yearly_total_customer }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
-                                        <span uk-icon="icon:user; ratio:3" class="flex justify-center items-center"></span>
+                                        <span uk-icon="icon:user; ratio:3"
+                                            class="flex justify-center items-center"></span>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +155,7 @@
                             <div class="grid grid-cols-5">
                                 <div class="col-span-4">
                                     <h3 class="uk-card-title text-xl">Total Revenue</h3>
-                                    <p class="text-4xl text-black">{{ $total }}</p>
+                                    <p class="text-4xl text-black">₱{{ $yearly_total_revenue }}</p>
                                 </div>
                                 <div class="col-span-1">
                                     <div class="pt-5" style="color: #f15a38">
@@ -183,38 +184,36 @@
             <ul class="uk-switcher uk-margin">
                 {{-- day --}}
                 <li>
-
                     <div class="uk-card uk-card-default uk-card-body rounded-3xl " style="background: rgb(255, 255, 255)">
                         <legend class="text-center text-black pt-2 ">Top 10 Products Today</legend>
                         <canvas id="linebarChart1" style="height: 2px; width: 9px"></canvas>
                     </div>
-
-
                 </li>
 
                 {{-- month --}}
                 <li>
                     <div class="uk-card uk-card-default uk-card-body  rounded-3xl" style="background: rgb(255, 255, 255)">
                         <legend class="text-center text-black pt-2">Top 10 Products this Month</legend>
-                        <canvas id="" style="height: 2px; width: 9px"></canvas>
+                        <canvas id="lineChart2" style="height: 2px; width: 9px"></canvas>
                     </div>
-
                 </li>
 
                 {{-- year --}}
                 <li>
                     <div class="uk-card uk-card-default uk-card-body  rounded-3xl" style="background: rgb(255, 255, 255)">
                         <legend class="text-center text-black pt-2">Top 10 Products this Year</legend>
-                        <canvas id="linebarChart2" style="height: 2px; width: 9px"></canvas>
+                        <canvas id="lineChart3" style="height: 2px; width: 9px"></canvas>
                     </div>
-
                 </li>
-
-
         </div>
+
         <script>
             var sample2 = @json($sample2);
             var sampleq2 = @json($sampleq2);
+            var monthlyChartQuantity = @json($monthlyChartQuantity);
+            var monthlyChartName = @json($monthlyChartName);
+            var yearlyChartQuantity = @json($yearlyChartName);
+            var yearlyChartName = @json($yearlyChartName);
         </script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="{{ asset('js/chart.js') }}"></script>

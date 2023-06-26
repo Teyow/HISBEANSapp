@@ -129,7 +129,7 @@ class OrderPOSController extends Controller
             'user_id' => $request->user_id,
             'voucher_id' => $request->voucher_id,
             'total_price' => $request->total_price,
-            'mode_of_payment' => "Cash",
+            'mode_of_payment' => $request->mode_of_payment,
             'order_status' => $request->order_status,
             'payment_status' => $request->payment_status,
         ]);

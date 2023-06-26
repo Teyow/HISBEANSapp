@@ -95,7 +95,7 @@
                         </div>
 
                     </div>
-                    <div class="pt-36">
+                    <div class="pt-20">
 
                         <div class=" pl-4 pr-4">
                             <div class=" text-right">Total: ₱<span class="text-black text-3xl text-right"
@@ -146,13 +146,7 @@
                                     </div>
 
                                     <div class="uk-margin">
-                                        <div class="text-center text-2xl pb-5 text-black">Mode of Payment</div>
 
-                                        <div class="text-center pb-2">Select a Mode of payment</div>
-                                        <select class="uk-select " aria-label="Select" name="" id="">
-                                            <option>Cash</option>
-                                            <option>GCash</option>
-                                        </select>
                                         <div class="text-center text-2xl pb-5 text-black pt-10">Apply Vouchers</div>
                                         <div class="text-center pb-2">Select a voucher that may apply</div>
                                         <select class="uk-select pb-10" aria-label="Select" name="vouchers" id="vouchers">
@@ -185,6 +179,32 @@
                                                 <option>nothing to display here</option>
                                             @endforelse
                                         </select>
+                                        <div class="text-center text-2xl pb-5 text-black">Mode of Payment</div>
+
+                                        <div class="text-center pb-2">Select a Mode of payment</div>
+                                        <select class="uk-select " aria-label="Select" name="mode_of_payment"
+                                            id="mode_of_payment">
+                                            <option value="Cash">Cash</option>
+                                            <option value="Gcash">GCash</option>
+                                        </select>
+                                        <div id="inputField" style="display: none;" class="mt-2">
+
+                                            <input type="text" id="reference_number" name="reference_number"
+                                                class="uk-input " placeholder="Reference Number">
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#mode_of_payment').change(function() {
+                                                    var selectedOption = $(this).val();
+                                                    if (selectedOption === 'Cash') {
+                                                        $('#inputField').hide();
+                                                    } else {
+                                                        $('#inputField').show();
+                                                    }
+                                                });
+                                            });
+                                        </script>
                                     </div>
 
                                     <div class="uk-modal-footer uk-text-right">
@@ -257,10 +277,14 @@
                                         <div class="flex justify-center items-center">
                                             <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
                                                 height="500">
+                                            <div class="uk-overlay uk-light uk-position-top">
+                                                <p class="text-black text-xl">₱{{ $menu->price }}</p>
+                                            </div>
                                         </div>
                                         <div class="text-3xl text-center text-black">{{ $menu->item_name }}</div>
-                                        <div class="text-xl font-bold text-center pb-5">Quantity:<span
-                                                class="flex flex-row">
+
+                                        <div class="text-xl font-bold  pb-5 flex justify-center items-center">
+                                            Quantity:<span class="flex flex-row">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     id="subQuantity{{ $menu->id }}" fill="currentColor"
                                                     class="bi bi-dash-square" viewBox="0 0 16 16">
@@ -354,12 +378,14 @@
                                         let addOnsName = ''
                                         let addOnsNameArray = []
                                         $("input:checkbox[name='checkbox']:checked").each(function() {
-                                            addOns.push($(this).val());
+                                            addOns.push($(this).val(
+
+                                            ));
                                         });
 
                                         addOns.map((item, index) => {
                                             totalPrice = totalPrice + Number($(`#price${item}`).html())
-                                            price = price + Number($(`#price${item}`).html())
+                                            // price = price + Number($(`#price${item}`).html())
                                             addOnsName = addOnsName + " " + $(`#name${item}`).html()
                                             addOnsNameArray.push($(`#name${item}`).html())
                                         })
@@ -421,7 +447,7 @@
                             voucher_id: $("#voucherId").val(),
                             total_price: $("#totalWithVoucher").html(),
                             order_status: "Pending",
-                            mode_of_payment: "Cash",
+                            mode_of_payment: $(`#mode_of_payment${i}`).html(),
                             payment_status: "Completed",
                         }).then(response => {
                             order = response.data
@@ -457,7 +483,7 @@
                             voucher_id: $("#voucherId").val(),
                             total_price: $("#totalWithVoucher").html(),
                             order_status: "Pending",
-                            mode_of_payment: "Cash",
+                            mode_of_payment: $(`#mode_of_payment${i}`).html(),
                             payment_status: "Completed",
                         }).then(response => {
                             order = response.data
@@ -474,8 +500,8 @@
                                 }).then(response => {
                                     swal({
                                         icon: "success",
-                                        title: "User Deleted!",
-                                        text: "User has been deleted successfully!",
+                                        title: "Order was Added!",
+                                        text: "Order was successfully!",
                                         buttons: false
                                     }).then(() => {
                                         location.reload()

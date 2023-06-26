@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
-@section('content')
+@section('pagecontent')
     <style>
         body {
             background-image: url(images/login-cover.png);
@@ -27,7 +27,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input w-10" type="text" aria-label="Not clickable icon" name="username"
+                            <input class="uk-input " type="text" aria-label="Not clickable icon" name="username"
                                 placeholder="Username">
                         </div>
                     </div>

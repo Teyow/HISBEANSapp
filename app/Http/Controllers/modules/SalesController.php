@@ -18,10 +18,11 @@ class SalesController extends Controller
     public function index()
     {
 
-        $total = DB::table('orders')
-            ->where('payment_status', 'Completed')
-            ->sum('total_price');
-
+        // $total = DB::table('orders')
+        //     ->where('payment_status', 'Completed')
+        //     ->sum('total_price');
+        $total = DB::table('order_items')
+            ->sum('drink_price');
 
         $data = DB::table('orders')
             ->count('id');
@@ -149,7 +150,23 @@ class SalesController extends Controller
                 ->sum('drink_quantity');
         }
 
+        $startDate = Carbon::now()->startOfWeek()->startOfDay();
+        $endDate = Carbon::now()->endOfWeek()->endOfDay();
 
+
+        $weekdays = DB::table('order_items')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereRaw('DAYOFWEEK(created_at) BETWEEN 2 AND 6')
+            ->sum('drink_price');
+
+        $weekends = DB::table('order_items')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->where(function ($query) {
+                $query->whereRaw('DAYOFWEEK(created_at) = 1')
+                    ->orWhereRaw('DAYOFWEEK(created_at) = 7');
+            })
+
+            ->sum('drink_price');
 
 
         return view('modules/Sales', [
@@ -166,6 +183,8 @@ class SalesController extends Controller
             'total_sold' => $total_sold,
             'drinks' => $drinks,
             'drinkQuantity' => $drinkQuantity,
+            'weekdays' => $weekdays,
+            'weekends' => $weekends,
             // 'dates' => $dates
 
 

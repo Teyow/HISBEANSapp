@@ -69,8 +69,8 @@
                                                         </div>
                                                         <div class="col-span-1">
                                                             <div class="text-black">₱{{ $total }}</div>
-                                                            <div class="">P5464</div>
-                                                            <div class="">P5464</div>
+                                                            <div class="text-black">₱{{ $weekdays }}</div>
+                                                            <div class="text-black">₱{{ $weekends }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
