@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
-@section('pagecontent')
+@section('content')
     <style>
         body {
             background-image: url(images/login-cover.png);
