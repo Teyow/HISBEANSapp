@@ -272,7 +272,7 @@
                                 </div>
 
 
-                                <div id="menuModal{{ $menu->id }}" uk-modal>
+                                <div id="menuModal{{ $menu->id }}" uk-modal class=".uk-modal-close">
                                     <div class="uk-modal-dialog uk-modal-body rounded-3xl">
                                         <div class="flex justify-center items-center">
                                             <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
@@ -358,7 +358,7 @@
                                             <div class="uk-text-right">
                                                 <button class="uk-button uk-button-default uk-modal-close"
                                                     type="button">Cancel</button>
-                                                <button class="uk-button uk-button-primary" type="button"
+                                                <button class="uk-button uk-button-primary uk-modal-close" type="button"
                                                     id="onSave{{ $menu->id }}">Save</button>
                                             </div>
                                         </div>
@@ -366,7 +366,34 @@
                                 </div>
 
                                 <script>
+                                    var modal = document.getElementById('menuModal');
+
+                                    // Close the modal after 3 seconds
+                                    setTimeout(function() {
+                                        modal.classList.remove('uk-open');
+                                        modal.classList.add('uk-close');
+                                    }, 3000);
+                                </script>
+
+                                <script>
                                     $("#onSave{{ $menu->id }}").click(() => {
+                                        if ($("#onSave").val() === "") {
+                                            swal({
+                                                icon: "success",
+                                                title: "Success!",
+                                                text: "Item has been Added!",
+                                            }).then(() => {
+                                                location.close()
+                                            })
+                                        } else {
+                                            swal({
+                                                icon: "success",
+                                                title: "Success!",
+                                                text: "Item has been Added!",
+                                            }).then(() => {
+                                                location.close()
+                                            })
+                                        }
                                         let totalPrice = Number("{{ $menu->price }}")
                                         let mainTotalPrice = $("#totalPrice").html()
                                         let drinkTemp = $('input[name="drinkTemp"]:checked').val();;
@@ -407,6 +434,9 @@
                                         <td>₱<span id="orderPrice${count}">${price}</span></td>
                                         <td id="orderAddOns${count}">${addOnsName}</td>
                                         <td>₱<span id="orderTotal${count}">${totalPrice}</span></td>
+                                        <td>  <span class="text-red-500 ">
+                                        <button id="delete" uk-icon="trash"></button>
+                                    </span></td>
                                     </tr>
                                         `)
                                         $('#paymentTable tbody').append(`

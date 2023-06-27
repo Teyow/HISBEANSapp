@@ -62,9 +62,19 @@
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 
+    {{-- TOAST --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
+
 <body>
+
     <div id="app">
         @auth
             <nav class="uk-navbar-container h-16" style="background-color:  #f25d3b" uk-navbar>
@@ -76,7 +86,7 @@
                     <div class="uk-inline">
                         {{-- BURGER MENU --}}
 
-                        <div class="  text-black pl-10 lg:hidden">
+                        <div class="  text-black pl-10 ">
                             <span class="uk-margin-small-right flex justify-center items-center text-black">
                                 <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -107,12 +117,29 @@
                         </span>
 
                         <div uk-drop="mode: click">
-                            <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg mr-24">
-                                <form>
-                                    @csrf
+                            <div class="uk-card uk-card-body uk-card-default  mt-5 rounded-lg ">
+                                @if (Session::has('message'))
+                                    <script>
+                                        toastr.options = {
+                                            "progressBar": true,
+                                            "closeButton": true,
 
-                                    <button type="submit">Notification</button>
-                                </form>
+                                        }
+                                        toastr.success("{{ Session::get('message') }}");
+                                    </script>
+                                @endif
+                                @forelse ($items as $item)
+                                    <div class="uk-alert-success" uk-alert>
+                                        <a class="uk-alert-close" uk-close></a>
+                                        <p><span class="text-red-500">#{{ $item->id }}</span>, {{ $item->name }}
+                                            has been
+                                            added in Inventory.
+                                        </p>
+                                    </div>
+
+                                @empty
+                                @endforelse
+
                             </div>
                         </div>
                     </div>
@@ -143,7 +170,10 @@
 
             <div id="offcanvas-slide" uk-offcanvas="mode: push; overlay: true">
                 <div class="uk-offcanvas-bar h-screen  " style="background: #231f20">
-                    <legend class="text-center pb-10 pt-5 font-bold text-lg text-white">HISBEANS</legend>
+                    <div class="flex justify-center items-center">
+                        <img class=" text-center" src="{{ asset('images/hb1.png') }} " alt="" srcset=""
+                            width="300" height="300">
+                    </div>
                     @if (Auth::user()->role == 'Admin')
                         <ul class="uk-nav uk-nav-default">
 

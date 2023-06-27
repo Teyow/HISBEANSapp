@@ -69,7 +69,8 @@ class HomeController extends Controller
         //     ->where('payment_status', 'Completed')
         //     ->sum('total_price');
 
-
+        $items = DB::table('items')
+            ->get();
 
         $today = Carbon::today();
         $this_month = Carbon::now()->month;
@@ -217,6 +218,7 @@ class HomeController extends Controller
             // 'sale' => $sale,
             // 'total' => $total,
             // 'order' => $order,
+            'items' => $items,
             'sample2' => $sample2,
             'sampleq2' => $sampleq2,
             'monthlyChartQuantity' => $monthlyChartQuantity,

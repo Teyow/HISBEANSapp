@@ -19,8 +19,11 @@ class CategoryController extends Controller
     {
         $categories =  DB::table('category')
             ->get();
+        $items = DB::table('items')
+            ->get();
         return view('modules/category', [
-            'categories' => $categories
+            'categories' => $categories,
+            'items' => $items,
         ]);
     }
 

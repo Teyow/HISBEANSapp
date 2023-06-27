@@ -25,10 +25,13 @@ class MenuController extends Controller
         $orders = DB::table('users')
             ->join('orders', 'users.id', 'orders.user_id')
             ->get();
+        $items = DB::table('items')
+            ->get();
 
         return view('modules/menu', [
             'menus' => $menus,
-            'orders' => $orders
+            'orders' => $orders,
+            'items' => $items
         ]);
     }
 

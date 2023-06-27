@@ -57,6 +57,7 @@
                                     </span>
                                 </td>
                             </tr>
+
                             <script>
                                 $("#delete{{ $item->id }}").click(function() {
                                     const formdata = new FormData()
@@ -89,7 +90,16 @@
                     </tbody>
 
                 </table>
+                @if (Session::has('message'))
+                    <script>
+                        toastr.options = {
+                            "progressBar": true,
+                            "closeButton": true,
 
+                        }
+                        toastr.success("{{ Session::get('message') }}");
+                    </script>
+                @endif
             </div>
         </div>
     </div>

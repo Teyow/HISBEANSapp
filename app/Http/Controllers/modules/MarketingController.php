@@ -24,9 +24,12 @@ class MarketingController extends Controller
 
         $vouchers = DB::table('vouchers')
             ->get();
+        $items = DB::table('items')
+            ->get();
 
         return view('modules/vouchers', [
-            'vouchers' => $vouchers
+            'vouchers' => $vouchers,
+            'items' => $items
         ]);
     }
 
@@ -102,9 +105,13 @@ class MarketingController extends Controller
     {
         $promos = DB::table('promotion')
             ->get();
+        $items = DB::table('items')
+            ->get();
+
 
         return view('modules/promotions', [
-            'promos' => $promos
+            'promos' => $promos,
+            'items' => $items
         ]);
     }
     public function Addpromotions()

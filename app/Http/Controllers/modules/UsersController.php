@@ -22,10 +22,12 @@ class UsersController extends Controller
         $employees = DB::table('users')
             ->get();
 
+        $items = DB::table('items')
+            ->get();
 
         return view('modules/users', [
-            'employees' => $employees
-
+            'employees' => $employees,
+            'items' => $items
         ]);
     }
 
