@@ -33,7 +33,11 @@ class UsersController extends Controller
 
     public function addusers()
     {
-        return view('modules/adduser');
+        $items = DB::table('items')
+            ->get();
+        return view('modules/adduser', [
+            'items' => $items,
+        ]);
     }
 
 
@@ -61,8 +65,11 @@ class UsersController extends Controller
             'status' => $request->status,
 
         ]);
-
-        return redirect('/users');
+        $items = DB::table('items')
+            ->get();
+        return redirect('/users', [
+            'items' => $items,
+        ]);
         // dd($request->all());
     }
 
@@ -71,9 +78,11 @@ class UsersController extends Controller
         $employee = DB::table('users')
             ->where('id', $id)
             ->first();
-
+        $items = DB::table('items')
+            ->get();
         return view('modules.editUser', [
             'employee' => $employee,
+            'items' => $items,
         ]);
     }
 

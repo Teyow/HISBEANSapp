@@ -42,7 +42,11 @@ class MarketingController extends Controller
 
     public function addVoucher()
     {
-        return view('modules/addVoucher');
+        $items = DB::table('items')
+            ->get();
+        return view('modules/addVoucher', [
+            'items' => $items,
+        ]);
     }
 
 
@@ -59,8 +63,11 @@ class MarketingController extends Controller
             'status' => $request->status
 
         ]);
-
-        return redirect('/vouchers');
+        $items = DB::table('items')
+            ->get();
+        return redirect('/vouchers', [
+            'items' => $items,
+        ]);
     }
 
     public function editVoucher($id)
@@ -68,9 +75,11 @@ class MarketingController extends Controller
         $vouchers = DB::table('vouchers')
             ->where('id', $id)
             ->first();
-
+        $items = DB::table('items')
+            ->get();
         return view('modules.editVoucher', [
-            'vouchers' => $vouchers
+            'vouchers' => $vouchers,
+            'items' => $items,
         ]);
     }
 
@@ -116,7 +125,11 @@ class MarketingController extends Controller
     }
     public function Addpromotions()
     {
-        return view('modules/AddPromotions');
+        $items = DB::table('items')
+            ->get();
+        return view('modules/AddPromotions', [
+            'items' => $items
+        ]);
     }
 
     public function createPromo(Request $request)
@@ -139,10 +152,14 @@ class MarketingController extends Controller
             'status' => $request->status,
 
         ]);
+        $items = DB::table('items')
+            ->get();
 
 
 
-        return redirect('/promotions');
+        return redirect('/promotions', [
+            'items' => $items
+        ]);
     }
 
     public function editPromo($id)
@@ -150,9 +167,12 @@ class MarketingController extends Controller
         $promos = DB::table('promotion')
             ->where('id', $id)
             ->first();
+        $items = DB::table('items')
+            ->get();
 
         return view('modules.editPromo', [
-            'promos' => $promos
+            'promos' => $promos,
+            'items' => $items
         ]);
     }
 

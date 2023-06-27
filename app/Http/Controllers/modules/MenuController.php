@@ -40,9 +40,12 @@ class MenuController extends Controller
         $category = DB::table('category')
             ->where('status', 'Enable')
             ->get();
+        $items = DB::table('items')
+            ->get();
         // dd($category);
         return view('modules/addMenu', [
-            'category' => $category
+            'category' => $category,
+            'items' => $items
         ]);
     }
 
@@ -70,6 +73,7 @@ class MenuController extends Controller
             'status' => $request->status,
             'image_path' => $newImageName,
 
+
         ]);
 
         return redirect('/menu');
@@ -88,11 +92,13 @@ class MenuController extends Controller
             ->where('status', 'Enable')
             ->get();
 
-
+        $items = DB::table('items')
+            ->get();
 
         return view('modules.editMenu', [
             'menu' => $menu,
-            'category' => $category
+            'category' => $category,
+            'items' => $items
         ]);
     }
 

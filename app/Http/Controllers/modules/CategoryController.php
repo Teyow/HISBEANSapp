@@ -29,7 +29,11 @@ class CategoryController extends Controller
 
     public function addCategory()
     {
-        return view('modules.addCategory');
+        $items = DB::table('items')
+            ->get();
+        return view('modules.addCategory', [
+            'items' => $items,
+        ]);
     }
 
     protected function create(Request $request)
@@ -47,9 +51,11 @@ class CategoryController extends Controller
         $categories = DB::table('category')
             ->where('id', $id)
             ->first();
-
+        $items = DB::table('items')
+            ->get();
         return view('modules.editCategory', [
-            'categories' => $categories
+            'categories' => $categories,
+            'items' => $items
         ]);
     }
 

@@ -31,7 +31,11 @@ class InventoryController extends Controller
 
     public function addItem()
     {
-        return view('modules/addItems');
+        $items = DB::table('items')
+            ->get();
+        return view('modules/addItems', [
+            'items' => $items,
+        ]);
     }
 
 
@@ -46,8 +50,11 @@ class InventoryController extends Controller
             'supplier' => $request->supplier,
 
         ]);
-        return redirect('/inventory')
-            ->with('message', 'Item has been added to inventory!');
+        $items = DB::table('items')
+            ->get();
+        return redirect('/inventory', [
+            'items' => $items,
+        ])->with('message', 'Item has been added to inventory!');
 
 
         // dd($request->all());
@@ -66,12 +73,14 @@ class InventoryController extends Controller
 
     public function editInventory($id)
     {
-        $items = DB::table('items')
+        $item = DB::table('items')
             ->where('id', $id)
             ->first();
-
+        $items = DB::table('items')
+            ->get();
         return view('modules.editInventory', [
-            'items' => $items
+            'item' => $item,
+            'items' => $items,
         ]);
     }
 
@@ -86,8 +95,13 @@ class InventoryController extends Controller
             'supplier' => $request->supplier,
 
         ]);
+        $items = DB::table('items')
+            ->get();
 
-        return redirect('/inventory');
+        return redirect(
+            '/inventory',
+            ['items' => $items,]
+        );
     }
 
     public function deleteInventory(Request $request)

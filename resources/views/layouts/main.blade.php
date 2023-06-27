@@ -318,7 +318,7 @@
                 <div class="logo_details  ">
 
                     <a href="{{ route('dashboard') }}">
-                        <div class=" pt-32"><img src="{{ asset('images/logo-image.png') }}"
+                        <div class="logo_name pt-32"><img src="{{ asset('images/logo-image.png') }}"
                                 class="flex justify-center items-center" alt="">
                         </div>
                     </a>
