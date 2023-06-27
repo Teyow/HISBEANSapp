@@ -79,9 +79,21 @@ class OrderPOSController extends Controller
         ]);
     }
 
-    public function PayOrder()
+    public function orderList()
     {
-        return view('modules/PayOrder');
+        $menus = DB::table('menu')
+            ->get();
+        $orders = DB::table('users')
+            ->join('orders', 'users.id', 'orders.user_id')
+            ->get();
+        $items = DB::table('items')
+            ->get();
+
+        return view('modules/orderList', [
+            'menus' => $menus,
+            'orders' => $orders,
+            'items' => $items
+        ]);
     }
 
     public function PrintReceipt()

@@ -86,7 +86,7 @@
                     <div class="uk-inline">
                         {{-- BURGER MENU --}}
 
-                        <div class="  text-black pl-10 ">
+                        <div class="  text-black pl-10 lg:hidden">
                             <span class="uk-margin-small-right flex justify-center items-center text-black">
                                 <a class="uk-navbar-toggle" href="#offcanvas-slide" uk-toggle><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"

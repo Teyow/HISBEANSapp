@@ -63,7 +63,7 @@ Route::get('/orderPOS', [OrderPOSController::class, 'index'])->name('orderPOS');
 Route::post('/loginPINCODE', [OrderPOSController::class, 'loginPINCODE'])->name('loginPINCODE');
 Route::post('/getSpecificAddons', [OrderPOSController::class, 'getSpecificAddons']);
 Route::get('/OrderMenu', [OrderPOSController::class, 'OrderMenu'])->name('OrderMenu');
-Route::get('/PayOrder', [OrderPOSController::class, 'PayOrder'])->name('PayOrder');
+Route::get('/orderList', [OrderPOSController::class, 'orderList'])->name('orderList');
 Route::get('/PrintReceipt', [OrderPOSController::class, 'PrintReceipt'])->name('PrintReceipt');
 Route::post('/CreateOrder/{id}', [OrderPOSController::class, 'CreateOrder'])->name('CreateOrder');
 Route::post('/CreateAddons', [OrderPOSController::class, 'CreateAddons'])->name('CreateAddons');
