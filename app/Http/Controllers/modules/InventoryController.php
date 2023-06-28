@@ -21,21 +21,14 @@ class InventoryController extends Controller
     {
 
 
-        $items = DB::table('items')
-            ->get();
 
-        return view('modules/inventory', [
-            'items' => $items
-        ]);
+        return view('modules/inventory');
     }
 
     public function addItem()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/addItems', [
-            'items' => $items,
-        ]);
+
+        return view('modules/addItems');
     }
 
 
@@ -73,11 +66,10 @@ class InventoryController extends Controller
         $item = DB::table('items')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
         return view('modules.editInventory', [
             'item' => $item,
-            'items' => $items,
+
         ]);
     }
 

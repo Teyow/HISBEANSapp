@@ -74,7 +74,10 @@
 
 
 <body>
-
+    <?php
+    $items = DB::table('items')->get();
+    
+    ?>
     <div id="app">
         @auth
             <nav class="uk-navbar-container h-16" style="background-color:  #f25d3b" uk-navbar>
@@ -128,17 +131,21 @@
                                         toastr.success("{{ Session::get('message') }}");
                                     </script>
                                 @endif
-                                @forelse ($items as $item)
-                                    <div class="uk-alert-success" uk-alert>
-                                        <a class="uk-alert-close" uk-close></a>
-                                        <p><span class="text-red-500">#{{ $item->id }}</span>, {{ $item->name }}
-                                            has been
-                                            added in Inventory.
-                                        </p>
-                                    </div>
 
-                                @empty
-                                @endforelse
+                                @if (count($items) != 0)
+                                    @forelse ($items as $item)
+                                        <div class="uk-alert-success" uk-alert>
+                                            <a class="uk-alert-close" uk-close></a>
+                                            <p><span class="text-red-500">#{{ $item->id }}</span>, {{ $item->name }}
+                                                has been
+                                                added in Inventory.
+                                            </p>
+                                        </div>
+
+                                    @empty
+                                    @endforelse
+                                @endif
+
 
                             </div>
                         </div>

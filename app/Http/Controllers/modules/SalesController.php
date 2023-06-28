@@ -29,8 +29,7 @@ class SalesController extends Controller
 
         $order_quantity = DB::table('order_items')
             ->count('drink_quantity');
-        $items = DB::table('items')
-            ->get();
+
 
         // $date = DB::table('order_items')
         //     ->get('created_at');
@@ -172,7 +171,7 @@ class SalesController extends Controller
 
 
         return view('modules/Sales', [
-            'items' => $items,
+
             'data' => $data,
             'total' => $total,
             'order_quantity' => $order_quantity,

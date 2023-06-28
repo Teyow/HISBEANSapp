@@ -25,13 +25,12 @@ class MenuController extends Controller
         $orders = DB::table('users')
             ->join('orders', 'users.id', 'orders.user_id')
             ->get();
-        $items = DB::table('items')
-            ->get();
+
 
         return view('modules/menu', [
             'menus' => $menus,
             'orders' => $orders,
-            'items' => $items
+
         ]);
     }
 
@@ -40,12 +39,11 @@ class MenuController extends Controller
         $category = DB::table('category')
             ->where('status', 'Enable')
             ->get();
-        $items = DB::table('items')
-            ->get();
-        // dd($category);
+
+
         return view('modules/addMenu', [
             'category' => $category,
-            'items' => $items
+
         ]);
     }
 
@@ -92,13 +90,10 @@ class MenuController extends Controller
             ->where('status', 'Enable')
             ->get();
 
-        $items = DB::table('items')
-            ->get();
-
         return view('modules.editMenu', [
             'menu' => $menu,
             'category' => $category,
-            'items' => $items
+
         ]);
     }
 

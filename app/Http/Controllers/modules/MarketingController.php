@@ -42,11 +42,8 @@ class MarketingController extends Controller
 
     public function addVoucher()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/addVoucher', [
-            'items' => $items,
-        ]);
+
+        return view('modules/addVoucher');
     }
 
 
@@ -63,11 +60,8 @@ class MarketingController extends Controller
             'status' => $request->status
 
         ]);
-        $items = DB::table('items')
-            ->get();
-        return redirect('/vouchers', [
-            'items' => $items,
-        ]);
+
+        return redirect('/vouchers');
     }
 
     public function editVoucher($id)
@@ -75,11 +69,10 @@ class MarketingController extends Controller
         $vouchers = DB::table('vouchers')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
         return view('modules.editVoucher', [
             'vouchers' => $vouchers,
-            'items' => $items,
+
         ]);
     }
 
@@ -114,22 +107,17 @@ class MarketingController extends Controller
     {
         $promos = DB::table('promotion')
             ->get();
-        $items = DB::table('items')
-            ->get();
 
 
         return view('modules/promotions', [
             'promos' => $promos,
-            'items' => $items
+
         ]);
     }
     public function Addpromotions()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/AddPromotions', [
-            'items' => $items
-        ]);
+
+        return view('modules/AddPromotions');
     }
 
     public function createPromo(Request $request)
@@ -165,12 +153,11 @@ class MarketingController extends Controller
         $promos = DB::table('promotion')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
 
         return view('modules.editPromo', [
             'promos' => $promos,
-            'items' => $items
+
         ]);
     }
 

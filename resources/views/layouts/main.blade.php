@@ -325,42 +325,43 @@
                     <i class="flex justify-center items-center" id="btn" uk-icon="icon: menu; ratio: 1.2"></i>
                 </div>
                 <ul class="nav-list pt-20">
+                    @if (Auth::user()->role == 'Admin')
+                        <li>
+                            <a href="{{ route('dashboard') }}">
+                                <i class="flex justify-center items-center" uk-icon="icon: home; ratio: 1.2"></i>
+                                <span class="link_name">Dashboard</span>
+                            </a>
+                            <span class="tooltip">Dashboard</span>
+                        </li>
+                        <li class="uk-parent">
+                            <ul class="uk-nav-default" uk-nav>
+                                <li class="uk-parent">
+                                    <a href="#">
+                                        <i class="flex justify-center items-center" uk-icon="icon: menu; ratio: 1.2"></i>
+                                        <span class="link_name">Menu</span>
+                                    </a>
+                                    <ul class="uk-nav-sub">
+                                        <div class="pt-5">
 
-                    <li>
-                        <a href="{{ route('dashboard') }}">
-                            <i class="flex justify-center items-center" uk-icon="icon: home; ratio: 1.2"></i>
-                            <span class="link_name">Dashboard</span>
-                        </a>
-                        <span class="tooltip">Dashboard</span>
-                    </li>
-                    <li class="uk-parent">
-                        <ul class="uk-nav-default" uk-nav>
-                            <li class="uk-parent">
-                                <a href="#">
-                                    <i class="flex justify-center items-center" uk-icon="icon: menu; ratio: 1.2"></i>
-                                    <span class="link_name">Menu</span>
-                                </a>
-                                <ul class="uk-nav-sub">
-                                    <div class="pt-5">
+                                            <li class="uk-parent">
+                                                <a href="{{ route('menu') }}" class="text-black"><span class="mt-1">Menu
+                                                        Items</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('category') }}" class="text-black "><span
+                                                        class="mt-1">Category</span>
+                                                </a>
+                                            </li>
 
-                                        <li class="uk-parent">
-                                            <a href="{{ route('menu') }}" class="text-black"><span class="mt-1">Menu
-                                                    Items</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('category') }}" class="text-black "><span
-                                                    class="mt-1">Category</span>
-                                            </a>
-                                        </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <span class="tooltip">Menu</span>
 
-                                    </div>
-                                </ul>
-                            </li>
-                        </ul>
-                        <span class="tooltip">Menu</span>
-
-                    </li>
+                        </li>
+                    @endif
                     <li>
 
                         <ul class="uk-nav-default" uk-nav>
@@ -390,57 +391,58 @@
                         </ul>
                         <span class="tooltip">Order/POS</span>
                     </li>
-                    <li>
-                        <a href="{{ route('sales') }}">
-                            <i class="flex justify-center items-center" uk-icon="icon: cart; ratio: 1.2"></i>
-                            <span class="link_name">Sales</span>
-                        </a>
-                        <span class="tooltip">Sales</span>
-                    </li>
-                    <li>
-                        <a href="{{ route('inventory') }}">
-                            <i class="flex justify-center items-center" uk-icon="icon: bag; ratio: 1.2"></i>
-                            <span class="link_name">Inventory</span>
-                        </a>
-                        <span class="tooltip">Inventory</span>
-                    </li>
+                    @if (Auth::user()->role == 'Admin')
+                        <li>
+                            <a href="{{ route('sales') }}">
+                                <i class="flex justify-center items-center" uk-icon="icon: cart; ratio: 1.2"></i>
+                                <span class="link_name">Sales</span>
+                            </a>
+                            <span class="tooltip">Sales</span>
+                        </li>
+                        <li>
+                            <a href="{{ route('inventory') }}">
+                                <i class="flex justify-center items-center" uk-icon="icon: bag; ratio: 1.2"></i>
+                                <span class="link_name">Inventory</span>
+                            </a>
+                            <span class="tooltip">Inventory</span>
+                        </li>
 
-                    <li>
+                        <li>
 
-                        <ul class="uk-nav-default" uk-nav>
-                            <li class="uk-parent">
-                                <a href="#">
-                                    <i class="flex justify-center items-center" uk-icon="icon: world; ratio: 1.2"></i>
-                                    <span class="link_name">Marketing</span>
-                                </a>
-                                <ul class="uk-nav-sub">
-                                    <div class="pt-5">
+                            <ul class="uk-nav-default" uk-nav>
+                                <li class="uk-parent">
+                                    <a href="#">
+                                        <i class="flex justify-center items-center" uk-icon="icon: world; ratio: 1.2"></i>
+                                        <span class="link_name">Marketing</span>
+                                    </a>
+                                    <ul class="uk-nav-sub">
+                                        <div class="pt-5">
 
-                                        <li class="uk-parent">
-                                            <a href="{{ route('vouchers') }}" class="text-black"><span
-                                                    class="mt-1">Vouchers</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('promotions') }}" class="text-black "><span
-                                                    class="mt-1">Promotions</span>
-                                            </a>
-                                        </li>
+                                            <li class="uk-parent">
+                                                <a href="{{ route('vouchers') }}" class="text-black"><span
+                                                        class="mt-1">Vouchers</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('promotions') }}" class="text-black "><span
+                                                        class="mt-1">Promotions</span>
+                                                </a>
+                                            </li>
 
-                                    </div>
-                                </ul>
-                            </li>
-                        </ul>
-                        <span class="tooltip">Marketing</span>
-                    </li>
-                    <li>
-                        <a href="{{ route('users') }}">
-                            <i class="flex justify-center items-center" uk-icon="icon: users; ratio: 1.2"></i>
-                            <span class="link_name">User</span>
-                        </a>
-                        <span class="tooltip">User</span>
-                    </li>
-
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <span class="tooltip">Marketing</span>
+                        </li>
+                        <li>
+                            <a href="{{ route('users') }}">
+                                <i class="flex justify-center items-center" uk-icon="icon: users; ratio: 1.2"></i>
+                                <span class="link_name">User</span>
+                            </a>
+                            <span class="tooltip">User</span>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
