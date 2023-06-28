@@ -50,11 +50,8 @@ class InventoryController extends Controller
             'supplier' => $request->supplier,
 
         ]);
-        $items = DB::table('items')
-            ->get();
-        return redirect('/inventory', [
-            'items' => $items,
-        ])->with('message', 'Item has been added to inventory!');
+
+        return redirect('/inventory')->with('message', 'Item has been added to inventory!');
 
 
         // dd($request->all());

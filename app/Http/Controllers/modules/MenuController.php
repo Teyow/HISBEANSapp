@@ -104,26 +104,39 @@ class MenuController extends Controller
 
     public function updateMenu(Request $request, $id)
     {
-        // $newImageName = time() . '-' . $request->item_name . '.' .
-        //     $request->image->extension();
-        // $request->image->move(public_path('image/menu'), $newImageName);
 
 
 
 
-        $menu = DB::table('menu')
-            ->where('id', $id)
-            ->update([
-                'item_name' => $request->item_name,
-                'item_description' => $request->item_description,
-                'price' => $request->price,
-                'category' => $request->category,
-                'is_featured' => $request->is_featured,
-                'status' => $request->status,
-                // 'image_path' => $request->image_path,
+        if ($request->hasFile('image')) {
+            $newImageName = time() . '-' . $request->item_name . '.' . $request->image->extension();
+            $request->image->move(public_path('image/menu'), $newImageName);
+            $menu = DB::table('menu')
+                ->where('id', $id)
+                ->update([
+                    'item_name' => $request->item_name,
+                    'item_description' => $request->item_description,
+                    'price' => $request->price,
+                    'category' => $request->category,
+                    'is_featured' => $request->is_featured,
+                    'status' => $request->status,
+                    'image_path' => $newImageName,
 
-            ]);
+                ]);
+        } else {
+            $menu = DB::table('menu')
+                ->where('id', $id)
+                ->update([
+                    'item_name' => $request->item_name,
+                    'item_description' => $request->item_description,
+                    'price' => $request->price,
+                    'category' => $request->category,
+                    'is_featured' => $request->is_featured,
+                    'status' => $request->status,
+                    // 'image_path' => $request->image,
 
+                ]);
+        }
         return redirect('/menu');
     }
 

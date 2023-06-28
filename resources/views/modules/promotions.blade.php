@@ -10,7 +10,7 @@
     </style>
     <div class="">
         <div class="row justify-content-center">
-            <legend class="text-4xl text-black text-center">INVENTORY</legend>
+            <legend class="text-4xl text-black text-center">PROMOTIONS</legend>
         </div>
         <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl">
             <div class="pt-5  flex justify-end text-center pb-5">

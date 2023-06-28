@@ -152,14 +152,12 @@ class MarketingController extends Controller
             'status' => $request->status,
 
         ]);
-        $items = DB::table('items')
-            ->get();
+        // $items = DB::table('items')
+        //     ->get();
 
 
 
-        return redirect('/promotions', [
-            'items' => $items
-        ]);
+        return redirect('/promotions');
     }
 
     public function editPromo($id)
@@ -179,14 +177,27 @@ class MarketingController extends Controller
     public function updatePromo(Request $request, $id)
     {
 
-        DB::table('promotion')
-            ->where('id', $request->id)
-            ->update([
-                'image' => $request->image,
-                'details' => $request->details,
-                'status' => $request->status
-            ]);
-
+        if ($request->hasFile('image')) {
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+            $request->image->move(public_path('image/promo'), $newImageName);
+            $promo = DB::table('promotion')
+                ->where('id', $id)
+                ->update([
+                    'image_path' => $newImageName,
+                    'name' => $request->name,
+                    'details' => $request->details,
+                    'status' => $request->status
+                ]);
+        } else {
+            $promo = DB::table('promotion')
+                ->where('id', $id)
+                ->update([
+                    // 'image' => $request->image,
+                    'name' => $request->name,
+                    'details' => $request->details,
+                    'status' => $request->status
+                ]);
+        }
 
         return redirect('/promotions');
     }
