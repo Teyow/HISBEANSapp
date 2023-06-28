@@ -57,6 +57,8 @@ class MarketingController extends Controller
             'minimum_order' => $request->minimum_order,
             'valid_until' => $request->valid_until,
             'promo_details' => $request->promo_details,
+            'voucher_discount' => $request->voucher_discount,
+            'discount_type' => $request->discount_type,
             'status' => $request->status
 
         ]);
@@ -85,6 +87,8 @@ class MarketingController extends Controller
             'minimum_order' => $request->minimum_order,
             'valid_until' => $request->valid_until,
             'promo_details' => $request->promo_details,
+            'voucher_discount' => $request->voucher_discount,
+            'discount_type' => $request->discount_type,
             'status' => $request->status
 
         ]);
