@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\modules\mobile\AddOnsController;
+use App\Http\Controllers\modules\mobile\FavoritesController;
 use App\Http\Controllers\modules\mobile\MenuController;
 use App\Http\Controllers\modules\mobile\OrderController;
 use App\Http\Controllers\modules\mobile\UserController;
@@ -53,6 +54,7 @@ Route::post('/cancelOrder', [OrderController::class, 'cancelOrder']);
 
 //voucher
 Route::get('/useVoucher', [VoucherController::class, 'useVoucher']);
+Route::get('/getPromotions', [VoucherController::class, 'getPromotions']);
 Route::post('/getPunchCard', [VoucherController::class, 'getPunchCard']);
 Route::post('/getUserVouchers', [VoucherController::class, 'getUserVouchers']);
 Route::post('/addUserVoucher', [VoucherController::class, 'addUserVoucher']);
@@ -60,6 +62,11 @@ Route::post('/addUserVoucher', [VoucherController::class, 'addUserVoucher']);
 //FCM
 Route::post('/updateToken', [OrderController::class, 'updateToken']);
 Route::post('/sendNotif', [OrderController::class, 'sendNotif']);
+
+//FAVORITES
+Route::post('/addToFavorites', [FavoritesController::class, 'addToFavorites']);
+Route::post('/removeToFavorites', [FavoritesController::class, 'removeToFavorites']);
+Route::post('/getUserFavorites', [FavoritesController::class, 'getUserFavorites']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

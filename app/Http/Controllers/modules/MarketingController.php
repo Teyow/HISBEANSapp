@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Promotions;
 
+use Kreait\Firebase\Contract\Messaging;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+
 use App\Models\Vouchers;
 
 class MarketingController extends Controller
@@ -53,21 +57,31 @@ class MarketingController extends Controller
     protected function create(Request $request)
     {
         // dd($request->all());
-        Vouchers::create([
+        $voucher = Vouchers::create([
             'type_of_voucher' => $request->type_of_voucher,
             'voucher_name' => $request->voucher_name,
             'voucher_code' => $request->voucher_code,
             'minimum_order' => $request->minimum_order,
             'valid_until' => $request->valid_until,
             'promo_details' => $request->promo_details,
-            'status' => $request->status
+            'status' => $request->status,
 
         ]);
-        $items = DB::table('items')
+        $users = DB::table('users')
+            ->whereNotNull('notification_token')
             ->get();
-        return redirect('/vouchers', [
-            'items' => $items,
-        ]);
+
+        $messaging = app('firebase.messaging');
+        foreach ($users as $user) {
+            $deviceToken = $user->notification_token;
+            $message = CloudMessage::withTarget('token', $deviceToken)
+                ->withNotification(Notification::create("Claim a new voucher!", "A new voucher is available at right now! Use the code $voucher->voucher_code to claim."))
+                ->withData(['key' => 'value']);
+            $messaging->send($message);
+        }
+
+
+        return redirect('/vouchers');
     }
 
     public function editVoucher($id)
@@ -75,11 +89,10 @@ class MarketingController extends Controller
         $vouchers = DB::table('vouchers')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
         return view('modules.editVoucher', [
             'vouchers' => $vouchers,
-            'items' => $items,
+
         ]);
     }
 
@@ -114,20 +127,18 @@ class MarketingController extends Controller
     {
         $promos = DB::table('promotion')
             ->get();
-        $items = DB::table('items')
-            ->get();
 
 
         return view('modules/promotions', [
             'promos' => $promos,
-            'items' => $items
+
         ]);
     }
     public function Addpromotions()
     {
         $items = DB::table('items')
             ->get();
-        return view('modules/AddPromotions', [
+        return view('modules/addPromotions', [
             'items' => $items
         ]);
     }
@@ -145,13 +156,26 @@ class MarketingController extends Controller
 
 
 
-        DB::table('promotion')->insert([
+        $promotion = DB::table('promotion')->insert([
             'name' => $request->name,
             'image_path' => $newImageName,
             'details' => $request->details,
             'status' => $request->status,
 
         ]);
+
+        $users = DB::table('users')
+            ->whereNotNull('notification_token')
+            ->get();
+
+        $messaging = app('firebase.messaging');
+        foreach ($users as $user) {
+            $deviceToken = $user->notification_token;
+            $message = CloudMessage::withTarget('token', $deviceToken)
+                ->withNotification(Notification::create("New Promotion Available!", "Open the app now to view our latest promotion!"))
+                ->withData(['key' => 'value']);
+            $messaging->send($message);
+        }
         // $items = DB::table('items')
         //     ->get();
 

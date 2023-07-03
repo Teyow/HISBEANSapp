@@ -23,6 +23,13 @@ class VoucherController extends Controller
             ->get();
     }
 
+    public function getPromotions()
+    {
+        return DB::table('promotion')
+            ->latest()
+            ->first();
+    }
+
     public function getPunchCard(Request $request)
     {
         // return $request;

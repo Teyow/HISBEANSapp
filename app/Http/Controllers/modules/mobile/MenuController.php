@@ -12,6 +12,7 @@ class MenuController extends Controller
     public function getAllMenu()
     {
         return DB::table('category')
+            ->where('status', 'Enable')
             ->get();
     }
 
@@ -32,6 +33,7 @@ class MenuController extends Controller
     {
         $featured = DB::table('menu')
             ->where('is_featured', "Featured")
+            ->where('status', 'Enable')
             ->get();
         return $featured;
     }
