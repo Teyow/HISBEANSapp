@@ -22,11 +22,8 @@ class OrderPOSController extends Controller
     }
     public function index()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/orderPOS', [
-            'items' => $items
-        ]);
+
+        return view('modules/orderPOS');
     }
 
     public function loginPINCODE(Request $request)
@@ -48,8 +45,7 @@ class OrderPOSController extends Controller
 
     public function OrderMenu()
     {
-        $items = DB::table('items')
-            ->get();
+
         $menus = DB::table('menu')
             ->get();
         $order = DB::table('orders')
@@ -75,7 +71,7 @@ class OrderPOSController extends Controller
             'order' => $order,
             'vouchers' => $vouchers,
             'addons' => $addons,
-            'items' => $items
+
         ]);
     }
 
@@ -86,13 +82,12 @@ class OrderPOSController extends Controller
         $orders = DB::table('users')
             ->join('orders', 'users.id', 'orders.user_id')
             ->get();
-        $items = DB::table('items')
-            ->get();
+
 
         return view('modules/orderList', [
             'menus' => $menus,
             'orders' => $orders,
-            'items' => $items
+
         ]);
     }
 

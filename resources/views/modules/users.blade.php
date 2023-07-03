@@ -66,14 +66,6 @@
                                             })
                                         })
                                 })
-
-                                $(document).ready(function() {
-                                    $('#users_tables').DataTable({
-
-                                        lengthMenu: [5, 10, 20, 50],
-                                        pageLength: 5,
-                                    });
-                                });
                             </script>
                         @empty
                             <tr>
@@ -89,4 +81,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#users_tables').DataTable({
+                dom: "Bfrltip",
+                lengthMenu: [1, 5, 10, 20, 50],
+                pageLength: 5,
+            });
+        });
+    </script>
 @endsection

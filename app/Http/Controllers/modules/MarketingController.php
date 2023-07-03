@@ -46,11 +46,8 @@ class MarketingController extends Controller
 
     public function addVoucher()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/addVoucher', [
-            'items' => $items,
-        ]);
+
+        return view('modules/addVoucher');
     }
 
 
@@ -64,6 +61,8 @@ class MarketingController extends Controller
             'minimum_order' => $request->minimum_order,
             'valid_until' => $request->valid_until,
             'promo_details' => $request->promo_details,
+            'voucher_discount' => $request->voucher_discount,
+            'discount_type' => $request->discount_type,
             'status' => $request->status,
 
         ]);
@@ -105,6 +104,8 @@ class MarketingController extends Controller
             'minimum_order' => $request->minimum_order,
             'valid_until' => $request->valid_until,
             'promo_details' => $request->promo_details,
+            'voucher_discount' => $request->voucher_discount,
+            'discount_type' => $request->discount_type,
             'status' => $request->status
 
         ]);
@@ -189,12 +190,11 @@ class MarketingController extends Controller
         $promos = DB::table('promotion')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
 
         return view('modules.editPromo', [
             'promos' => $promos,
-            'items' => $items
+
         ]);
     }
 

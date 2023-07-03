@@ -7,6 +7,10 @@
         </div>
         <div class="flex justify-center">
             <div class="uk-card uk-card-default uk-card-body ml-5 mr-5 mt-10 rounded-xl  w-3/5">
+                <div class="pt-5   text-left pb-5">
+                    <a class="  bg-green-500 text-white rounded-xl p-2 w-24 text-center hover:no-underline hover:text-white hover:bg-slate-400 duration-50"
+                        type="submit" href="{{ route('vouchers') }}">Back</a>
+                </div>
                 <legend class="text-center text-black text-2xl pb-10">Edit Voucher</legend>
                 <form action="{{ route('updateVoucher', $vouchers->id) }}" method="post">
                     @csrf
@@ -33,6 +37,18 @@
                     <div class="uk-margin">
                         <input class="uk-input" type="text" placeholder="Promo Details" aria-label="Input"
                             name="promo_details" value="{{ $vouchers->promo_details }}" required>
+                    </div>
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" placeholder="Voucher Discount" aria-label="Input"
+                            name="voucher_discount" value="{{ $vouchers->voucher_discount }}" required>
+                    </div>
+                    <div class="uk-margin">
+                        <select class="uk-select" aria-label="Select" name="discount_type" required>
+                            <option value="Percent" {{ $vouchers->discount_type == 'Percent' ? 'selected' : '' }}>Percent
+                            </option>
+                            <option value="Fixed" {{ $vouchers->discount_type == 'Fixed' ? 'selected' : '' }}>Fixed
+                            </option>
+                        </select>
                     </div>
                     <div class="uk-margin">
                         <select class="uk-select" aria-label="Select" name="status" required>

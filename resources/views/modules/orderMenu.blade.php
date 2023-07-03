@@ -187,20 +187,25 @@
                                             <option value="Cash">Cash</option>
                                             <option value="Gcash">GCash</option>
                                         </select>
-                                        <div id="inputField" style="display: none;" class="mt-2">
+                                        <div class="pt-2">
+                                            <input type="text" id="amount" name="amount" class="uk-input "
+                                                placeholder="Amount">
+                                        </div>
+                                        <div id="inputFieldGCash" style="display: none;" class="mt-2">
 
                                             <input type="text" id="reference_number" name="reference_number"
                                                 class="uk-input " placeholder="Reference Number">
                                         </div>
+
 
                                         <script>
                                             $(document).ready(function() {
                                                 $('#mode_of_payment').change(function() {
                                                     var selectedOption = $(this).val();
                                                     if (selectedOption === 'Cash') {
-                                                        $('#inputField').hide();
+                                                        $('#inputFieldGCash').hide();
                                                     } else {
-                                                        $('#inputField').show();
+                                                        $('#inputFieldGCash').show();
                                                     }
                                                 });
                                             });

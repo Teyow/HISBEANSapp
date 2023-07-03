@@ -31,11 +31,8 @@ class InventoryController extends Controller
 
     public function addItem()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules/addItems', [
-            'items' => $items,
-        ]);
+
+        return view('modules/addItems');
     }
 
 
@@ -50,8 +47,11 @@ class InventoryController extends Controller
             'supplier' => $request->supplier,
 
         ]);
-
-        return redirect('/inventory')->with('message', 'Item has been added to inventory!');
+        $items = DB::table('items')
+            ->get();
+        return redirect('/inventory', [
+            'items' => $items,
+        ])->with('message', 'Item has been added to inventory!');
 
 
         // dd($request->all());

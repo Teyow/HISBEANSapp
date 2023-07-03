@@ -19,21 +19,17 @@ class CategoryController extends Controller
     {
         $categories =  DB::table('category')
             ->get();
-        $items = DB::table('items')
-            ->get();
+
         return view('modules/category', [
             'categories' => $categories,
-            'items' => $items,
+
         ]);
     }
 
     public function addCategory()
     {
-        $items = DB::table('items')
-            ->get();
-        return view('modules.addCategory', [
-            'items' => $items,
-        ]);
+
+        return view('modules.addCategory');
     }
 
     protected function create(Request $request)
@@ -51,11 +47,10 @@ class CategoryController extends Controller
         $categories = DB::table('category')
             ->where('id', $id)
             ->first();
-        $items = DB::table('items')
-            ->get();
+
         return view('modules.editCategory', [
             'categories' => $categories,
-            'items' => $items
+
         ]);
     }
 

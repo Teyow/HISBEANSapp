@@ -28,6 +28,8 @@
                             <th>Min. Order</th>
                             <th>Valid Until</th>
                             <th>Promo Details</th>
+                            <th>Voucher Discount</th>
+                            <th>Discount Type</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -41,6 +43,8 @@
                                 <td>{{ $voucher->minimum_order }}</td>
                                 <td>{{ $voucher->valid_until }}</td>
                                 <td>{{ $voucher->promo_details }}</td>
+                                <td>{{ $voucher->voucher_discount }}</td>
+                                <td>{{ $voucher->discount_type }}</td>
                                 <td>{{ $voucher->status }}</td>
                                 <td><span class="text-green-500">
                                         <a href="/editVoucher/{{ $voucher->id }}" uk-icon="pencil"></a>
