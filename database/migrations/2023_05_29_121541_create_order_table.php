@@ -20,6 +20,7 @@ class CreateOrderTable extends Migration
             $table->string('total_price')->nullable();
             $table->string('order_status')->nullable();
             $table->string('mode_of_payment')->nullable();
+            $table->string('gcash_ref_number')->nullable();
             $table->string('payment_status')->nullable();
             $table->timestamps();
         });

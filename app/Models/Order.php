@@ -13,7 +13,18 @@ class Order extends Model
         'voucher_id',
         'total_price',
         'mode_of_payment',
+        'gcash_ref_number',
         'order_status',
         'payment_status',
     ];
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

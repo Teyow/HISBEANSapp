@@ -70,6 +70,8 @@ Route::post('/CreateAddons', [OrderPOSController::class, 'CreateAddons'])->name(
 Route::post('/addOrder', [OrderPOSController::class, 'addOrder']);
 Route::post('/addOrderItems', [OrderPOSController::class, 'addOrderItems']);
 Route::post('/completeStatus', [OrderPOSController::class, 'completeStatus']);
+Route::post('/deleteOrder', [OrderPOSController::class, 'deleteOrder']);
+Route::post('/validatePayment', [OrderPOSController::class, 'validatePayment']);
 
 
 //SALES

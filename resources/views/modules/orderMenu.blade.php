@@ -36,6 +36,26 @@
             overflow: auto;
         }
     </style>
+    <script>
+        function deleteItem(id) {
+            swal({
+                icon: "warning",
+                title: "Remove Item?",
+                text: "Are you sure you want to remove the item?",
+                buttons: true
+            }).then((response) => {
+                if (response) {
+                    const currPrice = $('#totalPrice').text()
+                    const itemPrice = $(`#orderTotal${id}`).text()
+                    const newPrice = Number(currPrice) - Number(itemPrice)
+                    $('#totalPrice').text(newPrice)
+                    $('#paymentTotal').text(newPrice)
+                    $(`#order${id}`).remove();
+                    $(`#payment${id}`).remove();
+                }
+            })
+        }
+    </script>
     <div class="row justify-content-center">
         <legend class="text-4xl text-black text-center">ORDER/POS</legend>
     </div>
@@ -89,10 +109,6 @@
                             </select>
                         </div>
 
-                        <div class="uk-margin ">
-                            <input class="uk-input" type="text" placeholder="Item Name" aria-label="Input"
-                                name="item_name">
-                        </div>
 
                     </div>
                     <div class="pt-20">
@@ -185,8 +201,10 @@
                                         <select class="uk-select " aria-label="Select" name="mode_of_payment"
                                             id="mode_of_payment">
                                             <option value="Cash">Cash</option>
-                                            <option value="Gcash">GCash</option>
+                                            <option value="GCash">GCash</option>
+
                                         </select>
+
                                         <div class="pt-2">
                                             <input type="text" id="amount" name="amount" class="uk-input "
                                                 placeholder="Amount">
@@ -196,8 +214,6 @@
                                             <input type="text" id="reference_number" name="reference_number"
                                                 class="uk-input " placeholder="Reference Number">
                                         </div>
-
-
                                         <script>
                                             $(document).ready(function() {
                                                 $('#mode_of_payment').change(function() {
@@ -210,6 +226,8 @@
                                                 });
                                             });
                                         </script>
+
+
                                     </div>
 
                                     <div class="uk-modal-footer uk-text-right">
@@ -249,8 +267,8 @@
                                     <div class="uk-card uk-card-default ml-5 mr-5 mb-10 rounded-xl ">
                                         <div class="rounded-3xl">
                                             <div class="flex justify-center items-center" href="#modal-center">
-                                                <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
-                                                    height="500">
+                                                <img src="{{ asset('HISBEANSapp-main/public/image/menu/' . $menu->image_path) }}"
+                                                    width="500" height="500">
                                                 <div class="uk-overlay uk-light uk-position-top">
                                                     <p class="text-black text-xl">₱{{ $menu->price }}</p>
                                                 </div>
@@ -280,8 +298,8 @@
                                 <div id="menuModal{{ $menu->id }}" uk-modal class=".uk-modal-close">
                                     <div class="uk-modal-dialog uk-modal-body rounded-3xl">
                                         <div class="flex justify-center items-center">
-                                            <img src="{{ asset('image/menu/' . $menu->image_path) }}" width="500"
-                                                height="500">
+                                            <img src="{{ asset('HISBEANSapp-main/public/image/menu/' . $menu->image_path) }}"
+                                                width="500" height="500">
                                             <div class="uk-overlay uk-light uk-position-top">
                                                 <p class="text-black text-xl">₱{{ $menu->price }}</p>
                                             </div>
@@ -313,7 +331,7 @@
                                         <h3 class="text-3xl font-bold">Temperature</h3>
                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                             <label><input class="uk-radio" type="radio" name="drinkTemp"
-                                                    value="Hot" checked>
+                                                    value="Hot">
                                                 Hot</label>
                                             <label><input class="uk-radio" type="radio" name="drinkTemp"
                                                     value="Iced">
@@ -382,77 +400,75 @@
 
                                 <script>
                                     $("#onSave{{ $menu->id }}").click(() => {
-                                        if ($("#onSave").val() === "") {
+                                        if ($('input[name="drinkTemp"]:checked').val() == undefined) {
                                             swal({
-                                                icon: "success",
-                                                title: "Success!",
-                                                text: "Item has been Added!",
-                                            }).then(() => {
-                                                location.close()
+                                                icon: "warning",
+                                                title: "Warning!",
+                                                text: "The item does not have a temperature option!",
                                             })
                                         } else {
+                                            console.log($('input[name="drinkTemp"]:checked').val())
                                             swal({
                                                 icon: "success",
                                                 title: "Success!",
                                                 text: "Item has been Added!",
                                             }).then(() => {
-                                                location.close()
+                                                let totalPrice = Number("{{ $menu->price }}")
+                                                let mainTotalPrice = $("#totalPrice").html()
+                                                let drinkTemp = $('input[name="drinkTemp"]:checked').val();
+                                                let price = Number("{{ $menu->price }}")
+                                                const quantity = $("#quantity{{ $menu->id }}").html()
+                                                const menuName = "{{ $menu->item_name }}"
+                                                let addOns = []
+                                                let count = $("#count").val()
+                                                let addOnsName = ''
+                                                let addOnsNameArray = []
+                                                $("input:checkbox[name='checkbox']:checked").each(function() {
+                                                    addOns.push($(this).val());
+                                                    console.log($(this).prop('checked', false))
+                                                });
+                                                $('input[name="drinkTemp"]:checked').prop('checked', false)
+
+                                                addOns.map((item, index) => {
+                                                    totalPrice = totalPrice + Number($(`#price${item}`).html())
+                                                    // price = price + Number($(`#price${item}`).html())
+                                                    addOnsName = addOnsName + " " + $(`#name${item}`).html()
+                                                    addOnsNameArray.push($(`#name${item}`).html())
+                                                })
+
+                                                addOnsNameArray = JSON.stringify(addOnsNameArray)
+
+                                                totalPrice = totalPrice * quantity
+                                                mainTotalPrice = Number(mainTotalPrice) + totalPrice
+                                                $("#totalPrice").html(mainTotalPrice)
+                                                $("#paymentTotal").html(mainTotalPrice)
+
+                                                $('#users_table tbody').append(`
+                                            <tr id="order${count}">
+                                                <td class="hidden" id="menuId${count}">{{ $menu->id }}</td>
+                                                <td class="hidden" id="menuAddOns${count}">${addOnsNameArray}</td>
+                                                <td class="hidden" id="drinkTemp${count}">${drinkTemp}</td>
+                                                <td id="orderName${count}">${menuName}</td>
+                                                <td id="orderQuantity${count}">${quantity}</td>
+                                                <td>₱<span id="orderPrice${count}">${price}</span></td>
+                                                <td id="orderAddOns${count}">${addOnsName}</td>
+                                                <td>₱<span id="orderTotal${count}">${totalPrice}</span></td>
+                                                <td>  <span class="text-red-500 ">
+                                                <button uk-icon="trash" class="text-red-500" onclick="deleteItem(${count});"></button>
+                                            </span></td>
+                                            </tr>
+                                                `)
+                                                $('#paymentTable tbody').append(`
+                                            <tr id="payment${count}">
+                                                <td id="paymentName${count}">${menuName}</td>
+                                                <td id="paymentQuantity${count}">${quantity}</td>
+                                                <td>₱<span id="paymentTotal${count}">${totalPrice}</span></td>
+                                                </tr>
+                                                `)
+                                                count = Number(count) + 1
+                                                $("#count").val(count)
                                             })
                                         }
-                                        let totalPrice = Number("{{ $menu->price }}")
-                                        let mainTotalPrice = $("#totalPrice").html()
-                                        let drinkTemp = $('input[name="drinkTemp"]:checked').val();;
-                                        let price = Number("{{ $menu->price }}")
-                                        const quantity = $("#quantity{{ $menu->id }}").html()
-                                        const menuName = "{{ $menu->item_name }}"
-                                        let addOns = []
-                                        let count = $("#count").val()
-                                        let addOnsName = ''
-                                        let addOnsNameArray = []
-                                        $("input:checkbox[name='checkbox']:checked").each(function() {
-                                            addOns.push($(this).val(
-
-                                            ));
-                                        });
-
-                                        addOns.map((item, index) => {
-                                            totalPrice = totalPrice + Number($(`#price${item}`).html())
-                                            // price = price + Number($(`#price${item}`).html())
-                                            addOnsName = addOnsName + " " + $(`#name${item}`).html()
-                                            addOnsNameArray.push($(`#name${item}`).html())
-                                        })
-
-                                        addOnsNameArray = JSON.stringify(addOnsNameArray)
-
-                                        totalPrice = totalPrice * quantity
-                                        mainTotalPrice = Number(mainTotalPrice) + totalPrice
-                                        $("#totalPrice").html(mainTotalPrice)
-                                        $("#paymentTotal").html(mainTotalPrice)
-
-                                        $('#users_table tbody').append(`
-                                    <tr id="order${count}">
-                                        <td class="hidden" id="menuId${count}">{{ $menu->id }}</td>
-                                        <td class="hidden" id="menuAddOns${count}">${addOnsNameArray}</td>
-                                        <td class="hidden" id="drinkTemp${count}">${drinkTemp}</td>
-                                        <td id="orderName${count}">${menuName}</td>
-                                        <td id="orderQuantity${count}">${quantity}</td>
-                                        <td>₱<span id="orderPrice${count}">${price}</span></td>
-                                        <td id="orderAddOns${count}">${addOnsName}</td>
-                                        <td>₱<span id="orderTotal${count}">${totalPrice}</span></td>
-                                        <td>  <span class="text-red-500 ">
-                                        <button id="delete" uk-icon="trash"></button>
-                                    </span></td>
-                                    </tr>
-                                        `)
-                                        $('#paymentTable tbody').append(`
-                                    <tr id="payment${count}">
-                                        <td id="paymentName${count}">${menuName}</td>
-                                        <td id="paymentQuantity${count}">${quantity}</td>
-                                        <td>₱<span id="paymentTotal${count}">${totalPrice}</span></td>
-                                        </tr>
-                                        `)
-                                        count = Number(count) + 1
-                                        $("#count").val(count)
                                     })
 
                                     $('#addQuantity{{ $menu->id }}').click(() => {
@@ -482,7 +498,8 @@
                             voucher_id: $("#voucherId").val(),
                             total_price: $("#totalWithVoucher").html(),
                             order_status: "Pending",
-                            mode_of_payment: $(`#mode_of_payment${i}`).html(),
+                            reference_number: $("#reference_number").val(),
+                            mode_of_payment: $(`#mode_of_payment`).val(),
                             payment_status: "Completed",
                         }).then(response => {
                             order = response.data
@@ -518,7 +535,8 @@
                             voucher_id: $("#voucherId").val(),
                             total_price: $("#totalWithVoucher").html(),
                             order_status: "Pending",
-                            mode_of_payment: $(`#mode_of_payment${i}`).html(),
+                            mode_of_payment: $(`#mode_of_payment`).val(),
+                            reference_number: $("#reference_number").val(),
                             payment_status: "Completed",
                         }).then(response => {
                             order = response.data

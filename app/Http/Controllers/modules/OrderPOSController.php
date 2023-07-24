@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\modules;
 
 use App\Http\Controllers\Controller;
+use App\Models\Items;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class OrderPOSController extends Controller
         $addons = DB::table('addons')
             ->get();
         $allUsers = DB::table("users")
-            ->where('role', 3)
+            ->where('role', "Customer")
             ->get();
 
         $categories = DB::table("category")
@@ -79,14 +80,12 @@ class OrderPOSController extends Controller
     {
         $menus = DB::table('menu')
             ->get();
-        $orders = DB::table('users')
-            ->join('orders', 'users.id', 'orders.user_id')
-            ->get();
+        $orders = Order::all();
 
 
         return view('modules/orderList', [
             'menus' => $menus,
-            'orders' => $orders,
+            'orders' => $orders->sortBy('created_at'),
 
         ]);
     }
@@ -143,6 +142,7 @@ class OrderPOSController extends Controller
             'voucher_id' => $request->voucher_id,
             'total_price' => $request->total_price,
             'mode_of_payment' => $request->mode_of_payment,
+            'gcash_ref_number' => $request->reference_number,
             'order_status' => $request->order_status,
             'payment_status' => $request->payment_status,
         ]);
@@ -161,6 +161,13 @@ class OrderPOSController extends Controller
             'drink_quantity' => $request->drink_quantity,
             'drink_price' => $request->drink_price
         ]);
+
+        $item = Items::where('name', 'Paper Cups')->firstOrFail();
+
+        Items::where('name', 'Paper Cups')
+            ->update([
+                'quantity' => (int)$item->quantity - 1
+            ]);
     }
 
     public function completeStatus(Request $request)
@@ -171,11 +178,27 @@ class OrderPOSController extends Controller
                 'order_status' => 'Completed'
             ]);
         $messaging = app('firebase.messaging');
-        $deviceToken = $request->deviceToken;
-        $message = CloudMessage::withTarget('token', $deviceToken)
-            ->withNotification(Notification::create("Your order #$request->order_id is completed!", "Please proceed to the counter to get your drink!"))
-            ->withData(['key' => 'value']);
+        if ($request->deviceToken != null) {
+            $deviceToken = $request->deviceToken;
+            $message = CloudMessage::withTarget('token', $deviceToken)
+                ->withNotification(Notification::create("Your order #$request->order_id is completed!", "Please proceed to the counter to get your drink!"))
+                ->withData(['key' => 'value']);
 
-        $messaging->send($message);
+            $messaging->send($message);
+        }
+    }
+
+    public function deleteOrder(Request $request)
+    {
+        Order::findOrFail($request->id)
+            ->delete();
+    }
+
+    public function validatePayment(Request $request)
+    {
+        Order::findOrFail($request->id)
+            ->update([
+                'payment_status' => "Completed"
+            ]);
     }
 }

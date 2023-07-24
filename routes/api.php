@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\modules\mobile\AddOnsController;
 use App\Http\Controllers\modules\mobile\FavoritesController;
 use App\Http\Controllers\modules\mobile\MenuController;
+use App\Http\Controllers\modules\mobile\NotificationController;
 use App\Http\Controllers\modules\mobile\OrderController;
+use App\Http\Controllers\modules\mobile\PunchCardController;
 use App\Http\Controllers\modules\mobile\UserController;
 use App\Http\Controllers\modules\mobile\VoucherController;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +30,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//PUNCH CARDS
+Route::get('/getUserPunchCard/{id}', [PunchCardController::class, 'getUserPunchCard']);
+
 Route::post('/logout', [LoginController::class, 'mobileLogout']);
 Route::post('/register', [RegisterController::class, 'mobileRegister']);
 Route::post('/login', [LoginController::class, 'mobileLogin']);
 Route::post("/editProfile", [UserController::class, 'editProfile']);
+Route::post('/password/email', [ForgotPasswordController::class, "sendResetLinkEmail"]);
 
 //Add ons
 Route::get('/getAllAddOns', [AddOnsController::class, 'getAllAddOns']);
@@ -67,6 +75,13 @@ Route::post('/sendNotif', [OrderController::class, 'sendNotif']);
 Route::post('/addToFavorites', [FavoritesController::class, 'addToFavorites']);
 Route::post('/removeToFavorites', [FavoritesController::class, 'removeToFavorites']);
 Route::post('/getUserFavorites', [FavoritesController::class, 'getUserFavorites']);
+
+//Notifications
+Route::get('/getAllNotifications', [NotificationController::class, 'getAllNotifications']);
+
+
+//STAFF
+Route::post('/addStaffOrder', [OrderController::class, 'addStaffOrder']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

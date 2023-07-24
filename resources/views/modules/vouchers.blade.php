@@ -41,7 +41,7 @@
                                 <td>{{ $voucher->voucher_name }}</td>
                                 <td>{{ $voucher->voucher_code }}</td>
                                 <td>{{ $voucher->minimum_order }}</td>
-                                <td>{{ $voucher->valid_until }}</td>
+                                <td id="date{{ $voucher->id }}">{{ $voucher->valid_until }}</td>
                                 <td>{{ $voucher->promo_details }}</td>
                                 <td>{{ $voucher->voucher_discount }}</td>
                                 <td>{{ $voucher->discount_type }}</td>
@@ -56,6 +56,11 @@
                                 </td>
                             </tr>
                             <script>
+                                $(document).ready(() => {
+                                    const date = $("#date{{ $voucher->id }}").text()
+                                    const newDate = moment(date).format("LL")
+                                    $("#date{{ $voucher->id }}").text(newDate)
+                                })
                                 $("#delete{{ $voucher->id }}").click(function() {
                                     const formdata = new FormData()
                                     formdata.append("id", "{{ $voucher->id }}")

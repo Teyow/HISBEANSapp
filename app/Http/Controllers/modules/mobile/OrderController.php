@@ -11,6 +11,7 @@ use Laravel\Ui\Presets\React;
 use Kreait\Firebase\Contract\Messaging;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
+use App\Models\Items;
 
 class OrderController extends Controller
 {
@@ -40,9 +41,10 @@ class OrderController extends Controller
 
     public function removeToCart(Request $request)
     {
-        return $request;
-        // DB::table('carts')
-        //     ->where('id', $request->)
+        // return $request;
+        DB::table('carts')
+            ->where('id', $request->cart_id)
+            ->delete();
     }
 
     public function getItemAddOns(Request $request)
@@ -59,6 +61,7 @@ class OrderController extends Controller
             'voucher_id' => $request->voucher_id,
             'total_price' => $request->total_price,
             'mode_of_payment' => $request->mode_of_payment,
+            'gcash_ref_number' => $request->gcash_ref_number,
             'order_status' => "Pending",
             'payment_status' => "Completed",
         ]);
@@ -77,11 +80,54 @@ class OrderController extends Controller
                 'is_favorite' => false
             ]);
 
+            $item = Items::where('name', 'Paper Cups')->firstOrFail();
+
+            Items::where('name', 'Paper Cups')
+                ->update([
+                    'quantity' => (int)$item->quantity - 1
+                ]);
+
             DB::table("carts")
                 ->where('id', $order_item->id)
                 ->delete();
         }
     }
+
+    public function addStaffOrder(Request $request)
+    {
+        $order = Order::create([
+            'user_id' => $request->user_id,
+            'voucher_id' => $request->voucher_id,
+            'total_price' => $request->total_price,
+            'mode_of_payment' => $request->mode_of_payment,
+            'gcash_ref_number' => $request->gcash_ref_number,
+            'order_status' => "Pending",
+            'payment_status' => "Pending",
+        ]);
+
+        $order_items = json_decode($request->order_items);
+
+        foreach ($order_items as $order_item) {
+            OrderItem::create([
+                'menu_id' => $order_item->menu_id,
+                'order_id' => $order->id,
+                'addons_id' => $order_item->addons_id,
+                'drink_temperature' => $order_item->drink_temperature,
+                'drink_name' => $order_item->drink_name,
+                'drink_price' => $order_item->drink_price,
+                'drink_quantity' => $order_item->drink_quantity,
+                'is_favorite' => false
+            ]);
+
+            $item = Items::where('name', 'Paper Cups')->firstOrFail();
+
+            Items::where('name', 'Paper Cups')
+                ->update([
+                    'quantity' => (int)$item->quantity - 1
+                ]);
+        }
+    }
+
 
     public function getUserPendingOrders(Request $request)
     {
@@ -95,6 +141,7 @@ class OrderController extends Controller
     {
         return DB::table('orders')
             ->where('user_id', $request->user_id)
+            ->where('order_status', "Pending")
             ->get();
     }
 

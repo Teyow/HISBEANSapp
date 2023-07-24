@@ -12,6 +12,7 @@ use App\Models\Promotions;
 use Kreait\Firebase\Contract\Messaging;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
+use App\Models\Notification as NotificationModel;
 
 use App\Models\Vouchers;
 
@@ -66,6 +67,12 @@ class MarketingController extends Controller
             'status' => $request->status,
 
         ]);
+
+        NotificationModel::create([
+            'notification_title' => $request->voucher_name,
+            'notification_description' => $request->promo_details,
+        ]);
+
         $users = DB::table('users')
             ->whereNotNull('notification_token')
             ->get();
@@ -163,6 +170,11 @@ class MarketingController extends Controller
             'details' => $request->details,
             'status' => $request->status,
 
+        ]);
+
+        NotificationModel::create([
+            'notification_title' => $request->name,
+            'notification_description' => $request->details,
         ]);
 
         $users = DB::table('users')

@@ -19,6 +19,7 @@ class MenuController extends Controller
     public function getAllCategories()
     {
         return DB::table('category')
+            ->where('status', "Enable")
             ->get();
     }
 
